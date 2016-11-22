@@ -6,6 +6,7 @@ name varchar(10) not null,
 space int,
 currentPowerUsage double,
 primary key (id)
+
 );
 
 drop table Product;
