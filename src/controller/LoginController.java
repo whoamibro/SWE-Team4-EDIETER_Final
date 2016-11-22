@@ -1,4 +1,4 @@
-package prototype;
+package controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
 
 	public void btnLoginHandler() {
 		MainController mainController = new MainController();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);
 
 		try {
@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
 	public void btnRegisterHandler() {
 		paneLogin.getChildren().clear();
 		RegisterController registerController = new RegisterController();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Register.fxml"));
 		loader.setController(registerController);
 		try {
 			paneLogin.getChildren().add(loader.load());

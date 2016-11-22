@@ -1,4 +1,4 @@
-package prototype;
+package controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +35,7 @@ public class UserEditController implements Initializable {
 		paneUserEdit.getChildren().clear();
 
 		LoginController loginController = new LoginController();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 		loader.setController(loginController);
 
 		try {
@@ -49,7 +49,7 @@ public class UserEditController implements Initializable {
 	public void btnCancelHandler() {
 		paneUserEdit.getChildren().clear();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);
 
 		try {
