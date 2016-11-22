@@ -15,18 +15,18 @@ public class ProductDAO {
 		this.con = con;
 	}
 
-	public int insertProduct(Product newProduct) throws Exception{
+	public int insertGrade(Product newProduct) throws Exception{
 
 		int insertCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO Product VALUES (?,?,?,?)";
+		String sql = "INSERT INTO grade VALUES (?,?,?,?)";
 
 		try{
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, newProduct.getStudent_no());
-			pstmt.setInt(2, newProduct.getProduct_kor());
-			pstmt.setInt(3, newProduct.getProduct_eng());
-			pstmt.setInt(4, newProduct.getProduct_math());
+			pstmt.setInt(2, newGrade.getGrade_kor());
+			pstmt.setInt(3, newGrade.getGrade_eng());
+			pstmt.setInt(4, newGrade.getGrade_math());
 
 			insertCount = pstmt.executeUpdate();
 		}
@@ -41,31 +41,31 @@ public class ProductDAO {
 		
 	}
 
-	public ArrayList<> selectProductList() throws Exception{
+	public ArrayList<Grade> selectGradeList() throws Exception{
 
-		ArrayList<Product> ProductList = null;
-		Product Product = null;
+		ArrayList<Grade> gradeList = null;
+		Grade grade = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT Product.student_no, student_name, Product_kor, Product_eng, Product_math "
-				+ "FROM Product, student WHERE Product.student_no = student.student_no";
+		String sql = "SELECT grade.student_no, student_name, grade_kor, grade_eng, grade_math "
+				+ "FROM grade, student WHERE grade.student_no = student.student_no";
 
 		try{
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				ProductList = new ArrayList<Product>();
+				gradeList = new ArrayList<Grade>();
 
 				do{
-					Product = new Product(
+					grade = new Grade(
 							rs.getInt("student_no"),
 							rs.getString("student_name"),
-							rs.getInt("Product_kor"),
-							rs.getInt("Product_eng"),
-							rs.getInt("Product_math"));
+							rs.getInt("grade_kor"),
+							rs.getInt("grade_eng"),
+							rs.getInt("grade_math"));
 
-					ProductList.add(Product);
+					gradeList.add(grade);
 
 				}while(rs.next());
 			}
@@ -78,18 +78,18 @@ public class ProductDAO {
 			close(pstmt);
 		}
 
-		return ProductList;
+		return gradeList;
 		
 	}
 
-	public ArrayList<Product> selectProductListByStudent_name(String student_name) throws Exception {
+	public ArrayList<Grade> selectGradeListByStudent_name(String student_name) throws Exception {
 
-		ArrayList<Product> searchProductList = null;
-		Product searchProduct = null;
+		ArrayList<Grade> searchGradeList = null;
+		Grade searchGrade = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT Product.student_no, student_name, Product_kor, Product_eng, Product_math "
-				+ "FROM Product, student WHERE Product.student_no = student.student_no "
+		String sql = "SELECT grade.student_no, student_name, grade_kor, grade_eng, grade_math "
+				+ "FROM grade, student WHERE grade.student_no = student.student_no "
 				+ "AND student_name like concat('%', ?, '%')";
 
 		try{
@@ -98,17 +98,17 @@ public class ProductDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				searchProductList = new ArrayList<Product>();
+				searchGradeList = new ArrayList<Grade>();
 
 				do{
-					searchProduct = new Product(
+					searchGrade = new Grade(
 							rs.getInt("student_no"),
 							rs.getString("student_name"),
-							rs.getInt("Product_kor"),
-							rs.getInt("Product_eng"),
-							rs.getInt("Product_math"));
+							rs.getInt("grade_kor"),
+							rs.getInt("grade_eng"),
+							rs.getInt("grade_math"));
 
-					searchProductList.add(searchProduct);
+					searchGradeList.add(searchGrade);
 
 				}while(rs.next());
 			}
@@ -121,19 +121,19 @@ public class ProductDAO {
 			close(pstmt);
 		}
 
-		return searchProductList;
+		return searchGradeList;
 		
 	}
 
-	public ArrayList<Product> selectProductListByStudent_no(int student_no) throws Exception{
+	public ArrayList<Grade> selectGradeListByStudent_no(int student_no) throws Exception{
 
-		ArrayList<Product> searchProductList = null;
-		Product Product = null;
+		ArrayList<Grade> searchGradeList = null;
+		Grade grade = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT Product.student_no, student_name, Product_kor, Product_eng, Product_math "
-				+ "FROM Product, student WHERE Product.student_no = student.student_no "
-				+ "AND Product.student_no like concat(?, '%')";
+		String sql = "SELECT grade.student_no, student_name, grade_kor, grade_eng, grade_math "
+				+ "FROM grade, student WHERE grade.student_no = student.student_no "
+				+ "AND grade.student_no like concat(?, '%')";
 
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -141,17 +141,17 @@ public class ProductDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				searchProductList = new ArrayList<Product>();
+				searchGradeList = new ArrayList<Grade>();
 
 				do{
-					Product = new Product(
+					grade = new Grade(
 							rs.getInt("student_no"),
 							rs.getString("student_name"),
-							rs.getInt("Product_kor"),
-							rs.getInt("Product_eng"),
-							rs.getInt("Product_math"));
+							rs.getInt("grade_kor"),
+							rs.getInt("grade_eng"),
+							rs.getInt("grade_math"));
 					
-					searchProductList.add(Product);
+					searchGradeList.add(grade);
 
 				}while(rs.next());
 			}
@@ -164,18 +164,18 @@ public class ProductDAO {
 			close(pstmt);
 		}
 
-		return searchProductList;
+		return searchGradeList;
 		
 	}
 
-	public ArrayList<Product> selectProductListByStudent_year(int student_year) throws Exception{
+	public ArrayList<Grade> selectGradeListByStudent_year(int student_year) throws Exception{
 
-		ArrayList<Product> searchProductList = null;
-		Product searchProduct = null;  
+		ArrayList<Grade> searchGradeList = null;
+		Grade searchGrade = null;  
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT Product.student_no, student_name, Product_kor, Product_eng, Product_math "
-				+ "FROM Product, student WHERE Product.student_no = student.student_no AND student_year = ?";
+		String sql = "SELECT grade.student_no, student_name, grade_kor, grade_eng, grade_math "
+				+ "FROM grade, student WHERE grade.student_no = student.student_no AND student_year = ?";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -184,16 +184,16 @@ public class ProductDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				searchProductList = new ArrayList<Product>();
+				searchGradeList = new ArrayList<Grade>();
 				do{
-					searchProduct = new Product(
+					searchGrade = new Grade(
 							rs.getInt("student_no"),
 							rs.getString("student_name"),
-							rs.getInt("Product_kor"),
-							rs.getInt("Product_eng"),
-							rs.getInt("Product_math"));
+							rs.getInt("grade_kor"),
+							rs.getInt("grade_eng"),
+							rs.getInt("grade_math"));
 
-					searchProductList.add(searchProduct);
+					searchGradeList.add(searchGrade);
 
 				}while(rs.next());
 
@@ -207,18 +207,18 @@ public class ProductDAO {
 			close(pstmt);
 		}
 
-		return searchProductList;
+		return searchGradeList;
 		
 	}
 	
-	public Product selectProduct(int student_no) throws Exception{
+	public Grade selectGrade(int student_no) throws Exception{
 
-		Product Product = null;
+		Grade grade = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT student.student_no, student_name, Product_kor, Product_eng, Product_math "
-				+ "FROM Product, student WHERE Product.student_no = student.student_no "
-				+ "AND Product.student_no = ?";
+		String sql = "SELECT student.student_no, student_name, grade_kor, grade_eng, grade_math "
+				+ "FROM grade, student WHERE grade.student_no = student.student_no "
+				+ "AND grade.student_no = ?";
 
 		try{
 			pstmt = con.prepareStatement(sql);
@@ -226,12 +226,12 @@ public class ProductDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				Product = new Product(
+				grade = new Grade(
 						rs.getInt("student_no"),
 						rs.getString("student_name"),
-						rs.getInt("Product_kor"),
-						rs.getInt("Product_eng"),
-						rs.getInt("Product_math"));
+						rs.getInt("grade_kor"),
+						rs.getInt("grade_eng"),
+						rs.getInt("grade_math"));
 			}
 		}
 		catch(Exception e){
@@ -242,23 +242,23 @@ public class ProductDAO {
 			close(pstmt);
 		}
 
-		return Product;
+		return grade;
 		
 	}
 	
-	public int updateProduct(Product changeProduct) throws Exception{
+	public int updateGrade(Grade changeGrade) throws Exception{
 
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE Product SET Product_kor = ?, Product_eng = ?, Product_math = ? WHERE student_no = ?";
+		String sql = "UPDATE grade SET grade_kor = ?, grade_eng = ?, grade_math = ? WHERE student_no = ?";
 
 		try{
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setInt(1, changeProduct.getProduct_kor());
-			pstmt.setInt(2, changeProduct.getProduct_eng());
-			pstmt.setInt(3, changeProduct.getProduct_math());
-			pstmt.setInt(4, changeProduct.getStudent_no());
+			pstmt.setInt(1, changeGrade.getGrade_kor());
+			pstmt.setInt(2, changeGrade.getGrade_eng());
+			pstmt.setInt(3, changeGrade.getGrade_math());
+			pstmt.setInt(4, changeGrade.getStudent_no());
 
 			updateCount = pstmt.executeUpdate();
 		}
@@ -273,11 +273,11 @@ public class ProductDAO {
 		
 	}
 
-	public int deleteProduct(int student_no) throws Exception {
+	public int deleteGrade(int student_no) throws Exception {
 
 		int deleteCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM Product WHERE student_no = ?";
+		String sql = "DELETE FROM grade WHERE student_no = ?";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -295,34 +295,34 @@ public class ProductDAO {
 		
 	}
 
-	public ArrayList<Product> selectProductListAddPercent(int ProductListSize) throws Exception{
+	public ArrayList<Grade> selectGradeListAddPercent(int gradeListSize) throws Exception{
 		
 		float percent = 0;
 		int count = 1;
-		ArrayList<Product> ProductListAddPercent = null;
-		Product Product = null;
+		ArrayList<Grade> gradeListAddPercent = null;
+		Grade grade = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT Product.student_no, student_name ,Product_kor,Product_eng,Product_math FROM Product, student WHERE Product.student_no = student.student_no ORDER BY (Product_kor + Product_eng + Product_math) DESC";
+		String sql = "SELECT grade.student_no, student_name ,grade_kor,grade_eng,grade_math FROM grade, student WHERE grade.student_no = student.student_no ORDER BY (grade_kor + grade_eng + grade_math) DESC";
 
 		try{
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				ProductListAddPercent = new ArrayList<Product>();
+				gradeListAddPercent = new ArrayList<Grade>();
 
 				do{
-					percent = count++ / (float)ProductListSize * 100;
-					Product = new Product(
+					percent = count++ / (float)gradeListSize * 100;
+					grade = new Grade(
 							rs.getInt("student_no"),
 							rs.getString("student_name"),
-							rs.getInt("Product_kor"),
-							rs.getInt("Product_eng"),
-							rs.getInt("Product_math"),
+							rs.getInt("grade_kor"),
+							rs.getInt("grade_eng"),
+							rs.getInt("grade_math"),
 							percent);
 					
-					ProductListAddPercent.add(Product);				
+					gradeListAddPercent.add(grade);				
 
 				}while(rs.next());
 			}
@@ -335,7 +335,7 @@ public class ProductDAO {
 			close(pstmt);
 		}
 
-		return ProductListAddPercent;
+		return gradeListAddPercent;
 		
 	}
 	
