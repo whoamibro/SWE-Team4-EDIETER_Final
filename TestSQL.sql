@@ -5,7 +5,6 @@ password varchar(20) not null,
 name varchar(10) not null,
 space int,
 currentPowerUsage double,
-
 primary key (id)
 );
 
