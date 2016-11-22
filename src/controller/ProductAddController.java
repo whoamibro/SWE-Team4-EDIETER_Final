@@ -81,7 +81,7 @@ public class ProductAddController implements Initializable {
 		paneAdd.getChildren().clear();
 
 		ProductTotalController productTotalController = new ProductTotalController();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductTotal.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
 
 		try {
@@ -99,7 +99,7 @@ public class ProductAddController implements Initializable {
 		paneAdd.getChildren().clear();
 
 		ProductTotalController productTotalController = new ProductTotalController();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductTotal.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
 
 		try {
