@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0"
+	prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="prototype.PlanController">
+	<children>
+		<Text layoutX="49.0" layoutY="64.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="현재 온도" />
+		<Text layoutX="49.0" layoutY="108.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="희망 온도" />
+		<Text layoutX="49.0" layoutY="160.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="희망 전기요금" />
+		<TextField layoutX="128.0" layoutY="44.0" />
+		<TextField layoutX="128.0" layoutY="88.0" />
+		<Text layoutX="321.0" layoutY="64.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="ºC" />
+		<Text layoutX="322.0" layoutY="108.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="ºC" />
+		<ComboBox fx:id="comboBox" layoutX="171.0" layoutY="141.0"
+			prefWidth="150.0" />
+		<Button fx:id="btnPlan" layoutX="415.0" layoutY="142.0"
+			mnemonicParsing="false" text="플래닝!" />
+		<TextArea fx:id="textArea" editable="false" layoutX="44.0"
+			layoutY="222.0" prefHeight="235.0" prefWidth="439.0" />
+	</children>
+</AnchorPane>

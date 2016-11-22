@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="paneProduct" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prototype.ProductController">
+	<children>
+		<ScrollPane layoutY="1.0" prefHeight="650.0" prefWidth="423.0">
+			<content>
+				<FlowPane fx:id="flowPane" prefHeight="100.0" prefWidth="420.0">
+					<children>
+						<Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="100.0" prefWidth="210.0" text="기기 추가" />
+					</children>
+				</FlowPane>
+			</content>
+		</ScrollPane>
+		<AnchorPane fx:id="paneTotal" layoutX="423.0" layoutY="1.0" prefHeight="650.0" prefWidth="497.0" />
+	</children>
+</AnchorPane>
