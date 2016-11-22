@@ -13,6 +13,9 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.TextField;
 
 public class UserController implements Initializable {
+	
+	private User user;
+	
 	@FXML
 	private TextField textFieldUser;
 	
@@ -26,6 +29,11 @@ public class UserController implements Initializable {
 //	private Button btnEdit;
 	@FXML
 	private BarChart<String, Double> barChart;
+	
+	//현재 사용자 객체 가져옴
+	public UserController(User user){
+		this.user = user;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -40,7 +48,7 @@ public class UserController implements Initializable {
 		list.add(new XYChart.Data<>("6", 6.0));
 
 		series1.setData(list);
-		series1.setName("���� ��뷮");
+		series1.setName("���� ��뷮");
 		barChart.getData().add(series1);
 		
 		
@@ -51,5 +59,18 @@ public class UserController implements Initializable {
 //		 1.4));
 //		 barChart.getData().add(series1);
 	}
+	
+	
+	//사용자 탭에 사용자 정보 보여줄 메소드
+	public void displayUserInfo() {
+		String userInfo = String.format("사용자 : %s\n실내 평수 :%d\n이번달 전력 사용량 : %f"
+				, user.getName(), user.getAreaSize(), user.getUsedElec());
+		System.out.println(userInfo);
+	}
+	
+	//전력사용 그래프. 추후
+	//public void displayUserGraph() {
+		
+	//}
 
 }
