@@ -1,4 +1,4 @@
-package prototype;
+package controller;
 
 import java.io.IOException;
 import java.net.URL;

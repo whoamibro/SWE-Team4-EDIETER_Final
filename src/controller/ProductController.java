@@ -1,4 +1,4 @@
-package prototype;
+package controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -84,7 +84,7 @@ public class ProductController implements Initializable {
 //		productTotalController.setProductController(this);
 		
 		ProductTotalController productTotalController = new ProductTotalController();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductTotal.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
 		try {
 			paneTotal.getChildren().add(loader.load());
@@ -104,7 +104,7 @@ public class ProductController implements Initializable {
 		paneTotal.getChildren().clear();
 		ProductAddController productAddController = new ProductAddController();
 		productAddController.setProductController(this);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("ProductAdd.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductAdd.fxml"));
 		loader.setController(productAddController);
 		
 		try {
