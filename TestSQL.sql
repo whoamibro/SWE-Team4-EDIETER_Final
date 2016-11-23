@@ -4,24 +4,25 @@ DROP TABLE CrawlingProduct;
 DROP TABLE User;
 
 CREATE TABLE User (
-uid VARCHAR(20),
+num INT,
+id VARCHAR(20),
 password VARCHAR(20),
 name VARCHAR(10),
 space INT,
 currentPowerUsage DOUBLE,
-PRIMARY KEY(uid)
+PRIMARY KEY(num)
 );
 
 CREATE TABLE PowerUsage (
-uid VARCHAR(20),
+num INT,
 month1 DOUBLE,
 month2 DOUBLE,
 month3 DOUBLE,
 month4 DOUBLE,
 month5 DOUBLE,
 month6 DOUBLE,
-PRIMARY KEY(uid),
-FOREIGN KEY(uid) REFERENCES User(uid) ON DELETE CASCADE
+PRIMARY KEY(num),
+FOREIGN KEY(num) REFERENCES User(num) ON DELETE CASCADE
 );
 
 CREATE TABLE CrawlingProduct (
@@ -35,17 +36,17 @@ PRIMARY KEY(pcode)
 
 CREATE TABLE OwnProduct (
 code INT,
-uid VARCHAR(20),
+num INT,
 pcode INT,
 nickName VARCHAR(20),
 usingTime INT,
 availableTime INT,
 PRIMARY KEY(code),
-FOREIGN KEY(uid) REFERENCES User(uid) ON DELETE CASCADE,
+FOREIGN KEY(num) REFERENCES User(num) ON DELETE CASCADE,
 FOREIGN KEY(pcode) REFERENCES CrawlingProduct(pcode) ON DELETE CASCADE
 );
 
-INSERT INTO User VALUES (1, 1, 1, 1, 1);
+INSERT INTO User VALUES (1, 1, 1, 1, 1, 1);
 INSERT INTO PowerUsage VALUES (1, 10, 20, 30, 40, 50, 60);
 INSERT INTO CrawlingProduct VALUES (1, '³ÃÀå°í', '¸ðµ¨¸í', 32, 1);
 INSERT INTO OwnProduct VALUES (1, 1, 1, '´Ð³×ÀÓ', 10, 10);
