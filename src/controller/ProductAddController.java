@@ -1,12 +1,11 @@
 package controller;
 
-import components.Product;
-import components.ProductBuilder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
+import components.Product;
+import components.ProductBuilder;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,11 +85,6 @@ public class ProductAddController implements Initializable {
 
 	public void btnAddHandler() {
 
-		Button newButton = new Button("fuck");
-		newButton.setPrefSize(210, 100);
-		newButton.setOnAction(event -> {
-			
-		});
 
 		paneAdd.getChildren().clear();
 
@@ -114,7 +108,25 @@ public class ProductAddController implements Initializable {
 				.setNickName(textFieldName.getText())
 				.build();
 
-		productController.getButtonList().add(new Button(newProduct.getNickName()));
+		Button newButton = new Button("fuck");
+		newButton.setPrefSize(210, 100);
+		newButton.setOnAction(event -> {
+			ProductEditController productEditController = new ProductEditController();
+			productEditController.setProduct(newProduct);
+			FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
+			editLoader.setController(productEditController);
+			
+			try {
+				productController.getPaneTotal().getChildren().clear();
+				productController.getPaneTotal().getChildren().add(editLoader.load());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		});
+		productController.getButtonList().add(newButton);
 		productController.applyList();
 	}
 
