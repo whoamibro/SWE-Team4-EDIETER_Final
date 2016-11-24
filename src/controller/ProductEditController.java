@@ -1,9 +1,11 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -40,8 +42,17 @@ public class ProductEditController implements Initializable {
 	}
 
 	public void btnCancelHandler() {
-//		productController.setVisibleEditController(false);
-//		productController.setVisibleTotalController(true);
+		paneEdit.getChildren().clear();
+		
+		ProductTotalController productTotalController = new ProductTotalController();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
+		loader.setController(productTotalController);
+
+		try {
+			paneEdit.getChildren().add(loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void btnRemoveHandler() {
