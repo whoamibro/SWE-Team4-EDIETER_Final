@@ -16,45 +16,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
 public class ProductController implements Initializable {
-//	@FXML
-//	private ProductTotalController productTotalController;
-//	
-//	@FXML
-//	private ProductAddController productAddController;
-//	
-//	@FXML
-//	private ProductEditController productEditController;
-//	
-//	public ProductTotalController getProductTotalController() {
-//		return productTotalController;
-//	}
-//
-//	public ProductAddController getProductAddController() {
-//		return productAddController;
-//	}
-//
-//	public ProductEditController getProductEditController() {
-//		return productEditController;
-//	}
-	
-//	
-//	public void setVisibleTotalController(boolean bool) {
-//		productTotalController.getPaneTotal().setVisible(bool);
-//	}
-//	
-//	public void setVisibleAddController(boolean bool) {
-//		productAddController.getPaneAdd().setVisible(bool);
-//	}
-//	
-//	public void setVisibleEditController(boolean bool) {
-//		productEditController.getPaneEdit().setVisible(bool);
-//	}
 	private ArrayList<Product> productList = new ArrayList<Product>();
 	@FXML
 	private AnchorPane paneProduct;
 	
 	@FXML
 	private AnchorPane paneTotal;
+	
+	public AnchorPane getPaneTotal() {
+		return paneTotal;
+	}
 	
 	@FXML
 	private FlowPane flowPane;
@@ -80,11 +51,6 @@ public class ProductController implements Initializable {
 	
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {
-		// 하위 컨트롤러 필드 초기화
-//		productAddController.setProductController(this);
-//		productEditController.setProductController(this);
-//		productTotalController.setProductController(this);
-		
 		ProductTotalController productTotalController = new ProductTotalController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
