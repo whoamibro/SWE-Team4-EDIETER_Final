@@ -1,5 +1,7 @@
 package controller;
 
+import components.Product;
+import components.ProductBuilder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,9 +19,14 @@ import javafx.scene.text.Text;
 
 public class ProductAddController implements Initializable {
 	private ProductController productController;
-
+	private Product newProduct;
+	private String type;
+	private String model;
 	public void setProductController(ProductController productController) {
 		this.productController = productController;
+	}
+	public Product getProduct() {
+		return newProduct;
 	}
 
 	@FXML
@@ -64,15 +71,22 @@ public class ProductAddController implements Initializable {
 		btnAdd.setOnAction(event -> btnAddHandler());
 		btnCancel.setOnAction(event2 -> btnCancelHandler());
 
-		ObservableList<String> list = FXCollections.observableArrayList();
+		ObservableList<String> list = cmbBoxProduct.getItems();
+		//ObservableList<String> list = FXCollections.observableArrayList();
 		list.add("a");
 		list.add("b");
-		cmbBoxProduct.setItems(list);
+		//cmbBoxProduct.setItems(list);
+		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event ->{
+	         type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();
+	      });
+		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event ->{
+	         model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
+	      });
 	}
 
 	public void btnAddHandler() {
 
-		Button newButton = new Button("test");
+		Button newButton = new Button("fuck");
 		newButton.setPrefSize(210, 100);
 		newButton.setOnAction(event -> {
 			
@@ -90,9 +104,18 @@ public class ProductAddController implements Initializable {
 			e.printStackTrace();
 		}
 
-		productController.getButtonList().add(new Button("test"));
-		productController.applyList();
+		ProductBuilder productBuilder = new ProductBuilder();
+		newProduct = productBuilder
+				.setType(type)
+				.setModel(model)
+				.setPower(Double.parseDouble(textPower.getText().split(" ")[0]))
+				.setGrade(Integer.parseInt(textGrade.getText().split(" ")[0]))
+				.setUsingTime(Integer.parseInt(textFieldHour.getText()))
+				.setNickName(textFieldName.getText())
+				.build();
 
+		productController.getButtonList().add(new Button(newProduct.getNickName()));
+		productController.applyList();
 	}
 
 	public void btnCancelHandler() {

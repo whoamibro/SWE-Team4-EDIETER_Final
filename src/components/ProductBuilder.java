@@ -5,7 +5,6 @@ public class ProductBuilder {
     private String model;
     private String nickName;
     private int usingTime;
-    private int availableTime;
     private double power;
     // 냉방전력, 난방전력
     private double cool_heatpower;
@@ -31,23 +30,13 @@ public class ProductBuilder {
         return this;
     }
 
-    public ProductBuilder setAvailableTime(int availableTime) {
-        this.availableTime = availableTime;
-        return this;
-    }
-
     public ProductBuilder setPower(double power) {
         this.power = power;
         return this;
     }
 
-    public ProductBuilder getGrade(int grade) {
+    public ProductBuilder setGrade(int grade) {
         this.grade = grade;
-        return this;
-    }
-
-    public ProductBuilder getCool_heatpower(double cool_heatpower) {
-        this.cool_heatpower = cool_heatpower;
         return this;
     }
 
@@ -58,7 +47,7 @@ public class ProductBuilder {
 
     public Product build() {
         Product product = new Product(type, model, nickName,
-                usingTime, availableTime, power, cool_heatpower, grade);
+                usingTime, power, cool_heatpower, grade);
         return product;
     }
 }
