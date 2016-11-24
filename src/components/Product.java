@@ -5,18 +5,16 @@ public class Product {
     private String model;
     private String nickName;
     private int usingTime;
-    private int availableTime;
     //추가 수정부분
     private double cool_heatpower;
     private double power;
     private int grade;
 
-    public Product(String type, String model, String nickName, int usingTime, int availableTime, double power, double cool_heatpower, int grade) {
+    public Product(String type, String model, String nickName, int usingTime, double power, double cool_heatpower, int grade) {
         this.type = type;
         this.model = model;
         this.nickName = nickName;
         this.usingTime = usingTime;
-        this.availableTime = availableTime;
         this.power = power;
         // 추가 수정부분
         this.cool_heatpower = cool_heatpower;
@@ -39,10 +37,6 @@ public class Product {
         return this.usingTime;
     }
 
-    public int getAvailableTime() {
-        return this.availableTime;
-    }
-
     public double getPower() {
         return this.power;
     }
@@ -54,7 +48,7 @@ public class Product {
     }
 
     public String getProductInfo() {
-        String productInfo = String.format("type:%s, model:%s, nickName:%s, usingTime:%d, availableTime:%d, power:%f, grade:%d", new Object[]{this.type, this.model, this.nickName, Integer.valueOf(this.usingTime), Integer.valueOf(this.availableTime), Double.valueOf(this.power), Integer.valueOf(this.grade)});
+        String productInfo = String.format("type:%s, model:%s, nickName:%s, usingTime:%d, availableTime:%d, power:%f, grade:%d", new Object[]{this.type, this.model, this.nickName, Integer.valueOf(this.usingTime), Double.valueOf(this.power), Integer.valueOf(this.grade)});
         return productInfo;
     }
 }

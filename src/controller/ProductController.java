@@ -1,7 +1,9 @@
 package controller;
 
+import components.Product;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -47,7 +49,7 @@ public class ProductController implements Initializable {
 //	public void setVisibleEditController(boolean bool) {
 //		productEditController.getPaneEdit().setVisible(bool);
 //	}
-	
+	private ArrayList<Product> productList = new ArrayList<Product>();
 	@FXML
 	private AnchorPane paneProduct;
 	
@@ -104,6 +106,7 @@ public class ProductController implements Initializable {
 		paneTotal.getChildren().clear();
 		ProductAddController productAddController = new ProductAddController();
 		productAddController.setProductController(this);
+		productList.add(productAddController.getProduct());
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductAdd.fxml"));
 		loader.setController(productAddController);
 		
