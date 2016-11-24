@@ -112,7 +112,6 @@ public class ProductAddController implements Initializable {
 		newButton.setPrefSize(210, 100);
 		newButton.setOnAction(event -> {
 			ProductEditController productEditController = new ProductEditController();
-			productEditController.setProduct(newProduct);
 			FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
 			editLoader.setController(productEditController);
 			
