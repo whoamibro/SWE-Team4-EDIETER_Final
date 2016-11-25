@@ -6,32 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="paneRegister" maxHeight="-Infinity"
-	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-	prefHeight="509.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="paneRegister" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Text layoutX="63.0" layoutY="72.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="ID" />
-		<Text layoutX="62.0" layoutY="120.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="비밀번호" />
-		<Text layoutX="62.0" layoutY="168.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="비밀번호 확인" />
-		<Text layoutX="62.0" layoutY="216.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="이름" />
-		<Text layoutX="62.0" layoutY="266.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="실내 평수" />
-		<Text layoutX="66.0" layoutY="321.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="이번 달 전력 사용량" />
+		<Text layoutX="63.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+		<Text layoutX="62.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호" />
+		<Text layoutX="62.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호 확인" />
+		<Text layoutX="62.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이름" />
+		<Text layoutX="62.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="실내 평수" />
+		<Text layoutX="66.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이번 달 전력 사용량" />
 		<TextField layoutX="167.0" layoutY="52.0" />
 		<PasswordField layoutX="167.0" layoutY="100.0" />
 		<PasswordField layoutX="167.0" layoutY="148.0" />
 		<TextField layoutX="167.0" layoutY="196.0" />
 		<TextField layoutX="167.0" layoutY="246.0" />
 		<TextField layoutX="221.0" layoutY="301.0" />
-		<Button fx:id="btnOK" layoutX="458.0" layoutY="408.0"
-			mnemonicParsing="false" text="가입" />
-		<Button fx:id="btnCancel" layoutX="531.0" layoutY="408.0"
-			mnemonicParsing="false" text="취소" />
+		<Button fx:id="btnOK" layoutX="458.0" layoutY="408.0" mnemonicParsing="false" text="가입" />
+		<Button fx:id="btnCancel" layoutX="531.0" layoutY="408.0" mnemonicParsing="false" text="취소" />
+      <Hyperlink layoutX="63.0" layoutY="345.0" onAction="#hyperlinkHandler" text="이번 달 전력 사용량 알기!" />
 	</children>
 </AnchorPane>
