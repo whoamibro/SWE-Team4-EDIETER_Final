@@ -45,8 +45,3 @@ PRIMARY KEY(code),
 FOREIGN KEY(num) REFERENCES User(num) ON DELETE CASCADE,
 FOREIGN KEY(pcode) REFERENCES CrawlingProduct(pcode) ON DELETE CASCADE
 ) DEFAULT CHARSET=UTF8;
-
-INSERT INTO User VALUES (2, '아이디', 1, 1, 1, 1);
-INSERT INTO PowerUsage VALUES (1, 10, 20, 30, 40, 50, 60);
-INSERT INTO CrawlingProduct VALUES (1, '�����', '�𵨸�', 32, 1);
-INSERT INTO OwnProduct VALUES (1, 1, 1, '�г���', 10, 10);
