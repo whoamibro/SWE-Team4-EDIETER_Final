@@ -32,21 +32,21 @@ public class ProductEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 	}
 
 	public void btnEditHandler() {
-		
+
 	}
 
 	public void btnCloseHandler() {
-		paneEdit.getChildren().clear();
-		
+
 		ProductTotalController productTotalController = new ProductTotalController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
 
 		try {
+			paneEdit.getChildren().clear();
 			paneEdit.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();

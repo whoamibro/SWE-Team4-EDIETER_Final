@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -15,7 +16,7 @@
 		<PasswordField fx:id="pwField" layoutX="428.0" layoutY="320.0" />
 		<Button fx:id="btnLogin" layoutX="639.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnLoginHandler" onKeyPressed="#btnLoginHandler" text="로그인" />
 		<Button fx:id="btnRegister" layoutX="327.0" layoutY="383.0" mnemonicParsing="false" onAction="#btnRegisterHandler" text="회원가입" />
-		<Button layoutX="432.0" layoutY="383.0" mnemonicParsing="false" text="아이디/비밀번호 찾기" />
+		<Button layoutX="432.0" layoutY="383.0" mnemonicParsing="false" text="아이디 / 비밀번호 찾기" />
 		<Text layoutX="174.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Dieter로 전기세를 아껴보세요!">
 			<font>
 				<Font size="39.0" />

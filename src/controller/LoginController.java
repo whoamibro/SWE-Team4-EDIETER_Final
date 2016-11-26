@@ -30,7 +30,7 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 	}
 
 	public void btnLoginHandler() {
@@ -47,11 +47,12 @@ public class LoginController implements Initializable {
 	}
 
 	public void btnRegisterHandler() {
-		paneLogin.getChildren().clear();
 		RegisterController registerController = new RegisterController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Register.fxml"));
 		loader.setController(registerController);
+		
 		try {
+			paneLogin.getChildren().clear();
 			paneLogin.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();

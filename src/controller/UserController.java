@@ -13,16 +13,16 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.TextField;
 
 public class UserController implements Initializable {
-	
+
 	@FXML
 	private TextField textFieldUser;
-	
+
 	@FXML
-    private TextField textFieldSize;
-    
-    @FXML
-    private TextField textFieldUsage;
-	
+	private TextField textFieldSize;
+
+	@FXML
+	private TextField textFieldUsage;
+
 	@FXML
 	private BarChart<String, Double> barChart;
 
@@ -39,22 +39,21 @@ public class UserController implements Initializable {
 		list.add(new XYChart.Data<>("6", 6.0));
 
 		series1.setData(list);
-		series1.setName("占쏙옙占쏙옙 占쏙옙酉�");
+		series1.setName("전기 사용량");
 		barChart.getData().add(series1);
 
-//		 XYChart.Series<String, Double> series1 = new Series<String,
-//		 Double>();
-//		 series1.getData().add(new XYChart.Data<String, Double>("Natural",
-//		 1.4));
-//		 barChart.getData().add(series1);
+		// XYChart.Series<String, Double> series1 = new Series<String,
+		// Double>();
+		// series1.getData().add(new XYChart.Data<String, Double>("Natural",
+		// 1.4));
+		// barChart.getData().add(series1);
 	}
-	
-	
-	//�궗�슜�옄 �꺆�뿉 �궗�슜�옄 �젙蹂� 蹂댁뿬以� 硫붿냼�뱶
-	
-	//�쟾�젰�궗�슜 洹몃옒�봽. 異뷀썑
-	//public void displayUserGraph() {
-		
-	//}
+
+	// �궗�슜�옄 �꺆�뿉 �궗�슜�옄 �젙蹂� 蹂댁뿬以� 硫붿냼�뱶
+
+	// �쟾�젰�궗�슜 洹몃옒�봽. 異뷀썑
+	// public void displayUserGraph() {
+
+	// }
 
 }

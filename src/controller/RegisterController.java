@@ -28,28 +28,28 @@ public class RegisterController implements Initializable {
 
 	@FXML
 	private AnchorPane paneRegister;
-	
+
 	@FXML
 	private TextField userName;
 
 	@FXML
 	private TextField ID;
-	
+
 	@FXML
 	private PasswordField password;
-	
+
 	@FXML
 	private PasswordField passwordAgain;
-	
+
 	@FXML
 	private TextField email;
-	
+
 	@FXML
 	private TextField areaSize;
-	
+
 	@FXML
 	private TextField usedElec;
-	
+
 	@FXML
 	private Button btnOK;
 
@@ -58,53 +58,42 @@ public class RegisterController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnOK.setOnAction(event -> {
-			btnOKHandler();
-		});
-		btnCancel.setOnAction(event2 -> {
-			btnCancelHandler();
-		});
+	
 	}
 
 	public void btnOKHandler() {
-
-		//if password and passwordAgain is same
-		if(password.getText() == passwordAgain.getText()){
-			//Create new user instance by entered information 
+		// if password and passwordAgain is same
+		if (password.getText() == passwordAgain.getText()) {
+			// Create new user instance by entered information
 			UserBuilder userbuilder = new UserBuilder();
-			newUser = userbuilder
-					.setName(userName.getText())
-					.setID(ID.getText())
-					.setPassword(password.getText())
-					.setEmail(email.getText())
-					.setAreaSize(Integer.parseInt(areaSize.getText()))
-					.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0]))
-					.build();
+			newUser = userbuilder.setName(userName.getText()).setID(ID.getText()).setPassword(password.getText())
+					.setEmail(email.getText()).setAreaSize(Integer.parseInt(areaSize.getText()))
+					.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0])).build();
 		}
-		
-		//if here was a message box that will pop up 
-		//after click this button to notify confirmation to user,
-		//that would be better.
+
+		// if here was a message box that will pop up
+		// after click this button to notify confirmation to user,
+		// that would be better.
 		showLoginWindow();
-		
+
 	}
-	
+
 	public User getuser() {
 		return newUser;
 	}
-	
+
 	public void btnCancelHandler() {
 		showLoginWindow();
 	}
 
 	public void showLoginWindow() {
-		paneRegister.getChildren().clear();
 
 		LoginController loginController = new LoginController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 		loader.setController(loginController);
 
 		try {
+			paneRegister.getChildren().clear();
 			paneRegister.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -128,7 +117,7 @@ public class RegisterController implements Initializable {
 			public void changed(ObservableValue<? extends Worker.State> arg0, Worker.State arg1, Worker.State arg2) {
 				if (arg2 == Worker.State.FAILED) {
 					Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setHeaderText("웹피이지 로드 오류");
+					alert.setHeaderText(null);
 					alert.setContentText("인터넷 연결을 확인하세요!");
 					alert.showAndWait();
 					webStage.close();

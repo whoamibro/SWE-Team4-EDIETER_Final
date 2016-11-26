@@ -23,17 +23,17 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 	}
 
 	public void btnLogoutHandler() {
-		paneMain.getChildren().clear();
 
 		LoginController loginController = new LoginController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 		loader.setController(loginController);
 
 		try {
+			paneMain.getChildren().clear();
 			paneMain.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -45,16 +45,16 @@ public class MainController implements Initializable {
 	}
 
 	public void btnEditHandler() {
-		paneMain.getChildren().clear();
 
 		UserEditController userEditController = new UserEditController();
 		userEditController.setMainController(this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserEdit.fxml"));
 		loader.setController(userEditController);
-		
+
 		try {
+			paneMain.getChildren().clear();
 			paneMain.getChildren().add(loader.load());
-		} catch( IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

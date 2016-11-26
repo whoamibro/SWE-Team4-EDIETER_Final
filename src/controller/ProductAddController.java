@@ -31,10 +31,10 @@ public class ProductAddController implements Initializable {
 
 	@FXML
 	private Text textGrade;
-	
+
 	@FXML
 	private Text Power;
-	
+
 	@FXML
 	private TextField textFieldNickName;
 
@@ -46,16 +46,16 @@ public class ProductAddController implements Initializable {
 
 	@FXML
 	private Button btnCancel;
-	
+
 	private ProductController productController;
 	private Product newProduct;
 	private String type;
 	private String model;
-	
+
 	public void setProductController(ProductController productController) {
 		this.productController = productController;
 	}
-	
+
 	public Product getProduct() {
 		return newProduct;
 	}
@@ -65,14 +65,14 @@ public class ProductAddController implements Initializable {
 		ObservableList<String> list = cmbBoxProduct.getItems();
 		list.add("a");
 		list.add("b");
-		
-		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event ->{
-	         type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();
-	      });
-		
-		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event ->{
-	         model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
-	      });
+
+		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event -> {
+			type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();
+		});
+
+		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event -> {
+			model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
+		});
 	}
 
 	public void btnAddHandler() {
@@ -90,14 +90,9 @@ public class ProductAddController implements Initializable {
 		}
 
 		ProductBuilder productBuilder = new ProductBuilder();
-		newProduct = productBuilder
-				.setType(type)
-				.setModel(model)
-				.setPower(Double.parseDouble(textPower.getText()))
-				.setGrade(Integer.parseInt(textGrade.getText()))
-				.setUsingTime(Integer.parseInt(textFieldHour.getText()))
-				.setNickName(textFieldNickName.getText())
-				.build();
+		newProduct = productBuilder.setType(type).setModel(model).setPower(Double.parseDouble(textPower.getText()))
+				.setGrade(Integer.parseInt(textGrade.getText())).setUsingTime(Integer.parseInt(textFieldHour.getText()))
+				.setNickName(textFieldNickName.getText()).build();
 
 		Button newButton = new Button("fuck");
 		newButton.setPrefSize(210, 100);
@@ -105,15 +100,14 @@ public class ProductAddController implements Initializable {
 			ProductEditController productEditController = new ProductEditController();
 			FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
 			editLoader.setController(productEditController);
-			
+
 			try {
 				productController.getPaneTotal().getChildren().clear();
 				productController.getPaneTotal().getChildren().add(editLoader.load());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			
+
 		});
 		productController.getButtonList().add(newButton);
 		productController.applyList();
