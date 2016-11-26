@@ -1,5 +1,7 @@
 package controller;
 
+import components.User;
+import components.UserBuilder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,42 +23,76 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class RegisterController implements Initializable {
+
+	private User newUser;
+
 	@FXML
 	private AnchorPane paneRegister;
 	
 	@FXML
-	private TextField idField;
-	
-	@FXML
-	private PasswordField pwField;
-	
-	@FXML
-	private PasswordField pwCheckField;
-	
-	@FXML
-	private TextField nameField;
-	
-	@FXML
-	private TextField spaceField;
-	
-	@FXML
-	private TextField powerField;
+	private TextField userName;
 
 	@FXML
-	private Button btnOK;
+	private TextField ID;
 	
 	@FXML
-	private Button btnCancel;
+	private PasswordField password;
 	
+	@FXML
+	private PasswordField passwordAgain;
+	
+	@FXML
+	private TextField email;
+	
+	@FXML
+	private TextField areaSize;
+	
+	@FXML
+	private TextField usedElec;
+	
+	@FXML
+	private Button btnOK;
+
+	@FXML
+	private Button btnCancel;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		btnOK.setOnAction(event -> {
+			btnOKHandler();
+		});
+		btnCancel.setOnAction(event2 -> {
+			btnCancelHandler();
+		});
 	}
 
 	public void btnOKHandler() {
-		showLoginWindow();
-	}
 
+		//if password and passwordAgain is same
+		if(password.getText() == passwordAgain.getText()){
+			//Create new user instance by entered information 
+			UserBuilder userbuilder = new UserBuilder();
+			newUser = userbuilder
+					.setName(userName.getText())
+					.setID(ID.getText())
+					.setPassword(password.getText())
+					.setEmail(email.getText())
+					.setAreaSize(Integer.parseInt(areaSize.getText()))
+					.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0]))
+					.build();
+		}
+		
+		//if here was a message box that will pop up 
+		//after click this button to notify confirmation to user,
+		//that would be better.
+		showLoginWindow();
+		
+	}
+	
+	public User getuser() {
+		return newUser;
+	}
+	
 	public void btnCancelHandler() {
 		showLoginWindow();
 	}

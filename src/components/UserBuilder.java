@@ -4,23 +4,30 @@ package components;
 public class UserBuilder {
 	
 	private String name;
-	private String email;
+	private String ID;
 	private String password;
+	private String email;
 	private int areaSize;
 	private double usedElec;
+	
 	
 	public UserBuilder setName(String name) {
 		this.name = name;
 		return this;
 	}
 	
-	public UserBuilder setEmail(String email) {
-		this.email = email;
+	public UserBuilder setID(String ID) {
+		this.ID = ID;
 		return this;
 	}
 	
 	public UserBuilder setPassword(String password) {
 		this.password = password;
+		return this;
+	}
+	
+	public UserBuilder setEmail(String email) {
+		this.email = email;
 		return this;
 	}
 	
@@ -35,7 +42,7 @@ public class UserBuilder {
 	}
 	
 	public User build() {
-		User user = new User(name, email, password, areaSize, usedElec);
+		User user = new User(name, ID, password, email, areaSize, usedElec);
 		return user;
 	}
 }
