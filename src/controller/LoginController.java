@@ -12,9 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class LoginController implements Initializable {
-	public AnchorPane getPaneLogin() {
-		return paneLogin;
-	}
 
 	@FXML
 	private AnchorPane paneLogin;
@@ -30,16 +27,14 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private Button btnRegister;
+	
+	public AnchorPane getPaneLogin() {
+		return paneLogin;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnLogin.setOnAction(event -> {
-			btnLoginHandler();
-		});
-
-		btnRegister.setOnAction(event2 -> {
-			btnRegisterHandler();
-		});
+		
 	}
 
 	public void btnLoginHandler() {

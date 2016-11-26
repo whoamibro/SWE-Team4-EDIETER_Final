@@ -84,7 +84,7 @@ public class RegisterController implements Initializable {
 		Scene scene = new Scene(webView);
 		webStage.setWidth(1020);
 		webStage.setScene(scene);
-		webStage.setTitle("ÇöÀç Àü·Â »ç¿ë·® ¾Ë±â");
+		webStage.setTitle("í˜„ì¬ ì „ë ¥ ì‚¬ìš©ëŸ‰ ì•Œê¸°");
 		webStage.show();
 
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
@@ -92,8 +92,8 @@ public class RegisterController implements Initializable {
 			public void changed(ObservableValue<? extends Worker.State> arg0, Worker.State arg1, Worker.State arg2) {
 				if (arg2 == Worker.State.FAILED) {
 					Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setHeaderText("À¥ÆäÀÌÁö ·Îµå ¿À·ù");
-					alert.setContentText("ÀÎÅÍ³İ ¿¬°áÀ» È®ÀÎÇÏ¼¼¿ä!");
+					alert.setHeaderText("ì›¹í”¼ì´ì§€ ë¡œë“œ ì˜¤ë¥˜");
+					alert.setContentText("ì¸í„°ë„· ì—°ê²°ì„ í™•ì¸í•˜ì„¸ìš”!");
 					alert.showAndWait();
 					webStage.close();
 				}

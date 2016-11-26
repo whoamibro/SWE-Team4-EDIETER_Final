@@ -32,16 +32,14 @@ public class ProductEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnEdit.setOnAction(event -> btnEditHandler());
-		btnClose.setOnAction(event2 -> btnCancelHandler());
-		btnRemove.setOnAction(event3 -> btnRemoveHandler());
+		
 	}
 
 	public void btnEditHandler() {
 		
 	}
 
-	public void btnCancelHandler() {
+	public void btnCloseHandler() {
 		paneEdit.getChildren().clear();
 		
 		ProductTotalController productTotalController = new ProductTotalController();

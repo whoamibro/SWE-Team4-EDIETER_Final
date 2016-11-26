@@ -60,10 +60,6 @@ public class ProductAddController implements Initializable {
 		return newProduct;
 	}
 
-	public AnchorPane getPaneAdd() {
-		return paneAdd;
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<String> list = cmbBoxProduct.getItems();
@@ -97,8 +93,8 @@ public class ProductAddController implements Initializable {
 		newProduct = productBuilder
 				.setType(type)
 				.setModel(model)
-				.setPower(Double.parseDouble(textPower.getText().split(" ")[0]))
-				.setGrade(Integer.parseInt(textGrade.getText().split(" ")[0]))
+				.setPower(Double.parseDouble(textPower.getText()))
+				.setGrade(Integer.parseInt(textGrade.getText()))
 				.setUsingTime(Integer.parseInt(textFieldHour.getText()))
 				.setNickName(textFieldNickName.getText())
 				.build();
@@ -139,8 +135,4 @@ public class ProductAddController implements Initializable {
 
 	}
 
-	public void displayAddProduct() {
-		paneAdd.setVisible(true);
-
-	}
 }
