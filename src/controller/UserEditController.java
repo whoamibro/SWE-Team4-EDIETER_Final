@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class UserEditController implements Initializable {
@@ -15,11 +17,29 @@ public class UserEditController implements Initializable {
 	private AnchorPane paneUserEdit;
 
 	@FXML
-	private Button btnOK;
+	private TextField idField;
+	
+	@FXML
+	private PasswordField pwField;
+	
+	@FXML
+	private PasswordField pwCheckField;
+	
+	@FXML
+	private TextField nameField;
+	
+	@FXML
+	private TextField spaceField;
+	
+	@FXML
+	private TextField powerField;
 
 	@FXML
+	private Button btnOK;
+	
+	@FXML
 	private Button btnCancel;
-
+	
 	private MainController mainController;
 
 	public void setMainController(MainController mainController) {
@@ -41,7 +61,6 @@ public class UserEditController implements Initializable {
 		try {
 			paneUserEdit.getChildren().add(loader.load());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

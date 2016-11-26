@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -20,22 +22,35 @@ import javafx.stage.Stage;
 
 public class RegisterController implements Initializable {
 	@FXML
-	private Button btnOK;
+	private AnchorPane paneRegister;
+	
+	@FXML
+	private TextField idField;
+	
+	@FXML
+	private PasswordField pwField;
+	
+	@FXML
+	private PasswordField pwCheckField;
+	
+	@FXML
+	private TextField nameField;
+	
+	@FXML
+	private TextField spaceField;
+	
+	@FXML
+	private TextField powerField;
 
+	@FXML
+	private Button btnOK;
+	
 	@FXML
 	private Button btnCancel;
-
-	@FXML
-	private AnchorPane paneRegister;
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnOK.setOnAction(event -> {
-			btnOKHandler();
-		});
-		btnCancel.setOnAction(event2 -> {
-			btnCancelHandler();
-		});
+		
 	}
 
 	public void btnOKHandler() {

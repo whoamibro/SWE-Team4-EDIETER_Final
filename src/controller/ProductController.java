@@ -23,16 +23,8 @@ public class ProductController implements Initializable {
 	@FXML
 	private AnchorPane paneTotal;
 	
-	public AnchorPane getPaneTotal() {
-		return paneTotal;
-	}
-	
 	@FXML
 	private FlowPane flowPane;
-	
-	public FlowPane getFlowPane() {
-		return flowPane;
-	}
 	
 	@FXML
 	private Button btnAdd;
@@ -43,11 +35,18 @@ public class ProductController implements Initializable {
 		return buttonList;
 	}
 	
+	public AnchorPane getPaneTotal() {
+		return paneTotal;
+	}
+	
+	public FlowPane getFlowPane() {
+		return flowPane;
+	}
+	
 	public void applyList() {
 		flowPane.getChildren().setAll(buttonList);
 		flowPane.getChildren().add(btnAdd);
 	}
-	
 	
 	@Override	
 	public void initialize(URL location, ResourceBundle resources) {
@@ -57,15 +56,10 @@ public class ProductController implements Initializable {
 		try {
 			paneTotal.getChildren().add(loader.load());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		// 버튼 액션 추가
-		btnAdd.setOnAction(event-> btnAddHandler());
-		
-		flowPane.getChildren().setAll(buttonList);
-		flowPane.getChildren().add(btnAdd);
+		applyList();
 	}
 
 	public void btnAddHandler() {
@@ -77,13 +71,10 @@ public class ProductController implements Initializable {
 		loader.setController(productAddController);
 		
 		try {
-			
 			paneTotal.getChildren().add(loader.load());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 	}
 }

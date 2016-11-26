@@ -30,10 +30,6 @@ public class PlanController implements Initializable{
 		comboBox.setItems(list);
 		
 		textArea.setText("Hello World!");
-		
-		btnPlan.setOnAction(event-> btnPlanHandler());
-		
-		
 	}
 	
 	public void btnPlanHandler() {

@@ -14,12 +14,12 @@
 		<Text layoutX="62.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이름" />
 		<Text layoutX="62.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="실내 평수" />
 		<Text layoutX="66.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이번 달 전력 사용량" />
-		<TextField disable="true" layoutX="167.0" layoutY="52.0" />
-      <PasswordField layoutX="167.0" layoutY="101.0" />
-      <PasswordField layoutX="167.0" layoutY="152.0" />
-		<TextField disable="true" layoutX="167.0" layoutY="206.0" />
-		<TextField layoutX="167.0" layoutY="256.0" />
-		<TextField layoutX="221.0" layoutY="311.0" />
+		<TextField fx:id="idField" disable="true" layoutX="167.0" layoutY="52.0" />
+      <PasswordField fx:id="pwField" layoutX="167.0" layoutY="101.0" />
+      <PasswordField fx:id="pwCheckField" layoutX="167.0" layoutY="152.0" />
+		<TextField fx:id="nameField" disable="true" layoutX="167.0" layoutY="206.0" />
+		<TextField fx:id="spaceField" layoutX="167.0" layoutY="256.0" />
+		<TextField fx:id="powerField" layoutX="221.0" layoutY="311.0" />
 		<Button fx:id="btnOK" layoutX="458.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnOKHandler" text="변경" />
 		<Button fx:id="btnCancel" layoutX="531.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnCancelHandler" text="취소" />
 	</children>

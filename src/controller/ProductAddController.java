@@ -17,17 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class ProductAddController implements Initializable {
-	private ProductController productController;
-	private Product newProduct;
-	private String type;
-	private String model;
-	public void setProductController(ProductController productController) {
-		this.productController = productController;
-	}
-	public Product getProduct() {
-		return newProduct;
-	}
-
 	@FXML
 	private AnchorPane paneAdd;
 
@@ -38,13 +27,16 @@ public class ProductAddController implements Initializable {
 	private ComboBox<String> cmbBoxModel;
 
 	@FXML
-	private TextField textFieldName;
-
-	@FXML
 	private Text textPower;
 
 	@FXML
 	private Text textGrade;
+	
+	@FXML
+	private Text Power;
+	
+	@FXML
+	private TextField textFieldNickName;
 
 	@FXML
 	private TextField textFieldHour;
@@ -54,11 +46,18 @@ public class ProductAddController implements Initializable {
 
 	@FXML
 	private Button btnCancel;
-
-	public void refreshContents() {
-		cmbBoxProduct.setValue("");
-		cmbBoxModel.setValue("");
-
+	
+	private ProductController productController;
+	private Product newProduct;
+	private String type;
+	private String model;
+	
+	public void setProductController(ProductController productController) {
+		this.productController = productController;
+	}
+	
+	public Product getProduct() {
+		return newProduct;
 	}
 
 	public AnchorPane getPaneAdd() {
@@ -67,28 +66,24 @@ public class ProductAddController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnAdd.setOnAction(event -> btnAddHandler());
-		btnCancel.setOnAction(event2 -> btnCancelHandler());
-
 		ObservableList<String> list = cmbBoxProduct.getItems();
-		//ObservableList<String> list = FXCollections.observableArrayList();
 		list.add("a");
 		list.add("b");
-		//cmbBoxProduct.setItems(list);
+		
 		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event ->{
 	         type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();
 	      });
+		
 		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event ->{
 	         model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
 	      });
 	}
 
 	public void btnAddHandler() {
-
-
 		paneAdd.getChildren().clear();
 
 		ProductTotalController productTotalController = new ProductTotalController();
+		productTotalController.setProductController(productController);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
 
@@ -105,7 +100,7 @@ public class ProductAddController implements Initializable {
 				.setPower(Double.parseDouble(textPower.getText().split(" ")[0]))
 				.setGrade(Integer.parseInt(textGrade.getText().split(" ")[0]))
 				.setUsingTime(Integer.parseInt(textFieldHour.getText()))
-				.setNickName(textFieldName.getText())
+				.setNickName(textFieldNickName.getText())
 				.build();
 
 		Button newButton = new Button("fuck");

@@ -11,7 +11,7 @@ name VARCHAR(10),
 space INT,
 currentPowerUsage DOUBLE,
 PRIMARY KEY(num)
-);
+) DEFAULT CHARSET=UTF8;
 
 CREATE TABLE PowerUsage (
 num INT,
@@ -32,7 +32,7 @@ model VARCHAR(20),
 power DOUBLE,
 grade INT,
 PRIMARY KEY(pcode)
-);
+) DEFAULT CHARSET=UTF8;
 
 CREATE TABLE OwnProduct (
 code INT,
@@ -44,9 +44,9 @@ availableTime INT,
 PRIMARY KEY(code),
 FOREIGN KEY(num) REFERENCES User(num) ON DELETE CASCADE,
 FOREIGN KEY(pcode) REFERENCES CrawlingProduct(pcode) ON DELETE CASCADE
-);
+) DEFAULT CHARSET=UTF8;
 
-INSERT INTO User VALUES (1, 1, 1, 1, 1, 1);
+INSERT INTO User VALUES (2, '아이', 1, 1, 1, 1);
 INSERT INTO PowerUsage VALUES (1, 10, 20, 30, 40, 50, 60);
 INSERT INTO CrawlingProduct VALUES (1, '냉장고', '모델명', 32, 1);
 INSERT INTO OwnProduct VALUES (1, 1, 1, '닉네임', 10, 10);

@@ -16,13 +16,13 @@
 		<Text layoutX="80.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="주당 사용 시간" />
 		<ComboBox fx:id="cmbBoxProduct" layoutX="203.0" layoutY="46.0" prefWidth="150.0" />
 		<ComboBox fx:id="cmbBoxModel" layoutX="203.0" layoutY="91.0" prefWidth="150.0" />
-		<TextField fx:id="textFieldName" layoutX="203.0" layoutY="276.0" />
+		<TextField fx:id="textFieldNickName" layoutX="203.0" layoutY="276.0" />
 		<Text fx:id="textPower" layoutX="203.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1200 kW" />
 		<Text fx:id="textGrade" layoutX="203.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5 등급" />
 		<TextField fx:id="textFieldHour" layoutX="203.0" layoutY="322.0" />
-		<Button fx:id="btnAdd" layoutX="248.0" layoutY="411.0" mnemonicParsing="false" text="추가" />
-		<Button fx:id="btnCancel" layoutX="323.0" layoutY="411.0" mnemonicParsing="false" text="취소" />
+		<Button fx:id="btnAdd" layoutX="248.0" layoutY="411.0" mnemonicParsing="false" onAction="#btnAddHandler" text="추가" />
+		<Button fx:id="btnCancel" layoutX="323.0" layoutY="411.0" mnemonicParsing="false" onAction="#btnCancelHandler" text="취소" />
       <Text layoutX="80.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="냉/난방 능력" />
-      <Text layoutX="203.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="해당 없음" />
+      <Text fx:id="textPower" layoutX="203.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="해당 없음" />
 	</children>
 </AnchorPane>
