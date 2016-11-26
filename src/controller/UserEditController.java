@@ -1,5 +1,7 @@
 package controller;
 
+import components.User;
+import components.UserBuilder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,26 +15,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class UserEditController implements Initializable {
+	
+	User thisuser;
 	@FXML
 	private AnchorPane paneUserEdit;
 
 	@FXML
-	private TextField idField;
+	private TextField userName;
+
+	@FXML
+	private TextField ID;
 	
 	@FXML
-	private PasswordField pwField;
+	private PasswordField password;
 	
 	@FXML
-	private PasswordField pwCheckField;
+	private PasswordField passwordAgain;
 	
 	@FXML
-	private TextField nameField;
+	private TextField email;
 	
 	@FXML
-	private TextField spaceField;
+	private TextField areaSize;
 	
 	@FXML
-	private TextField powerField;
+	private TextField usedElec;
 
 	@FXML
 	private Button btnOK;
@@ -41,7 +48,14 @@ public class UserEditController implements Initializable {
 	private Button btnCancel;
 	
 	private MainController mainController;
-
+	
+	public UserEditController(){}
+	
+	//get current user instance
+	public UserEditController(User user){
+		thisuser = user;
+	}
+	
 	public void setMainController(MainController mainController) {
 		this.mainController = mainController;
 	}
@@ -50,13 +64,14 @@ public class UserEditController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 	}
+	
+
 
 	public void btnOKHandler() {
 		paneUserEdit.getChildren().clear();
 
-		LoginController loginController = new LoginController();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-		loader.setController(loginController);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+		loader.setController(mainController);
 
 		try {
 			paneUserEdit.getChildren().add(loader.load());

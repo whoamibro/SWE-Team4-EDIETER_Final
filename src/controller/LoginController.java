@@ -17,10 +17,10 @@ public class LoginController implements Initializable {
 	private AnchorPane paneLogin;
 
 	@FXML
-	private TextField textFieldID;
+	private TextField userName;
 
 	@FXML
-	private TextField textFieldPW;
+	private TextField password;
 
 	@FXML
 	private Button btnLogin;
