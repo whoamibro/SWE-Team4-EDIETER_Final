@@ -40,7 +40,6 @@ public class ProductEditController implements Initializable {
 	}
 
 	public void btnCloseHandler() {
-
 		ProductTotalController productTotalController = new ProductTotalController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);

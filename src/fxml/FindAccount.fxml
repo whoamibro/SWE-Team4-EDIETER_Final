@@ -6,13 +6,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="paneFind" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="70.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="아이디 찾기" />
-      <Text layoutX="70.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호 찾기" />
-      <TextField layoutX="70.0" layoutY="102.0" />
-      <TextField layoutX="70.0" layoutY="290.0" />
-      <TextField layoutX="70.0" layoutY="143.0" />
+      <Text layoutX="301.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="아이디 찾기" />
+      <Text layoutX="301.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호 찾기" />
+      <TextField layoutX="301.0" layoutY="216.0" />
+      <TextField layoutX="301.0" layoutY="404.0" />
+      <TextField layoutX="301.0" layoutY="257.0" />
+      <Button layoutX="495.0" layoutY="257.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="495.0" layoutY="404.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="btnCancel" layoutX="599.0" layoutY="496.0" mnemonicParsing="false" onAction="#btnCancelHandler" text="취소" />
    </children>
 </AnchorPane>

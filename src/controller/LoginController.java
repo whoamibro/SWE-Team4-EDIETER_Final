@@ -27,6 +27,9 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private Button btnRegister;
+	
+	@FXML
+	private Button btnFind;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -50,6 +53,19 @@ public class LoginController implements Initializable {
 		RegisterController registerController = new RegisterController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Register.fxml"));
 		loader.setController(registerController);
+		
+		try {
+			paneLogin.getChildren().clear();
+			paneLogin.getChildren().add(loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void btnFindHandler() {
+		FindAccountController findAccountController = new FindAccountController();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FindAccount.fxml"));
+		loader.setController(findAccountController);
 		
 		try {
 			paneLogin.getChildren().clear();

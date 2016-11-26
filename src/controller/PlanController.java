@@ -3,7 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,11 +22,10 @@ public class PlanController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ObservableList<String> list = FXCollections.observableArrayList();
+		ObservableList<String> list = comboBox.getItems();
 		list.add("1~2");
 		list.add("2~3");
 		list.add("3~4");
-		comboBox.setItems(list);
 
 		textArea.setText("Hello World!");
 	}

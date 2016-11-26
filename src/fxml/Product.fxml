@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="paneProduct" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductController">
+<AnchorPane fx:id="paneProduct" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductController">
 	<children>
-		<ScrollPane layoutY="1.0" prefHeight="650.0" prefWidth="423.0">
+		<ScrollPane layoutY="1.0" prefHeight="700.0" prefWidth="423.0">
 			<content>
 				<FlowPane fx:id="flowPane" prefHeight="100.0" prefWidth="420.0">
 					<children>

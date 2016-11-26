@@ -27,7 +27,6 @@ public class MainController implements Initializable {
 	}
 
 	public void btnLogoutHandler() {
-
 		LoginController loginController = new LoginController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 		loader.setController(loginController);
@@ -45,7 +44,6 @@ public class MainController implements Initializable {
 	}
 
 	public void btnEditHandler() {
-
 		UserEditController userEditController = new UserEditController();
 		userEditController.setMainController(this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserEdit.fxml"));
