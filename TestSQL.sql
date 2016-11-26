@@ -46,7 +46,7 @@ FOREIGN KEY(num) REFERENCES User(num) ON DELETE CASCADE,
 FOREIGN KEY(pcode) REFERENCES CrawlingProduct(pcode) ON DELETE CASCADE
 ) DEFAULT CHARSET=UTF8;
 
-INSERT INTO User VALUES (2, 'ΎΖΐΜ', 1, 1, 1, 1);
+INSERT INTO User VALUES (2, 'μ•„μ΄λ””', 1, 1, 1, 1);
 INSERT INTO PowerUsage VALUES (1, 10, 20, 30, 40, 50, 60);
-INSERT INTO CrawlingProduct VALUES (1, '³Γΐε°ν', 'Έπµ¨Έν', 32, 1);
-INSERT INTO OwnProduct VALUES (1, 1, 1, '΄Π³ΧΐΣ', 10, 10);
+INSERT INTO CrawlingProduct VALUES (1, 'οΏ½οΏ½οΏ½οΏ½οΏ½', 'οΏ½πµ¨ΈοΏ½', 32, 1);
+INSERT INTO OwnProduct VALUES (1, 1, 1, 'οΏ½Π³οΏ½οΏ½οΏ½', 10, 10);
