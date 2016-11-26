@@ -69,7 +69,18 @@ public class UserEditController implements Initializable {
 
 	public void btnOKHandler() {
 		paneUserEdit.getChildren().clear();
+		
+		UserBuilder userBuilder = new UserBuilder();
+		thisuser = userBuilder
+				.setPassword(password.getText())
+				.setEmail(email.getText())
+				.setAreaSize(Integer.parseInt(areaSize.getText()))
+				.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0]))
+				.build();
 
+		//if here was a message box that will pop up 
+		//after click this button to notify confirmation to user,
+		//that would be better.
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);
 
