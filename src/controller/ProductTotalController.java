@@ -18,10 +18,6 @@ public class ProductTotalController implements Initializable {
 	@FXML
 	Text text;
 	
-	public AnchorPane getPaneTotal() {
-		return paneTotal;
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 

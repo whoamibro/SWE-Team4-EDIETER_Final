@@ -27,10 +27,6 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private Button btnRegister;
-	
-	public AnchorPane getPaneLogin() {
-		return paneLogin;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -58,12 +54,8 @@ public class LoginController implements Initializable {
 		try {
 			paneLogin.getChildren().add(loader.load());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void setVisible(boolean bool) {
-		paneLogin.setVisible(bool);
-	}
 }

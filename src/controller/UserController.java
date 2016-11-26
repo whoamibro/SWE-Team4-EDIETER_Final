@@ -23,11 +23,8 @@ public class UserController implements Initializable {
     @FXML
     private TextField textFieldUsage;
 	
-//	@FXML
-//	private Button btnEdit;
 	@FXML
 	private BarChart<String, Double> barChart;
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -44,8 +41,6 @@ public class UserController implements Initializable {
 		series1.setData(list);
 		series1.setName("占쏙옙占쏙옙 占쏙옙酉�");
 		barChart.getData().add(series1);
-		
-		
 
 //		 XYChart.Series<String, Double> series1 = new Series<String,
 //		 Double>();

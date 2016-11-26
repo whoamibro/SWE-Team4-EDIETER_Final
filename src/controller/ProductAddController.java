@@ -110,7 +110,6 @@ public class ProductAddController implements Initializable {
 				productController.getPaneTotal().getChildren().clear();
 				productController.getPaneTotal().getChildren().add(editLoader.load());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

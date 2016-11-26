@@ -31,8 +31,8 @@
 				</Tab>
 			</tabs>
 		</TabPane>
-      <Button fx:id="btnEdit" layoutX="694.0" layoutY="14.0" mnemonicParsing="false" text="회원 정보 수정" />
-      <Button fx:id="btnLogout" layoutX="828.0" layoutY="14.0" mnemonicParsing="false" text="로그아웃" />
+      <Button fx:id="btnEdit" layoutX="694.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnEditHandler" text="회원 정보 수정" />
+      <Button fx:id="btnLogout" layoutX="828.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnLogoutHandler" text="로그아웃" />
       <Text layoutX="24.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="환영합니다 ㅁㅁㅁ님" />
 	</children>
 </AnchorPane>

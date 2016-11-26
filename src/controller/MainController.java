@@ -11,9 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 public class MainController implements Initializable {
-	public AnchorPane getPaneMain() {
-		return paneMain;
-	}
 
 	@FXML
 	private AnchorPane paneMain;
@@ -26,13 +23,7 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnLogout.setOnAction(event -> {
-			btnLogoutHandler();
-		});
-
-		btnEdit.setOnAction(event2 -> {
-			btnEditHandler();
-		});
+		
 	}
 
 	public void btnLogoutHandler() {
@@ -45,7 +36,6 @@ public class MainController implements Initializable {
 		try {
 			paneMain.getChildren().add(loader.load());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
