@@ -1,5 +1,7 @@
 package controller;
 
+import components.User;
+import components.UserBuilder;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,9 +11,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 public class MainController implements Initializable {
 
+	User thisUser;
 	@FXML
 	private AnchorPane paneMain;
 
@@ -20,10 +24,19 @@ public class MainController implements Initializable {
 
 	@FXML
 	private Button btnLogout;
-
+	
+	@FXML
+	private Text greetText;
+	
+	public MainController(){}
+	
+	public MainController(User user){
+		thisUser = user;
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		greetText.setText("환영합니다 " + thisUser.getName() + "님");
 	}
 
 	public void btnLogoutHandler() {
@@ -44,7 +57,7 @@ public class MainController implements Initializable {
 	}
 
 	public void btnEditHandler() {
-		UserEditController userEditController = new UserEditController();
+		UserEditController userEditController = new UserEditController(thisUser);
 		userEditController.setMainController(this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserEdit.fxml"));
 		loader.setController(userEditController);

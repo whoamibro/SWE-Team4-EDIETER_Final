@@ -16,7 +16,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class UserEditController implements Initializable {
 
-	User thisuser;
+	User thisUser;
 	@FXML
 	private AnchorPane paneUserEdit;
 
@@ -54,7 +54,7 @@ public class UserEditController implements Initializable {
 
 	// get current user instance
 	public UserEditController(User user) {
-		thisuser = user;
+		thisUser = user;
 	}
 
 	public void setMainController(MainController mainController) {
@@ -63,12 +63,16 @@ public class UserEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		userName.setText(thisUser.getName());
+		ID.setText(thisUser.getID());
+		email.setText(thisUser.getEmail());
+		areaSize.setText(String.valueOf(thisUser.getAreaSize()));
+		usedElec.setText(String.valueOf(thisUser.getUsedElec()));
 	}
 
 	public void btnOKHandler() {
 		UserBuilder userBuilder = new UserBuilder();
-		thisuser = userBuilder.setPassword(password.getText()).setEmail(email.getText())
+		thisUser = userBuilder.setPassword(password.getText()).setEmail(email.getText())
 				.setAreaSize(Integer.parseInt(areaSize.getText()))
 				.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0])).build();
 
@@ -76,7 +80,7 @@ public class UserEditController implements Initializable {
 		// after click this button to notify confirmation to user,
 		// that would be better.
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);
 
 		try {
