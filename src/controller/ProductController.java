@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -29,7 +30,7 @@ public class ProductController implements Initializable {
 	@FXML
 	private Button btnAdd;
 
-	private ObservableList<Button> buttonList = FXCollections.observableArrayList();
+	private ObservableList<Button> buttonList=FXCollections.observableArrayList();
 
 	public ObservableList<Button> getButtonList() {
 		return buttonList;

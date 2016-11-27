@@ -7,9 +7,11 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
 
@@ -66,12 +68,14 @@ public class LoginController implements Initializable {
 		FindAccountController findAccountController = new FindAccountController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FindAccount.fxml"));
 		loader.setController(findAccountController);
-		
 		try {
-			paneLogin.getChildren().clear();
-			paneLogin.getChildren().add(loader.load());
-		} catch (IOException e) {
-			e.printStackTrace();
+			Scene scene = new Scene(loader.load());
+			Stage stage = new Stage();
+			stage.setTitle("비밀번호 찾기");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 

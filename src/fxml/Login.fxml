@@ -20,7 +20,7 @@
 		<TextField fx:id="idField" layoutX="391.0" layoutY="287.0" />
 		<PasswordField fx:id="pwField" layoutX="391.0" layoutY="336.0" />
 		<Button fx:id="btnLogin" layoutX="583.0" layoutY="287.0" mnemonicParsing="false" onAction="#btnLoginHandler" onKeyPressed="#btnLoginHandler" text="로그인" />
-		<Button fx:id="btnRegister" layoutX="290.0" layoutY="399.0" mnemonicParsing="false" onAction="#btnRegisterHandler" text="회원가입" />
-		<Button fx:id="btnFind" layoutX="395.0" layoutY="399.0" mnemonicParsing="false" onAction="#btnFindHandler" text="아이디 / 비밀번호 찾기" />
+		<Button fx:id="btnRegister" layoutX="297.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnRegisterHandler" text="회원가입" />
+		<Button fx:id="btnFind" layoutX="392.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnFindHandler" text="비밀번호 찾기" />
 	</children>
 </AnchorPane>
