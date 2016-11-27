@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class ProductEditController implements Initializable {
@@ -18,6 +20,18 @@ public class ProductEditController implements Initializable {
 	private AnchorPane paneEdit;
 
 	@FXML
+	private ComboBox<String> cmbBoxType;
+
+	@FXML
+	private ComboBox<String> cmbBoxModel;
+
+	@FXML
+	private TextField nickNameField;
+
+	@FXML
+	private TextField hourField;
+
+	@FXML
 	private Button btnEdit;
 
 	@FXML
@@ -26,17 +40,30 @@ public class ProductEditController implements Initializable {
 	@FXML
 	private Button btnRemove;
 
-	public AnchorPane getPaneEdit() {
-		return paneEdit;
-	}
-
+	private boolean editFlag = false;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 	}
 
-	public void btnEditHandler() {
 
+	public void btnEditHandler() {
+		if (!editFlag) {
+			cmbBoxType.setDisable(false);
+			cmbBoxModel.setDisable(false);
+			nickNameField.setDisable(false);
+			hourField.setDisable(false);
+			btnEdit.setText("완료");
+			editFlag = true;
+		} else {
+			cmbBoxType.setDisable(true);
+			cmbBoxModel.setDisable(true);
+			nickNameField.setDisable(true);
+			hourField.setDisable(true);
+			btnEdit.setText("편집");
+			editFlag = false;
+		}
 	}
 
 	public void btnCloseHandler() {
