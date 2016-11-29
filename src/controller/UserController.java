@@ -11,8 +11,10 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 public class UserController implements Initializable {
+	
 	private User user;
 
 	public void setUser(User user) {
@@ -20,13 +22,13 @@ public class UserController implements Initializable {
 	}
 
 	@FXML
-	private TextField textFieldUser;
+	private Text userName;
 
 	@FXML
-	private TextField textFieldSize;
+	private Text areaSize;
 
 	@FXML
-	private TextField textFieldUsage;
+	private Text usedElec;
 
 	@FXML
 	private BarChart<String, Double> barChart;
@@ -46,6 +48,11 @@ public class UserController implements Initializable {
 		list.add(new Data<>("6", 6.0));
 
 		barChart.getData().add(series);
+
+	}
+	
+	public void btnPastHandler() {
+		
 
 	}
 

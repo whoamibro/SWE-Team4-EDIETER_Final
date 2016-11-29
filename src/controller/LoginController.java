@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
 
-	User thisUser=new User();
+	User thisUser;
 	@FXML
 	private AnchorPane paneLogin;
 
@@ -43,18 +43,24 @@ public class LoginController implements Initializable {
 	}
 
 	public void btnLoginHandler() {
+		
+		int[] chargeHistory = new int[13];
+		
+		for(int i = 1; i <13; i++){
+			chargeHistory[i] = 10000;
+		}
 		//Create user instance who logged in by entered information
 		UserBuilder userbuilder = new UserBuilder();
-		thisUser = userbuilder.setName("源�怨좉컼").setID("user1").setPassword("1")
+		thisUser = userbuilder.setName("Tom").setID("user1").setPassword("1")
 						.setEmail("user1@gmail.com").setAreaSize(10)
-						.setUsedElec(100.0).build();
+						.setUsedElec(100.0).setChargeHist(chargeHistory).build();
 		
-		User user = new User();
+		//User user = new User();
 		UserController userController = new UserController();
-		userController.setUser(user);
+		userController.setUser(thisUser);
 		MainController mainController = new MainController();
 		mainController.setUserController(userController);
-		mainController.setUser(user);
+		mainController.setUser(thisUser);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);

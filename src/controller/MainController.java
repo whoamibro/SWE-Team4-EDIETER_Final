@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class MainController implements Initializable {
-	private User user;
+	private User thisUser;
 
 	@FXML
 	private AnchorPane paneMain;
@@ -34,7 +34,7 @@ public class MainController implements Initializable {
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.thisUser = user;
 	}
 
 	private UserController userController;
@@ -52,7 +52,7 @@ public class MainController implements Initializable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-		greetText.setText("�솚�쁺�빀�땲�떎 " + user.getName() + "�떂");
+		greetText.setText("�솚�쁺�빀�땲�떎 " + thisUser.getName() + "�떂");
 	}
 
 	public void btnLogoutHandler() {
@@ -73,7 +73,7 @@ public class MainController implements Initializable {
 	}
 
 	public void btnEditHandler() {
-		UserEditController userEditController = new UserEditController(user);
+		UserEditController userEditController = new UserEditController(thisUser);
 		userEditController.setMainController(this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserEdit.fxml"));
 		loader.setController(userEditController);

@@ -9,6 +9,7 @@ public class UserBuilder {
 	private String email;
 	private int areaSize;
 	private double usedElec;
+	private int[] chargeHistory;//Electricity charge history.
 
 	public UserBuilder setName(String name) {
 		this.name = name;
@@ -39,9 +40,14 @@ public class UserBuilder {
 		this.usedElec = usedElec;
 		return this;
 	}
+	
+	public UserBuilder setChargeHist(int[] chargeHistory) {
+		this.chargeHistory = chargeHistory;
+		return this;
+	}
 
 	public User build() {
-		User user = new User(name, ID, password, email, areaSize, usedElec);
+		User user = new User(name, ID, password, email, areaSize, usedElec, chargeHistory);
 		return user;
 	}
 }
