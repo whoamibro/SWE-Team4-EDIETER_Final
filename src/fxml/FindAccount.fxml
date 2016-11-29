@@ -12,7 +12,7 @@
       <Text layoutX="50.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail" />
       <FlowPane fx:id="inputPane" hgap="5.0" layoutX="209.0" layoutY="100.0" prefHeight="65.0" prefWidth="136.0">
          <children>
-            <ComboBox fx:id="cmbBoxSite" prefHeight="29.0" prefWidth="130.0" />
+            <ComboBox fx:id="cmbBoxSite" prefHeight="29.0" prefWidth="130.0" promptText="선택" />
          </children>
       </FlowPane>
       <Button fx:id="btnFindPW" layoutX="368.0" layoutY="99.0" mnemonicParsing="false" onAction="#btnFindPWHandler" text="찾기" />

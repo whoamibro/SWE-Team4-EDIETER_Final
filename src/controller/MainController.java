@@ -13,8 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class MainController implements Initializable {
-	User thisUser;
-	
+	private User user;
+
 	@FXML
 	private AnchorPane paneMain;
 
@@ -23,23 +23,36 @@ public class MainController implements Initializable {
 
 	@FXML
 	private Button btnLogout;
-	
+
 	@FXML
 	private Text greetText;
-	
-	public MainController(){}
-	
-	public MainController(User user){
-		thisUser = user;
+
+	@FXML
+	private AnchorPane userPane;
+
+	public MainController() {
 	}
-	
+
 	public void setUser(User user) {
-	
+		this.user = user;
 	}
-	
+
+	private UserController userController;
+
+	public void setUserController(UserController userController) {
+		this.userController = userController;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		greetText.setText("�솚�쁺�빀�땲�떎 " + thisUser.getName() + "�떂");
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/User.fxml"));
+		loader.setController(userController);
+		try {
+			userPane.getChildren().add(loader.load());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+		greetText.setText("�솚�쁺�빀�땲�떎 " + user.getName() + "�떂");
 	}
 
 	public void btnLogoutHandler() {
@@ -60,7 +73,7 @@ public class MainController implements Initializable {
 	}
 
 	public void btnEditHandler() {
-		UserEditController userEditController = new UserEditController(thisUser);
+		UserEditController userEditController = new UserEditController(user);
 		userEditController.setMainController(this);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserEdit.fxml"));
 		loader.setController(userEditController);

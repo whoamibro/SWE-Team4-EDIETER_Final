@@ -1,7 +1,15 @@
 package controller;
 
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -76,4 +84,34 @@ public class FindAccountController implements Initializable {
 		failAlert.showAndWait();
 	}
 	
+	public void sendMail() throws MessagingException {
+		 // 메일 관련 정보
+        String host = "smtp.gmail.com";
+        String username = "지메일아이디@gmail.com";
+        String password = "비밀번호";
+         
+        // 메일 내용
+        String recipient = "수신자 메일주소"; // 수신자 메일주소
+        String subject = "지메일을 사용한 발송 테스트입니다."; // 메일 제목
+        String body = "내용 무"; // 메일 내용
+         
+        //properties 설정
+        Properties props = new Properties();
+        props.put("mail.smtps.auth", "true");
+        // 메일 세션
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage msg = new MimeMessage(session);
+ 
+        // 메일 관련
+        msg.setSubject(subject);
+        msg.setText(body);
+        msg.setFrom(new InternetAddress(username));
+        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+ 
+        // 발송 처리
+        Transport transport = session.getTransport("smtps");
+        transport.connect(host, username, password);
+        transport.sendMessage(msg, msg.getAllRecipients());
+        transport.close();  
+	}
 }

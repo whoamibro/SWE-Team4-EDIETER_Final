@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
 
-	User thisUser;
+	User thisUser=new User();
 	@FXML
 	private AnchorPane paneLogin;
 
@@ -39,17 +39,23 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
 	}
 
 	public void btnLoginHandler() {
-		
 		//Create user instance who logged in by entered information
 		UserBuilder userbuilder = new UserBuilder();
-		thisUser = userbuilder.setName("김고객").setID("user1").setPassword("1")
+		thisUser = userbuilder.setName("源�怨좉컼").setID("user1").setPassword("1")
 						.setEmail("user1@gmail.com").setAreaSize(10)
 						.setUsedElec(100.0).build();
-		MainController mainController = new MainController(thisUser);
+		
+		User user = new User();
+		UserController userController = new UserController();
+		userController.setUser(user);
+		MainController mainController = new MainController();
+		mainController.setUserController(userController);
+		mainController.setUser(user);
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);
 
@@ -81,7 +87,7 @@ public class LoginController implements Initializable {
 		try {
 			Scene scene = new Scene(loader.load());
 			Stage stage = new Stage();
-			stage.setTitle("��й�ȣ ã��");
+			stage.setTitle("비밀번호 찾기");
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e1) {
