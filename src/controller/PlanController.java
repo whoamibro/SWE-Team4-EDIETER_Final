@@ -56,6 +56,7 @@ public class PlanController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<String> list = comboBox.getItems();
+<<<<<<< HEAD
 		list.add("10000");
 		list.add("20000");
 		list.add("30000");
@@ -67,6 +68,12 @@ public class PlanController implements Initializable {
 		list.add("90000");
 		list.add("100000");
 
+=======
+		list.add("1~2");
+		list.add("2~3");
+		list.add("3~4");
+		list.add("4~5");
+>>>>>>> abc
 
 		comboBox.getSelectionModel().selectedItemProperty().addListener(event -> {
 			hope_fee = Integer.parseInt(comboBox.getSelectionModel().getSelectedItem().toString());
@@ -79,6 +86,10 @@ public class PlanController implements Initializable {
 
 	}
 
+<<<<<<< HEAD
 
 
 }
+=======
+}
+>>>>>>> abc
