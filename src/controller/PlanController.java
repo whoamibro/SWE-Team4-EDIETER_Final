@@ -56,7 +56,6 @@ public class PlanController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<String> list = comboBox.getItems();
-<<<<<<< HEAD
 		list.add("10000");
 		list.add("20000");
 		list.add("30000");
@@ -68,12 +67,6 @@ public class PlanController implements Initializable {
 		list.add("90000");
 		list.add("100000");
 
-=======
-		list.add("1~2");
-		list.add("2~3");
-		list.add("3~4");
-		list.add("4~5");
->>>>>>> abc
 
 		comboBox.getSelectionModel().selectedItemProperty().addListener(event -> {
 			hope_fee = Integer.parseInt(comboBox.getSelectionModel().getSelectedItem().toString());
@@ -86,10 +79,45 @@ public class PlanController implements Initializable {
 
 	}
 
-<<<<<<< HEAD
+	public void execute_current_cal_fee(){
+        calculate_electric_usage.setProductCount();
+        total_usage = calculate_electric_usage.calc_ele_cur_usage();
+        ex_total_usage = calculate_electric_usage.cal_ele_expect_usage();
+
+        // 앞으로 어느정도까지 사용 가능한지 계산함 (한달 전체 전력량 - 1일부터오늘까지 사용한 전력량)
+        calculateThirdposition.setTotal_electric_usage(total_usage);
+        calculatefee.setNum_remain(calculateThirdposition.cal_position()[1]);
+        calculatefee.setNumofthirdposition(calculateThirdposition.cal_position()[0],calculateThirdposition.cal_position()[2]);
+
+        // 현재까지의 사용한 전력요금액 (부과세, 펀드 미포함)
+        current_basic_fee = calculatefee.cal_Basic_Fee();
+        // 부과세 계산
+        calculatefee.taxing();
+        // 펀드 포함
+        calculatefee.cal_elec_industry_fund();
+        // 총액 계산
+        current_fee = calculatefee.cal_total();
+    }
+
+    public void execute_total_cal_fee(){
+        // 패턴이 한달 내내 똑같다는 가정하에 희망요금까지 추가로 사용 가능한 전력량 계산
+        calculateThirdposition.setTotal_electric_usage(ex_total_usage);
+        calculatefee.setNum_remain(calculateThirdposition.cal_position()[1]);
+        calculatefee.setNumofthirdposition(calculateThirdposition.cal_position()[0],calculateThirdposition.cal_position()[2]);
+
+        // 한달 동안 사용할 것으로 예상되는 전력에 대한 요금액 (부과세 펀드 미포함
+        month_basic_fee = calculatefee.cal_Basic_Fee();
+        calculatefee.taxing();
+        calculatefee.cal_elec_industry_fund();
+        month_fee = calculatefee.cal_total();
+
+        // 한달 패턴이 똑같다고 가정할때 추가로 사용가능한 전력량
+        calculate_plan.setCurrent_basic_fee(month_basic_fee);
+        calculate_plan.setCurrent_total_fee(month_fee);
+        calculate_plan.setRemainder(hope_fee);
+
+
+    }
 
 
 }
-=======
-}
->>>>>>> abc

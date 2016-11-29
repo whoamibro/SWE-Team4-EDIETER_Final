@@ -1,11 +1,11 @@
 package controller;
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 import java.net.URL;
 import java.util.ResourceBundle;
 
->>>>>>> abc
+//>>>>>>> abc
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -27,8 +27,8 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-=======
->>>>>>> abc
+//=======
+//>>>>>>> abc
 public class FindAccountController implements Initializable {
 	@FXML
 	private AnchorPane paneFind;
@@ -51,22 +51,22 @@ public class FindAccountController implements Initializable {
 		siteList.add("naver.com");
 		siteList.add("gmail.com");
 		siteList.add("daum.net");
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		siteList.add("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½");
-=======
-		siteList.add("Á÷Á¢ ÀÔ·Â");
->>>>>>> abc
+//=======
+		siteList.add("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½");
+//>>>>>>> abc
 
 		cmbBoxSite.getSelectionModel().selectedItemProperty().addListener(event -> cmbBoxSiteListener());
 	}
 
 	public void cmbBoxSiteListener() {
 		TextField inputField;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
-=======
-		// Á÷Á¢ ÀÔ·Â ÅØ½ºÆ® ÇÊµå À¯¹« È®ÀÎ
->>>>>>> abc
+
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+
 		boolean existFlag = true;
 		try {
 			inputPane.getChildren().get(1);
@@ -74,28 +74,28 @@ public class FindAccountController implements Initializable {
 			existFlag = false;
 		}
 
-<<<<<<< HEAD
+
 		if (cmbBoxSite.getSelectionModel().getSelectedItem() == "ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½") {
-=======
-		if (cmbBoxSite.getSelectionModel().getSelectedItem() == "Á÷Á¢ ÀÔ·Â") {
->>>>>>> abc
+
+		if (cmbBoxSite.getSelectionModel().getSelectedItem() == "ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½") {
+
 			inputField = new TextField();
 			inputField.setPrefWidth(130);
 			inputPane.getChildren().add(0, inputField);
 		} else {
-<<<<<<< HEAD
+
 			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Êµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
-=======
-			// Á÷Á¢ ÀÔ·Â ÅØ½ºÆ® ÇÊµå°¡ Á¸ÀçÇÏ¸é
->>>>>>> abc
+
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Êµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
+
 			if(existFlag) {
 				inputPane.getChildren().remove(0);
 			}
 		}
-	}
+	}}
 
 	public void btnFindPWHandler() {
-<<<<<<< HEAD
+
 		// DBï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Ò¸ï¿½ Ã£ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ë¸ï¿½
 		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
 		successAlert.setHeaderText(null);
@@ -139,19 +139,17 @@ public class FindAccountController implements Initializable {
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();  
 	}
-=======
-		// DB¿¡¼­ ÀÌ¸ÞÀÏ ÁÖ¼Ò¸¦ Ã£¾Æ¼­ ÀÖÀ» °æ¿ì ¸ÞÀÏ È®ÀÎ ¾Ë¸²
-		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-		successAlert.setHeaderText(null);
-		successAlert.setContentText("¸ÞÀÏÀ» È®ÀÎÇØÁÖ¼¼¿ä!");
-		successAlert.showAndWait();
 
-		// Ã£Áö ¸øÇÒ °æ¿ì µî·ÏµÈ ÀÌ¸ÞÀÏ ¾ø´Ù°í ¾Ë¸²
-		Alert failAlert = new Alert(Alert.AlertType.ERROR);
-		failAlert.setHeaderText(null);
-		failAlert.setContentText("µî·ÏµÈ ÀÌ¸ÞÀÏ ÁÖ¼Ò°¡ ¾ø½À´Ï´Ù.");
-		failAlert.showAndWait();
+//		// DBï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Ò¸ï¿½ Ã£ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ë¸ï¿½
+//		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+//		successAlert.setHeaderText(null);
+//		successAlert.setContentText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½!");
+//		successAlert.showAndWait();
+//
+//		// Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½Ë¸ï¿½
+//		Alert failAlert = new Alert(Alert.AlertType.ERROR);
+//		failAlert.setHeaderText(null);
+//		failAlert.setContentText("ï¿½ï¿½Ïµï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+//		failAlert.showAndWait();
 	}
-	
->>>>>>> abc
-}
+

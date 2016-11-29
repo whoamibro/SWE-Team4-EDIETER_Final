@@ -97,7 +97,7 @@ public class ProductEditController implements Initializable {
 			cmbBoxModel.setDisable(false);
 			nickNameField.setDisable(false);
 			hourField.setDisable(false);
-			btnEdit.setText("¿Ï·á");
+			btnEdit.setText("ï¿½Ï·ï¿½");
 			editFlag = true;
 			
 		} else {
@@ -156,7 +156,7 @@ public class ProductEditController implements Initializable {
 			cmbBoxModel.setDisable(true);
 			nickNameField.setDisable(true);
 			hourField.setDisable(true);
-			btnEdit.setText("ÆíÁý");
+			btnEdit.setText("ï¿½ï¿½ï¿½ï¿½");
 			editFlag = false;
 		}
 	}
