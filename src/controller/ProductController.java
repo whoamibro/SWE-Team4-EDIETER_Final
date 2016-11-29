@@ -48,6 +48,22 @@ public class ProductController implements Initializable {
 		flowPane.getChildren().setAll(buttonList);
 		flowPane.getChildren().add(btnAdd);
 	}
+	
+	public void addProductList(Product newProduct) {
+		productList.add(newProduct);
+	}
+	
+	public void removeProductInList(Product removeProduct) {
+		productList.remove(removeProduct);
+	}
+	
+	public int getProductIndexInList(Product searchProduct) {
+		return productList.indexOf(searchProduct);
+	}
+	
+	public int getProductListSize() {
+		return productList.size();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -66,7 +82,6 @@ public class ProductController implements Initializable {
 	public void btnAddHandler() {
 		ProductAddController productAddController = new ProductAddController();
 		productAddController.setProductController(this);
-		productList.add(productAddController.getProduct());
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductAdd.fxml"));
 		loader.setController(productAddController);
 

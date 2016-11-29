@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import components.Product;
 import components.ProductBuilder;
 import javafx.collections.ObservableList;
@@ -62,10 +64,14 @@ public class ProductAddController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ObservableList<String> list = cmbBoxProduct.getItems();
-		list.add("a");
-		list.add("b");
+		ObservableList<String> listProduct = cmbBoxProduct.getItems();
+		listProduct.add("a");
+		listProduct.add("b");
 
+		ObservableList<String> listModel = cmbBoxModel.getItems();
+		listModel.add("c");
+		listModel.add("d");
+		
 		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event -> {
 			type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();
 		});
@@ -90,15 +96,21 @@ public class ProductAddController implements Initializable {
 		}
 
 		ProductBuilder productBuilder = new ProductBuilder();
-		newProduct = productBuilder.setType(type).setModel(model).setPower(Double.parseDouble(textPower.getText()))
-				.setGrade(Integer.parseInt(textGrade.getText())).setUsingTime(Integer.parseInt(textFieldHour.getText()))
-				.setNickName(textFieldNickName.getText()).build();
+		newProduct = productBuilder
+				.setType(type)
+				.setModel(model)
+				.setPower(Double.parseDouble(textPower.getText().split(" ")[0]))
+				.setGrade(Integer.parseInt(textGrade.getText()))
+				.setUsingTime(Integer.parseInt(textFieldHour.getText()))
+				.setNickName(textFieldNickName.getText())
+				.build();
 
-		Button newButton = new Button("fuck");
+		Button newButton = new Button(newProduct.getNickName());
 		newButton.setPrefSize(210, 100);
 		newButton.setOnAction(event -> {
 			ProductEditController productEditController = new ProductEditController();
 			productEditController.setProductController(productController);
+			productEditController.setProduct(newProduct);
 			FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
 			editLoader.setController(productEditController);
 
@@ -112,6 +124,9 @@ public class ProductAddController implements Initializable {
 		});
 		productController.getButtonList().add(newButton);
 		productController.applyList();
+		productController.addProductList(newProduct);
+
+
 	}
 
 	public void btnCancelHandler() {
