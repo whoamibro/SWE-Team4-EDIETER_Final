@@ -17,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
 public class ProductController implements Initializable {
-	private ArrayList<Product> productList = new ArrayList<Product>();
+	public static ArrayList<Product> productList = new ArrayList<Product>();
 	@FXML
 	private AnchorPane paneProduct;
 

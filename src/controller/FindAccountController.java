@@ -1,16 +1,5 @@
 package controller;
 
-import java.net.URL;
-import java.util.Properties;
-import java.util.ResourceBundle;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +9,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.net.URL;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class FindAccountController implements Initializable {
 	@FXML
@@ -43,14 +42,14 @@ public class FindAccountController implements Initializable {
 		siteList.add("naver.com");
 		siteList.add("gmail.com");
 		siteList.add("daum.net");
-		siteList.add("Á÷Á¢ ÀÔ·Â");
+		siteList.add("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½");
 
 		cmbBoxSite.getSelectionModel().selectedItemProperty().addListener(event -> cmbBoxSiteListener());
 	}
 
 	public void cmbBoxSiteListener() {
 		TextField inputField;
-		// Á÷Á¢ ÀÔ·Â ÅØ½ºÆ® ÇÊµå À¯¹« È®ÀÎ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		boolean existFlag = true;
 		try {
 			inputPane.getChildren().get(1);
@@ -58,12 +57,12 @@ public class FindAccountController implements Initializable {
 			existFlag = false;
 		}
 
-		if (cmbBoxSite.getSelectionModel().getSelectedItem() == "Á÷Á¢ ÀÔ·Â") {
+		if (cmbBoxSite.getSelectionModel().getSelectedItem() == "ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½") {
 			inputField = new TextField();
 			inputField.setPrefWidth(130);
 			inputPane.getChildren().add(0, inputField);
 		} else {
-			// Á÷Á¢ ÀÔ·Â ÅØ½ºÆ® ÇÊµå°¡ Á¸ÀçÇÏ¸é
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Êµå°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
 			if(existFlag) {
 				inputPane.getChildren().remove(0);
 			}
@@ -71,44 +70,44 @@ public class FindAccountController implements Initializable {
 	}
 
 	public void btnFindPWHandler() {
-		// DB¿¡¼­ ÀÌ¸ÞÀÏ ÁÖ¼Ò¸¦ Ã£¾Æ¼­ ÀÖÀ» °æ¿ì ¸ÞÀÏ È®ÀÎ ¾Ë¸²
+		// DBï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Ò¸ï¿½ Ã£ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ë¸ï¿½
 		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
 		successAlert.setHeaderText(null);
-		successAlert.setContentText("¸ÞÀÏÀ» È®ÀÎÇØÁÖ¼¼¿ä!");
+		successAlert.setContentText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½!");
 		successAlert.showAndWait();
 
-		// Ã£Áö ¸øÇÒ °æ¿ì µî·ÏµÈ ÀÌ¸ÞÀÏ ¾ø´Ù°í ¾Ë¸²
+		// Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½Ë¸ï¿½
 		Alert failAlert = new Alert(Alert.AlertType.ERROR);
 		failAlert.setHeaderText(null);
-		failAlert.setContentText("µî·ÏµÈ ÀÌ¸ÞÀÏ ÁÖ¼Ò°¡ ¾ø½À´Ï´Ù.");
+		failAlert.setContentText("ï¿½ï¿½Ïµï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		failAlert.showAndWait();
 	}
 	
 	public void sendMail() throws MessagingException {
-		 // ¸ÞÀÏ °ü·Ã Á¤º¸
+		 // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         String host = "smtp.gmail.com";
-        String username = "Áö¸ÞÀÏ¾ÆÀÌµð@gmail.com";
-        String password = "ºñ¹Ð¹øÈ£";
+        String username = "ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Ìµï¿½@gmail.com";
+        String password = "ï¿½ï¿½Ð¹ï¿½È£";
          
-        // ¸ÞÀÏ ³»¿ë
-        String recipient = "¼ö½ÅÀÚ ¸ÞÀÏÁÖ¼Ò"; // ¼ö½ÅÀÚ ¸ÞÀÏÁÖ¼Ò
-        String subject = "Áö¸ÞÀÏÀ» »ç¿ëÇÑ ¹ß¼Û Å×½ºÆ®ÀÔ´Ï´Ù."; // ¸ÞÀÏ Á¦¸ñ
-        String body = "³»¿ë ¹«"; // ¸ÞÀÏ ³»¿ë
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        String recipient = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
+        String subject = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ ï¿½×½ï¿½Æ®ï¿½Ô´Ï´ï¿½."; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        String body = "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½"; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
          
-        //properties ¼³Á¤
+        //properties ï¿½ï¿½ï¿½ï¿½
         Properties props = new Properties();
         props.put("mail.smtps.auth", "true");
-        // ¸ÞÀÏ ¼¼¼Ç
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Session session = Session.getDefaultInstance(props);
         MimeMessage msg = new MimeMessage(session);
  
-        // ¸ÞÀÏ °ü·Ã
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         msg.setSubject(subject);
         msg.setText(body);
         msg.setFrom(new InternetAddress(username));
         msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
  
-        // ¹ß¼Û Ã³¸®
+        // ï¿½ß¼ï¿½ Ã³ï¿½ï¿½
         Transport transport = session.getTransport("smtps");
         transport.connect(host, username, password);
         transport.sendMessage(msg, msg.getAllRecipients());
