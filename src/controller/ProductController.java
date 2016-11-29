@@ -64,7 +64,14 @@ public class ProductController implements Initializable {
 	public int getProductListSize() {
 		return productList.size();
 	}
+	
+	public void setProductInList(int productIndex, Product editProduct) {
+		productList.set(productIndex, editProduct);
+	}
 
+	public Product getProduct(int index) {
+		return productList.get(index);
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ProductTotalController productTotalController = new ProductTotalController();

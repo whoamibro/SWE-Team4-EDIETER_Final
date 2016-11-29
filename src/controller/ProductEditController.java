@@ -2,9 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
-
-import javax.swing.JOptionPane;
 
 import components.Product;
 import components.ProductBuilder;
@@ -22,7 +21,6 @@ public class ProductEditController implements Initializable {
 	@FXML
 	private ProductController productController;
 	private Product editProduct;
-	private int productIndex;
 	
 	private String type;
 	private String model;
@@ -62,11 +60,10 @@ public class ProductEditController implements Initializable {
 		this.editProduct = editProduct;
 	}
 	
-	public void setProductIndex(int productIndex) {
-		this.productIndex = productIndex;
-	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		type = "";
+		model = "";
 		
 		ObservableList<String> listType = cmbBoxType.getItems();
 		listType.add("a");
@@ -84,38 +81,77 @@ public class ProductEditController implements Initializable {
 			model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
 		});
 		
-		
 		cmbBoxType.setPromptText(editProduct.getType());
 		cmbBoxModel.setPromptText(editProduct.getModel());
 		textPower.setText(String.valueOf(editProduct.getPower()) + " kW");
 		textGrade.setText(String.valueOf(editProduct.getGrade()));
 		nickNameField.setText(editProduct.getNickName());
 		hourField.setText(String.valueOf(editProduct.getUsingTime()));
+	
 	}
 
 	public void btnEditHandler() {
 		if (!editFlag) {
+		
 			cmbBoxType.setDisable(false);
 			cmbBoxModel.setDisable(false);
 			nickNameField.setDisable(false);
 			hourField.setDisable(false);
 			btnEdit.setText("¿Ï·á");
 			editFlag = true;
+			
 		} else {
 			ProductBuilder productBuilder = new ProductBuilder();
 			
-			editProduct = productBuilder
-					.setType(type)
-					.setModel(model)
-					.setPower(Double.parseDouble(textPower.getText().split(" ")[0]))
-					.setGrade(Integer.parseInt(textGrade.getText()))
-					.setUsingTime(Integer.parseInt(hourField.getText()))
-					.setNickName(nickNameField.getText())
-					.build();
-			
-			productController.removeProductInList(editProduct);
-			productController.addProductList(editProduct);
-			
+			ListIterator<Button> it = productController.getButtonList().listIterator();
+			while(it.hasNext()) {
+				Button button = it.next();
+				int buttonIndex = it.previousIndex();
+				int productIndex = productController.getProductIndexInList(editProduct);
+				
+				if(editProduct.getNickName().equals(button.getText()))
+				{
+					if(type == "")
+						type = editProduct.getType();
+					
+					if(model == "")
+						model = editProduct.getType();
+					 
+					editProduct = productBuilder
+							.setType(type)
+							.setModel(model)
+							.setPower(Double.parseDouble(textPower.getText().split(" ")[0]))
+							.setGrade(Integer.parseInt(textGrade.getText()))
+							.setUsingTime(Integer.parseInt(hourField.getText()))
+							.setNickName(nickNameField.getText())
+							.build();
+					
+					button.setOnAction(event -> {
+						ProductEditController productEditController = new ProductEditController();
+						productEditController.setProductController(productController);
+						
+						productEditController.setProduct(editProduct);
+						productController.setProductInList(productIndex, editProduct);
+						
+						FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
+						editLoader.setController(productEditController);
+
+						try {
+							productController.getPaneTotal().getChildren().clear();
+							productController.getPaneTotal().getChildren().add(editLoader.load());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					});
+					button.setText(editProduct.getNickName());
+					it.set(button);
+					
+					productController.getButtonList().set(buttonIndex, button);
+					
+				}
+						
+			}
+	
 			cmbBoxType.setDisable(true);
 			cmbBoxModel.setDisable(true);
 			nickNameField.setDisable(true);
@@ -139,10 +175,18 @@ public class ProductEditController implements Initializable {
 	}
 
 	public void btnRemoveHandler() {
-		int index = productController.getProductIndexInList(editProduct);
+	
 		productController.removeProductInList(editProduct);
-		JOptionPane.showMessageDialog(null, editProduct.getNickName());
-		productController.getButtonList().remove(index);
+		
+		ListIterator<Button> it = productController.getButtonList().listIterator();
+		while(it.hasNext()) {
+			if(editProduct.getNickName().equals(it.next().getText()))
+			{
+				it.remove();
+			}
+					
+		}
+		
 		productController.applyList();
 		paneEdit.setVisible(false);
 	}
