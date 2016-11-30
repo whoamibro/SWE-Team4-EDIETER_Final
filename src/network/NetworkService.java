@@ -12,35 +12,34 @@ import java.util.List;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 36
  */
 public interface NetworkService {
-    // ?šŒ?›ê°??… ?ˆ˜?–‰?•¨?ˆ˜
+    // callback method for signup
     @POST("user/signup")
     Call<SignupResult> getSignupResult(@Body Signup signup);
 
-    // ë¡œê·¸?¸ ?ˆ˜?–‰?•¨?ˆ˜
+    // callback method for signin
     @POST("user/signin")
     Call<User_f_n> getUserIdentity(@Body Login login);
 
-    // ë¡œê·¸?¸?›„ ? „? ¥?‚¬?š© ?ˆ?Š¤?† ë¦? ?š”ì²? ?•¨?ˆ˜
+    // callback method for request get electric usage history
     @GET("user/getelechistory")
     Call<List<Electricusage_permon>> getElechistory(@Query("token") int token);
 
-    // ?„œë²„ì— ???¥?˜?–´ ?ˆ?Š” ?‚¬?š©? ê³„ì •?— ???•œ ëª¨ë¸ ë¦¬ìŠ¤?Š¸?“¤?„ ë°›ì•„?˜´
+    // callback method for request crawled product info list
     @GET("user/product/getproductlist")
-    Call<List<ProductList>> getProductList(); // type 0 : ?‚¬?š©?ê°? ?“±ë¡í–ˆ?—ˆ?˜ ëª¨ë“  ? œ?’ˆ?“¤?˜ ë¦¬ìŠ¤?Š¸ë¥? ë°›ì•„?˜´
+    Call<List<ProductList>> getProductList(); 
 
+    // callback method for request user's product info list
     @GET("user/product/getuserproductlist")
-    Call<List<Product>> getUserPList(@Query("token") int token);
-    // ?„œë²„ì— ?‚¬?š©?ê°? ?ƒˆë¡? ?“±ë¡í•˜?Š” ? œ?’ˆ?“¤?„ ì¶”ê?
+    Call<List<Product_n>> getUserPList(@Query("token") int token);
+    
+    // callback method for add product to user's account on server
     @GET("user/product/addproducttolist")
-    Call<Void> addProduct(@Header("token") String token, @Body Product product);
+    Call<Void> addProduct(@Header("token") String token, @Body Product_n product);
 
-    // ?„œë²„ì— ?‚¬?š©?ê°? ?“±ë¡í•´?†¨?˜ ? œ?’ˆ?— ???•œ ? •ë³? ?¼ë¶?ë¥? ?ˆ˜? •
+    // callback method for edit product to user's account on server
     @GET("user/product/editproducttolist")
-    Call<Void> editProduct(@Header("token") String token,@Body Product product);
-
-    // for confimation code
-//    @GET("topic")
-//    Call<Practice> checkoutnetworking(@Query("javascript") String type);
+    Call<Void> editProduct(@Header("token") String token,@Body Product_n product);
 }

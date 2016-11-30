@@ -2,14 +2,15 @@ package network.request;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 48
  */
 public class Signup {
-    // ?šŒ?›ê°??…?„ ?œ„?•œ ê°ì²´
-    private String name;    // ?´ë¦?
-    private String email;   // ?´ë©”ì¼
-    private String password;// ë¹„ë?ë²ˆí˜¸
-    private int areaSize;   // ?˜¨?„ê³„ì‚°?„ ?œ„?•œ ê±°ì£¼ê³µê°„ ?‚¬?´ì¦?
-    private double ElecUsage;   // ?´ë²ˆë‹¬ ? „? ¥?‚¬?š©?Ÿ‰
+    // object for signup
+    private String name;  
+    private String email; 
+    private String password;
+    private int areaSize;   
+    private double ElecUsage;  
 
     public String getName() {
         return name;
@@ -51,3 +52,6 @@ public class Signup {
         this.ElecUsage = ElecUsage;
     }
 }
+/**
+ * 
+ */

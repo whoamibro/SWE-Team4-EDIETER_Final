@@ -3,7 +3,7 @@ package network;
 import javafx.collections.ObservableList;
 import network.request.Token;
 import network.response.Electricusage_permon;
-import network.response.Product;
+import network.response.Product_n;
 import network.response.ProductList;
 import network.response.User_f_n;
 
@@ -11,13 +11,15 @@ import java.util.List;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 62 
+ * part for networking create static variables (for escape nullpointError)
  */
 public class Assembleddata {
     private static Token token = new Token();
     private static User_f_n user_f_n = new User_f_n();
     private static List<Electricusage_permon> electricusage_permons;
     private static List<ProductList> productLists;
-    private static List<Product> products;
+    private static List<Product_n> products;
 
     public static Token getToken() {
         return token;
@@ -59,11 +61,14 @@ public class Assembleddata {
     }
 
 
-    public static List<Product> getProducts() {
+    public static List<Product_n> getProducts() {
         return products;
     }
 
-    public static void setProducts(List<Product> products) {
+    public static void setProducts(List<Product_n> products) {
         Assembleddata.products = products;
     }
 }
+/**
+ * 
+ */

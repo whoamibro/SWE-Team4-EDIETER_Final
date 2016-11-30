@@ -2,11 +2,12 @@ package network.request;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 21
  */
 public class Login {
 
-    private String email;   // ?ù¥Î©îÏùº
-    private String password;// ÎπÑÎ?Î≤àÌò∏
+    private String email;   // email
+    private String password;// password
 
     public String getEmail() {
         return email;
@@ -24,3 +25,6 @@ public class Login {
         this.password = password;
     }
 }
+/**
+ * 
+ */

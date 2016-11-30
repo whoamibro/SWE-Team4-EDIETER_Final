@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import network.Assembleddata;
 
 //ProductEditController
 public class ProductEditController implements Initializable {
@@ -77,6 +78,7 @@ public class ProductEditController implements Initializable {
 		
 		// Initialize list of types
 		ObservableList<String> listType = cmbBoxType.getItems();
+<<<<<<< HEAD
 		
 		// Add types to list
 		listType.add("a");
@@ -88,6 +90,24 @@ public class ProductEditController implements Initializable {
 		// Add models to list
 		listModel.add("c");
 		listModel.add("d");
+=======
+		ObservableList<String> listModel = cmbBoxModel.getItems();
+		
+		/** Created by jeonyongjin on 2016. 11. 30..
+		 *  LOC 8
+		 */ 
+		listType.add("washer");
+		listType.add("airconditioner");
+        listType.add("heater");
+        listType.add("refrigerator");
+        listType.add("TV");
+		for(int i=0;i< Assembleddata.getProductLists().size();i++){
+			listModel.add(i,Assembleddata.getProductLists().get(i).getName());
+		}
+		/**
+		 * 
+		 */
+>>>>>>> 9d3b5c656fc95950f130ee9a8507d2f510f76f71
 
 		// Event of type combobox changed
 		cmbBoxType.getSelectionModel().selectedItemProperty().addListener(event -> {

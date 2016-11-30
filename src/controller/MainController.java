@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import components.Product;
+import components.ProductBuilder;
 import components.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +17,8 @@ import javafx.scene.text.Text;
 import network.Assembleddata;
 import network.NetworkService;
 import network.request.Token;
-import network.response.Product;
 import network.response.ProductList;
+import network.response.Product_n;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainController implements Initializable {
 	/**
 	 * Created by jeonyongjin on 2016. 11. 29..
+	 * LOC : 3
 	 */
 	private String baseurl;
 	private final String IP="52.78.211.206";
@@ -113,6 +116,7 @@ public class MainController implements Initializable {
 
 	/**
 	 * Created by jeonyongjin on 2016. 11. 30..
+	 * LOC 
 	 */
 	private void Getproductlist(){
 		baseurl = String.format("http://%s:%d/", IP, PORT);
@@ -164,17 +168,43 @@ public class MainController implements Initializable {
         System.out.println("언제 찍히니");
 		System.out.printf("%d", token.getToken());
 
-		networkService.getUserPList(token.getToken()).enqueue(new Callback<List<Product>>() {
+		networkService.getUserPList(token.getToken()).enqueue(new Callback<List<Product_n>>() {
 			@Override
-			public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+			public void onResponse(Call<List<Product_n>> call, Response<List<Product_n>> response) {
+                int status = response.code();
+                if(response.isSuccessful()) {
+                    List<Product_n> products = response.body();
+                    Assembleddata.setProducts(products);
 
+                    for(int i=0;i<products.size();i++){
+                        for(int j=0;j<Assembleddata.getProductLists().size();j++) {
+                            if(products.get(i).getPcode() == Assembleddata.getProductLists().get(i).getPcode()) {
+                                ProductBuilder productBuilder = new ProductBuilder();
+                                Product product = productBuilder
+                                        .setType(Assembleddata.getProductLists().get(i).getName())
+                                        .setModel(Assembleddata.getProductLists().get(i).getModel())
+                                        .setPower(Assembleddata.getProductLists().get(i).getPower())
+                                        .setGrade(Assembleddata.getProductLists().get(i).getGrade())
+                                        .setUsingTime(Assembleddata.getProducts().get(i).getUsingtime())
+                                        .setNickName(Assembleddata.getProducts().get(i).getNickname())
+                                        .build();
+                                ProductController.productList.add(i,product);
+                                System.out.printf("이부분 값은 ? %d", products.size());
+                                System.out.printf("이부분 값은 ? %d", Assembleddata.getProductLists().size());
+                                System.out.printf("%s", product.getNickName());
+                                System.out.printf("%s", product.getModel());
+                                System.out.printf("%s", product.getType());
+                            }
+                        }
+                    }
+                }
 			}
 
-			@Override
-			public void onFailure(Call<List<Product>> call, Throwable throwable) {
-				System.out.printf("%s", throwable.getMessage());
-				System.out.println("failure");
-			}
+            @Override
+            public void onFailure(Call<List<Product_n>> call, Throwable throwable) {
+                System.out.printf("%s", throwable.getMessage());
+                System.out.println("failure");
+            }
 		});
 	}
 	/**
