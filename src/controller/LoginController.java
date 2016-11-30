@@ -75,15 +75,21 @@ public class LoginController implements Initializable {
 
 		System.out.printf("%s , %s", idField.getText(), pwField.getText());
 
-		for (int i = 0; i < 3; i++) {
+		Thread thread = new Thread(() -> {
 			Login();
+		});
+		thread.start();
+
+		long startTime = System.currentTimeMillis();
+
+		while (thisUser == null) {
 			try {
-				Thread.sleep(300);
+				Thread.sleep(500);
+				if (System.currentTimeMillis() - startTime >= 1500)
+					break;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if (thisUser != null)
-				break;
 		}
 
 		if (thisUser == null) {
@@ -97,7 +103,7 @@ public class LoginController implements Initializable {
 		ProductController productController = new ProductController();
 		PlanController planController = new PlanController();
 		MainController mainController = new MainController();
-		
+
 		mainController.setUserController(userController);
 		mainController.setProductController(productController);
 		mainController.setPlanController(planController);
@@ -146,10 +152,9 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * Created by jeonyongjin on 2016. 11. 29..
-	 * LOC 89
+	 * Created by jeonyongjin on 2016. 11. 29.. LOC 89
 	 */
-	// method for login 
+	// method for login
 	private void Login() {
 
 		baseurl = String.format("http://%s:%d/", IP, PORT);
@@ -202,7 +207,7 @@ public class LoginController implements Initializable {
 			}
 		});
 	}
-	
+
 	// method for get user's electric usage history
 	private void Gethistory() {
 		baseurl = String.format("http://%s:%d/", IP, PORT);
