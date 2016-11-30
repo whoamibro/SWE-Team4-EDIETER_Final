@@ -6,6 +6,7 @@ import components.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -88,6 +89,12 @@ public class ProductController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		Iterator<Product> iterator = productList.iterator();
+		while(iterator.hasNext()) {
+			buttonList.add(new Button(iterator.next().getNickName()));
+		}
+		
+		
 		ProductTotalController productTotalController = new ProductTotalController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
