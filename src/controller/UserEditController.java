@@ -24,17 +24,14 @@ public class UserEditController implements Initializable {
 	private TextField userName;
 
 	@FXML
-	private TextField ID;
+	private TextField email;
+
+	@FXML
+	private PasswordField oldPassword;
 
 	@FXML
 	private PasswordField password;
-
-	@FXML
-	private PasswordField passwordAgain;
-
-	@FXML
-	private TextField email;
-
+	
 	@FXML
 	private TextField areaSize;
 
@@ -52,7 +49,7 @@ public class UserEditController implements Initializable {
 	public UserEditController() {
 	}
 
-	// get current user instance
+	//get current user instance
 	public UserEditController(User user) {
 		thisUser = user;
 	}
@@ -63,8 +60,8 @@ public class UserEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//set each text as this user's information
 		userName.setText(thisUser.getName());
-//		ID.setText(thisUser.getID());
 		email.setText(thisUser.getEmail());
 		areaSize.setText(String.valueOf(thisUser.getAreaSize()));
 		usedElec.setText(String.valueOf(thisUser.getUsedElec()));
@@ -72,16 +69,15 @@ public class UserEditController implements Initializable {
 
 	public void btnOKHandler() {
 
-//		thisUser.setPassword(password.getText());
-		thisUser.setEmail(email.getText());
+		//set new information that this user entered to this user's each information item
+		thisUser.setAreaSize(Integer.parseInt(areaSize.getText()));
 		thisUser.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0]));
-		// if here was a message box that will pop up
-		// after click this button to notify confirmation to user,
-		// that would be better.
 
+		//set loader of Main.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);
 
+		//clear and load Main.fxml
 		try {
 			paneUserEdit.getChildren().clear();
 			paneUserEdit.getChildren().add(loader.load());
