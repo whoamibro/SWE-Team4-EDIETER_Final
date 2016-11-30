@@ -1,4 +1,7 @@
 package controller;
+/**
+ * Created by ParkKyeungHye on 2016. 11. 30.
+ */
 
 import components.User;
 
@@ -60,13 +63,12 @@ public class UserEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-<<<<<<< HEAD
+
 		/**
 		 * Create by jeonyongjin on 2016. 11. 30 ..
 		 */
-=======
 		//set each text as this user's information
->>>>>>> refs/heads/KH
+
 		userName.setText(thisUser.getName());
 		email.setText(thisUser.getEmail());
 		areaSize.setText(String.valueOf(thisUser.getAreaSize()));
@@ -108,3 +110,5 @@ public class UserEditController implements Initializable {
 	}
 
 }
+/**
+ */

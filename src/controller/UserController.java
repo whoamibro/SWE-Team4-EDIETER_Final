@@ -1,5 +1,8 @@
 package controller;
-
+/**
+ * Created by ParkKyeungHye on 2016. 11. 30.(except included comment)
+ */
+import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -7,6 +10,7 @@ import java.util.ResourceBundle;
 import components.User;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart.Data;
@@ -23,7 +27,7 @@ public class UserController implements Initializable {
 	private User thisUser;
 
 	@FXML
-	private AnchorPane paneMain;
+	private AnchorPane paneUser;
 	
 	@FXML
 	private Text userName;
@@ -70,8 +74,29 @@ public class UserController implements Initializable {
 	/**
 	 * 
 	 */
+	//button handler for past charge button
 	public void btnPastHandler() {
+			
+		//create PastUsageController and connect it to this UserController
+		PastUsageController pastUsageController = new PastUsageController(thisUser);
+		pastUsageController.setUserController(this);
+		//set loader of PastUsage.fxml
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PastUsage.fxml"));
+		loader.setController(pastUsageController);
 
+		//clear and load PastUsage.fxml
+		try {
+			paneUser.getChildren().clear();
+			paneUser.getChildren().add(loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+		
+	public void setVisible(boolean bool) {
+		paneUser.setVisible(bool);
 	}
 
 }
+/**
+ */
