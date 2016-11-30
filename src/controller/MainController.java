@@ -28,15 +28,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainController implements Initializable {
 	/**
-	 * Created by jeonyongjin on 2016. 11. 29..
-	 * LOC : 3
+	 * Created by jeonyongjin on 2016. 11. 29.. LOC : 3
 	 */
 	private String baseurl;
-	private final String IP="52.78.211.206";
-	private final int PORT=80;
+	private final String IP = "52.78.211.206";
+	private final int PORT = 80;
 	Token token = new Token();
 	/**
 	 */
+	
+	/** 
+	 * created by Jin Jung on 2016. 11. 30.
+	 * loc : 40 
+	 * */
 	private User thisUser;
 
 	@FXML
@@ -53,16 +57,12 @@ public class MainController implements Initializable {
 
 	@FXML
 	private AnchorPane userPane;
-	
+
 	@FXML
 	private AnchorPane productPane;
-	
+
 	@FXML
 	private AnchorPane planPane;
-	
-
-	public MainController() {
-	}
 
 	public void setUser(User user) {
 		this.thisUser = user;
@@ -72,6 +72,7 @@ public class MainController implements Initializable {
 	private ProductController productController;
 	private PlanController planController;
 
+	// setter for controller
 	public void setUserController(UserController userController) {
 		this.userController = userController;
 	}
@@ -83,10 +84,18 @@ public class MainController implements Initializable {
 	public void setPlanController(PlanController planController) {
 		this.planController = planController;
 	}
+	/** 
+	 * */
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		Getproductlist();
+		/** 
+		 * created by Jin Jung on 2016. 11. 30.
+		 * function : create loader and load scene 
+		 * loc : 28
+		 * */
+		
+		// load user scene
 		FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/fxml/User.fxml"));
 		userLoader.setController(userController);
 		try {
@@ -94,7 +103,8 @@ public class MainController implements Initializable {
 
 		} catch (IOException e) {
 		}
-
+		
+		// load product scene
 		FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/fxml/Product.fxml"));
 		productLoader.setController(productController);
 		try {
@@ -103,6 +113,7 @@ public class MainController implements Initializable {
 		} catch (IOException e) {
 		}
 
+		// load plan scene
 		FXMLLoader planLoader = new FXMLLoader(getClass().getResource("/fxml/Plan.fxml"));
 		planLoader.setController(planController);
 		try {
@@ -110,42 +121,63 @@ public class MainController implements Initializable {
 
 		} catch (IOException e) {
 		}
-
-		// greetText.setText("welcome " + thisUser.getName());
-
-
+		
+		// set welcome text
+		greetText.setText("welcome " + thisUser.getName());
+		/** 
+		 * */
 	}
 
 	public void btnLogoutHandler() {
+		/** 
+		 * created by Jin Jung on 2016. 11. 30.
+		 * function : handler for logout
+		 * loc : 13
+		 * */
+		
+		// create loginController 
 		LoginController loginController = new LoginController();
+		// create loader for loginController
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+		// set controller on loader
 		loader.setController(loginController);
 
+		// load login scene
 		try {
 			paneMain.getChildren().clear();
 			paneMain.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void setVisible(boolean bool) {
-		paneMain.setVisible(bool);
+		/** 
+		 * */
+		
 	}
 
 	public void btnEditHandler() {
+		/** 
+		 * created by Jin Jung on 2016. 11. 30.
+		 * function : handler for edit
+		 * loc : 14 
+		 * */
+		
+		// create userEditController
 		UserEditController userEditController = new UserEditController(thisUser);
 		userEditController.setMainController(this);
+		// create loader for userEditController
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/UserEdit.fxml"));
+		// set controller on loader
 		loader.setController(userEditController);
 
+		// load UserEdit scene
 		try {
 			paneMain.getChildren().clear();
 			paneMain.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		/** 
+		 * */
 	}
 
-	
 }

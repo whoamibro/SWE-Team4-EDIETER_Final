@@ -1,20 +1,19 @@
 package controller;
-/**
- * Created by jeonilbae on 2016. 11. 30..
- */
-import components.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
+/**
+ * Created by jeonilbae on 2016. 11. 30..
+ */
+import components.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -90,10 +89,38 @@ public class ProductController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Iterator<Product> iterator = productList.iterator();
-		while(iterator.hasNext()) {
-			buttonList.add(new Button(iterator.next().getNickName()));
-		}
 		
+		while(iterator.hasNext()) {
+			Product product = iterator.next();
+			
+			Button newButton = new Button();
+			newButton.setText(product.getNickName());
+			newButton.setPrefSize(210, 100);
+			// Event of button click
+			newButton.setOnAction(event -> {
+				
+				// Create object of ProductEditController
+				ProductEditController productEditController = new ProductEditController();
+				productEditController.setProductController(this);
+
+				// Initialize productEditController's product field
+				productEditController.setProduct(product);
+				
+				// Connect loader with ProductEdit.fxml
+				FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
+				editLoader.setController(productEditController);
+
+				// Add loader to pane
+				try {
+					getPaneTotal().getChildren().clear();
+					getPaneTotal().getChildren().add(editLoader.load());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+						
+			buttonList.add(newButton);
+		}
 		
 		ProductTotalController productTotalController = new ProductTotalController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));

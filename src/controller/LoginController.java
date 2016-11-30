@@ -46,6 +46,10 @@ public class LoginController implements Initializable {
 	Login login = new Login();
 	User thisUser = null;
 	Token token = new Token();
+	
+	/** 
+	 * created by Jin Jung on 2016. 11. 30.
+	 * */
 	@FXML
 	private AnchorPane paneLogin;
 
@@ -66,26 +70,34 @@ public class LoginController implements Initializable {
 
 	UserController userController = new UserController();
 	MainController mainController = new MainController();
-
+	/** 
+	 * */
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 	}
 
 	public void btnLoginHandler() {
-		// //Create user instance who logged in by entered information
+		/** 
+		 * created by Jin Jung on 2016. 11. 30.
+		 * function : handler for login button
+		 * loc : 57
+		 * */
+		// create user instance who logged in by entered information
 		login.setEmail(idField.getText());
 		login.setPassword(pwField.getText());
 
-		System.out.printf("%s , %s", idField.getText(), pwField.getText());
-
+		// login thread
 		Thread thread = new Thread(() -> {
 			Login();
 		});
 		thread.start();
 
+		// check current time
 		long startTime = System.currentTimeMillis();
 
+		// check login status
 		while (thisUser == null) {
 			try {
 				Thread.sleep(500);
@@ -96,7 +108,9 @@ public class LoginController implements Initializable {
 			}
 		}
 
+		// if login is failed
 		if (thisUser == null) {
+			// fail alert
 			Alert successAlert = new Alert(Alert.AlertType.ERROR);
 			successAlert.setHeaderText(null);
 			successAlert.setContentText("로그인 오류 발생!");
@@ -104,46 +118,73 @@ public class LoginController implements Initializable {
 			return;
 		}
 
+		// create all controller
 		ProductController productController = new ProductController();
 		PlanController planController = new PlanController();
 		MainController mainController = new MainController();
 
+		// controller setting
 		mainController.setUserController(userController);
 		mainController.setProductController(productController);
 		mainController.setPlanController(planController);
 		mainController.setUser(thisUser);
 		userController.setUser(thisUser);
 
+		// create main scene loader 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-
+		// set controller on loader
 		loader.setController(mainController);
 
+		// load main scene
 		try {
 			paneLogin.getChildren().clear();
 			paneLogin.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		/** 
+		 * */
 	}
 
 	public void btnRegisterHandler() {
+		/** 
+		 * created by Jin Jung on 2016. 11. 30.
+		 * function : handler for register button
+		 * loc : 13 
+		 * */
+		// create Register Controller
 		RegisterController registerController = new RegisterController();
+		// create loader for registerController
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Register.fxml"));
+		// set controller on loader
 		loader.setController(registerController);
 
+		// load register scene
 		try {
 			paneLogin.getChildren().clear();
 			paneLogin.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		/** 
+		 * */
 	}
 
 	public void btnFindHandler() {
+		/** 
+		 * created by Jin Jung on 2016. 11. 30.
+		 * function : handler for find button
+		 * loc : 13 
+		 * */
+		// create findAccountController
 		FindAccountController findAccountController = new FindAccountController();
+		// create loader for indAccountController
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FindAccount.fxml"));
+		// set controller on loader
 		loader.setController(findAccountController);
+		
+		// load find scene
 		try {
 			Scene scene = new Scene(loader.load());
 			Stage stage = new Stage();
@@ -153,6 +194,8 @@ public class LoginController implements Initializable {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		/** 
+		 * */
 	}
 
 	/**
@@ -255,7 +298,6 @@ public class LoginController implements Initializable {
 	
 	/**
 	 * Created by jeonyongjin on 2016. 11. 30..
-	 * LOC 
 	 */
 	private void Getproductlist(){
 		baseurl = String.format("http://%s:%d/", IP, PORT);

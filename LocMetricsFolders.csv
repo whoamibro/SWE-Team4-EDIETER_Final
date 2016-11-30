@@ -1,0 +1,11 @@
+Folder,Files,LOC,SLOC-P,SLOC-L,MVG,BLOC,C&SLOC,CLOC,CWORD,HCLOC,HCWORD
+Total,31,3077,2114,1583,143,571,57,392,1584,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final,31,3077,2114,1583,143,571,57,392,1584,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src,30,3030,2071,1583,143,567,57,392,1584,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src\components,3,201,128,95,21,38,15,35,126,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src\controller,11,1768,1205,944,34,373,38,190,800,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src\main,1,28,22,18,0,6,0,0,0,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src\network,10,470,294,211,33,99,4,77,246,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src\network\request,3,108,65,46,8,23,2,20,54,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src\network\response,5,234,148,105,19,48,2,38,101,0,0
+C:\Users\Samsung\git\SWE-Team4-EDIETER_Final\src\simulation,5,563,422,315,55,51,0,90,412,0,0
