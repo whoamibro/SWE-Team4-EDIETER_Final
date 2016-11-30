@@ -72,22 +72,7 @@ public class ProductAddController implements Initializable {
 		
 		// Initialize list of types
 		ObservableList<String> listProduct = cmbBoxProduct.getItems();
-<<<<<<< HEAD
 		
-		// Add types to list
-		listProduct.add("?ƒ‰?ž¥ê³?");
-		listProduct.add("?—?–´ì»?");
-        listProduct.add("?‚œë°©ê¸°");
-        listProduct.add("?„¸?ƒê¸?");
-        listProduct.add("TV");
-
-        // Initialize list of models
-		ObservableList<String> listModel = cmbBoxModel.getItems();
-		
-		// Add models to list
-		listModel.add("c");
-		listModel.add("d");
-=======
 		ObservableList<String> listModel = cmbBoxModel.getItems();
 		
 		/** Created by jeonyongjin on 2016. 11. 30..
@@ -104,8 +89,7 @@ public class ProductAddController implements Initializable {
 		/**
 		 * 
 		 */
->>>>>>> 9d3b5c656fc95950f130ee9a8507d2f510f76f71
-		
+
 		// Event of type combobox changed
 		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event -> {
 			
