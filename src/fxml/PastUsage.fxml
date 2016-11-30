@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="panePastUsage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+
+		<Text fx:id="MonthName" layoutX="63.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="월" />
+		<Text fx:id="MonthName2" layoutX="63.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="월" />
+		<Text fx:id="MonthName3" layoutX="62.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="월" />
+		<Text fx:id="MonthName4" layoutX="62.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="월" />
+		<Text fx:id="MonthName5" layoutX="62.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="월" />
+		<Text fx:id="MonthName6" layoutX="62.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="월" />
+		<TextField fx:id="lastMonth" layoutX="167.0" layoutY="55.0" />
+		<TextField fx:id="lastMonth2" disable="true" layoutX="167.0" layoutY="105.0" />
+		<TextField fx:id="lastMonth3" disable="true" layoutX="167.0" layoutY="155.0" />
+		<TextField fx:id="lastMonth4" disable="true" layoutX="167.0" layoutY="205.0" />
+		<TextField fx:id="lastMonth5" disable="true" layoutX="167.0" layoutY="255.0" />
+		<TextField fx:id="lastMonth6" disable="true" layoutX="167.0" layoutY="305.0" />
+		<Button fx:id="btnOK" layoutX="410.0" layoutY="400.0" mnemonicParsing="false" onAction="#btnOKHandler" text="입력" />
+		<Button fx:id="btnCancel" layoutX="490.0" layoutY="400.0" mnemonicParsing="false" onAction="#btnCancelHandler" text="취소" />
+				
+	</children>
+</AnchorPane>

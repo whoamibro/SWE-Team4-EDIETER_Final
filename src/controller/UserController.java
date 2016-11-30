@@ -49,12 +49,12 @@ public class UserController implements Initializable {
 
 		ObservableList<Data<String, Double>> list = series.getData();
 		// -는 임시방편으로 사용한거 나중에 수정해야함
-		list.add(new Data<>(String.valueOf(thismonth-4), thisUser.getChargeHistory()[0]));
-		list.add(new Data<>(String.valueOf(thismonth-3), thisUser.getChargeHistory()[1]));
-		list.add(new Data<>(String.valueOf(thismonth-2), thisUser.getChargeHistory()[2]));
-		list.add(new Data<>(String.valueOf(thismonth-1), thisUser.getChargeHistory()[3]));
-		list.add(new Data<>(String.valueOf(thismonth), thisUser.getChargeHistory()[4]));
-		list.add(new Data<>(String.valueOf(thismonth+1), thisUser.getChargeHistory()[5]));
+		list.add(new Data<>(String.valueOf(thismonth-4), thisUser.getChargeHist()[0]));
+		list.add(new Data<>(String.valueOf(thismonth-3), thisUser.getChargeHist()[1]));
+		list.add(new Data<>(String.valueOf(thismonth-2), thisUser.getChargeHist()[2]));
+		list.add(new Data<>(String.valueOf(thismonth-1), thisUser.getChargeHist()[3]));
+		list.add(new Data<>(String.valueOf(thismonth), thisUser.getChargeHist()[4]));
+		list.add(new Data<>(String.valueOf(thismonth+1), thisUser.getChargeHist()[5]));
 
 		barChart.getData().add(series);
 
