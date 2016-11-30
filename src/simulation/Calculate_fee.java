@@ -4,21 +4,21 @@ package simulation;
  * Created by jeonyongjin on 2016. 11. 29..
  */
 public class Calculate_fee {
-    // 3ì§? ?ë¦¬ìˆ˜
+    // 3rd position
     private int numofthirdposition;
-    // 3ì§? ?ë¦¬ëŠ” ? œ?™¸?•œ ?ˆ˜
+    // except 3rdposition
     private int num_remain;
-    // 501?„ ì´ˆê³¼?–ˆ?„?•Œ ì²˜ë¦¬ë¥? ?œ„?•œ ?ˆ˜
+    // if exceed 501kwh
     private int exceed;
-    // ëª©í‘œ ê¸ˆì•¡
+    // goal fee
     private int goalfee;
-    // ? „? ¥?Ÿ‰?š”ê¸?
+    // basic electric fee
     private double basicfee;
-    // ë¶?ê°?ê°?ì¹˜ì„¸
+    // tax
     private int tax;
-    // ? „? ¥?‚°?—…ê¸°ë°˜ê¸°ê¸ˆ
+    // electric industry fund
     private int ele_ind_fund;
-    // ì²?êµ¬ê¸ˆ?•¡
+    // total fee
     private int total_fee;
 
 
@@ -35,7 +35,7 @@ public class Calculate_fee {
         this.goalfee = goalfee;
     }
 
-    // ? „? ¥?Ÿ‰ ?š”ê¸? ê³„ì‚°
+    // calculate electric basic fee
     public double cal_Basic_Fee(){
         switch(numofthirdposition){
             // 0 ~ 100 kWh
@@ -64,33 +64,35 @@ public class Calculate_fee {
                 break;
         }
         // for confirmation
-        System.out.println("ê¸°ë³¸?š”ê¸ˆì? " + basicfee);
+        System.out.println("basic fee : " + basicfee);
         return basicfee;
     }
 
-    // ë¶?ê°?ê°?ì¹˜ì„¸ ê³„ì‚° (?› ë¯¸ë§Œ 4?‚¬ 5?…)
-    public void taxing(){
+    // calculate tax
+    public int taxing(){
         tax = (int) (basicfee * 0.1);
         // for confimation
-        System.out.println("ë¶?ê°?ê°?ì¹˜ì„¸?Š” " + tax);
+        System.out.println("tax : " + tax);
+        return tax;
     }
 
-    // ? „? ¥?‚°?—…ê¸°ë°˜ê¸°ê¸ˆ ê³„ì‚° (10?› ë¯¸ë§Œ ? ˆ?‚¬)
-    public void cal_elec_industry_fund(){
+    // calculate electric industry fund
+    public int cal_elec_industry_fund(){
         double fund = basicfee *0.037;
-        // 10?›?‹¨?œ„ ?•„?˜ ? ˆ?‚¬
+        // 10?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
         int rm_first_positon = (int)fund / 10 * 10;
         ele_ind_fund = rm_first_positon;
         // for confirmation
-        System.out.println("? „? ¥ ë°œì „ ê¸°ê¸ˆ ê¸ˆì•¡?? " +  ele_ind_fund);
+        System.out.println("electric industry fund : " +  ele_ind_fund);
+        return ele_ind_fund; 
     }
 
-    // ì²?êµ¬ìš”ê¸? ê³„ì‚°
+    // ï¿½?êµ¬ìš”ï¿½? ê³„ì‚°
     public int cal_total(){
-        // ? „? ¥?Ÿ‰ ?š”ê¸? + ë¶?ê°?ê°?ì¹˜ì„¸ + ? „? ¥?‚°?—…ê¸°ë°˜ê¸°ê¸ˆ = ì²?êµ¬ê¸ˆ?•¡
+        // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? + ï¿½?ï¿½?ï¿½?ì¹˜ì„¸ + ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ê¸°ë°˜ê¸°ê¸ˆ = ï¿½?êµ¬ê¸ˆ?ï¿½ï¿½
         total_fee = ((int)basicfee + tax + ele_ind_fund ) /10 * 10;
         // for confirmation
-        System.out.println("?˜„?¬ê¹Œì??˜ ì´? ê¸ˆì•¡?? " + total_fee);
+        System.out.println("total fee : " + total_fee);
         return total_fee;
     }
 }

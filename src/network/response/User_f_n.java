@@ -7,7 +7,8 @@ package network.response;
 //object for user information right after login success
 public class User_f_n {
     private String name;    
-    private String email;   
+    private String email;
+    private String pw;
     private int areaSize;       
     private double usedElec;    
     private boolean result;     
@@ -60,6 +61,15 @@ public class User_f_n {
     public void setToken(int token) {
         this.token = token;
     }
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+    
 }
 /**
  * 

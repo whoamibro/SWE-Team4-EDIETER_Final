@@ -78,7 +78,7 @@ public class LoginController implements Initializable {
 		for (int i = 0; i < 3; i++) {
 			Login();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(300);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -141,7 +141,9 @@ public class LoginController implements Initializable {
 
 	/**
 	 * Created by jeonyongjin on 2016. 11. 29..
+	 * LOC 89
 	 */
+	// method for login 
 	private void Login() {
 
 		baseurl = String.format("http://%s:%d/", IP, PORT);
@@ -164,7 +166,7 @@ public class LoginController implements Initializable {
 						System.out.println("connect to server successful");
 						Assembleddata.setUser_f_n(user_f_n);
 						Assembleddata.setToken(user_f_n.getToken());
-
+						Assembleddata.setpw(login.getPassword());
 						token.setToken(user_f_n.getToken());
 
 						System.out.printf("%d\n", user_f_n.getToken());
@@ -194,7 +196,8 @@ public class LoginController implements Initializable {
 			}
 		});
 	}
-
+	
+	// method for get user's electric usage history
 	private void Gethistory() {
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();

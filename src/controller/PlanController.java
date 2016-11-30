@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import network.Assembleddata;
 import simulation.*;
 
 import static java.lang.Thread.sleep;
@@ -22,18 +23,20 @@ public class PlanController implements Initializable {
 	private int total_fee;
 	private double total_usage;
 	private double ex_total_usage;
+	private int tax;
+	private int ele_industry_fund;
 
-	private double current_basic_fee; // ?˜„?¬?˜ ? „ê¸°ìš”ê¸ˆê³„ (ë¶?ê³¼ì„¸, ???“œ ë¯¸í¬?•¨)
+	private double current_basic_fee; // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê¸°ìš”ê¸ˆê³„ (ï¿½?ê³¼ì„¸, ???ï¿½ï¿½ ë¯¸í¬?ï¿½ï¿½)
 	private int current_fee;
 
-	private double month_basic_fee; // ?•œ?‹¬ ?™?•ˆ ?‚¬?š©?•  ê²ƒìœ¼ë¡? ?˜ˆ?ƒ?˜?Š” ? „? ¥?Ÿ‰?— ???•œ ?š”ê¸ˆì•¡
+	private double month_basic_fee; // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê²ƒìœ¼ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ???ï¿½ï¿½ ?ï¿½ï¿½ê¸ˆì•¡
 	private int month_fee;
 
 	private int hope_fee;
 	double simul_result = 0;
 
-	private int current_temp; // ?˜„?¬?˜ ?˜¨?„
-	private int hope_temp; // ?¬ë§? ?˜¨?„
+	private int current_temp; // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
+	private int hope_temp; // ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½
 
 	private int current_day;
 	private int last_day;
@@ -67,7 +70,6 @@ public class PlanController implements Initializable {
 		list.add("90000");
 		list.add("100000");
 
-
 		comboBox.getSelectionModel().selectedItemProperty().addListener(event -> {
 			hope_fee = Integer.parseInt(comboBox.getSelectionModel().getSelectedItem().toString());
 		});
@@ -75,47 +77,66 @@ public class PlanController implements Initializable {
 
 	public void btnPlanHandler() throws InterruptedException {
 		textArea.setText("Your hope fee is : " + String.valueOf(hope_fee) + "won\n");
-		textArea.appendText("Start Simulation...");
+		textArea.appendText("Start Simulation...\n");
+		execute_current_cal_fee();
+		execute_total_cal_fee();
 
 	}
 
 	public void execute_current_cal_fee(){
         calculate_electric_usage.setProductCount();
         total_usage = calculate_electric_usage.calc_ele_cur_usage();
+        textArea.appendText("1ì¼ë¶€í„° í˜„ì¬ê¹Œì§€ì˜ "+Assembleddata.getUser_f_n().getName()+"ë‹˜ ê³„ì •ì˜ ì „ë ¥ì‚¬ìš©ëŸ‰ì€\n " + String.valueOf(Math.round(total_usage)) + " kwh ì…ë‹ˆë‹¤.\n");
         ex_total_usage = calculate_electric_usage.cal_ele_expect_usage();
-
-        // ?•?œ¼ë¡? ?–´?Š? •?„ê¹Œì? ?‚¬?š© ê°??Š¥?•œì§? ê³„ì‚°?•¨ (?•œ?‹¬ ? „ì²? ? „? ¥?Ÿ‰ - 1?¼ë¶??„°?˜¤?Š˜ê¹Œì? ?‚¬?š©?•œ ? „? ¥?Ÿ‰)
+        textArea.appendText("ì´ë²ˆë‹¬ì— ì˜ˆìƒë˜ëŠ” "+Assembleddata.getUser_f_n().getName()+"ë‹˜ ê³„ì •ì˜ ì „ë ¥ì‚¬ìš©ëŸ‰ì€\n " + String.valueOf(Math.round(ex_total_usage)) + " kwh ì…ë‹ˆë‹¤.\n");
+        
+        textArea.appendText("/////////////////////////////////////////////////////////////////////////////\n");
+        // ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ê¹Œï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½? ê³„ì‚°?ï¿½ï¿½ (?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ - 1?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ê¹Œï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½)
         calculateThirdposition.setTotal_electric_usage(total_usage);
         calculatefee.setNum_remain(calculateThirdposition.cal_position()[1]);
         calculatefee.setNumofthirdposition(calculateThirdposition.cal_position()[0],calculateThirdposition.cal_position()[2]);
 
-        // ?˜„?¬ê¹Œì??˜ ?‚¬?š©?•œ ? „? ¥?š”ê¸ˆì•¡ (ë¶?ê³¼ì„¸, ???“œ ë¯¸í¬?•¨)
+        // ?ï¿½ï¿½?ï¿½ï¿½ê¹Œï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ê¸ˆì•¡ (ï¿½?ê³¼ì„¸, ???ï¿½ï¿½ ë¯¸í¬?ï¿½ï¿½)
+        textArea.appendText("-------- 1ì¼ ë¶€í„° ì˜¤ëŠ˜ê¹Œì§€ --------\n");
         current_basic_fee = calculatefee.cal_Basic_Fee();
-        // ë¶?ê³¼ì„¸ ê³„ì‚°
-        calculatefee.taxing();
-        // ???“œ ?¬?•¨
-        calculatefee.cal_elec_industry_fund();
+        textArea.appendText("ì „ë ¥ì‚¬ìš©ìš”ê¸ˆ : " + String.valueOf(current_basic_fee) +" ì›\n");
+        
+        // ï¿½?ê³¼ì„¸ ê³„ì‚°
+        tax = calculatefee.taxing();
+        textArea.appendText("ë¶€ê°€ê°€ì¹˜ì„¸ : " + String.valueOf(tax) + " ì›\n");
+        
+        // ???ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
+        ele_industry_fund = calculatefee.cal_elec_industry_fund();
+        textArea.appendText("ì „ë ¥ì‚°ì—…ë°œì „ê¸°ê¸ˆ : " + String.valueOf(ele_industry_fund) + " ì›\n");
         // ì´ì•¡ ê³„ì‚°
         current_fee = calculatefee.cal_total();
+        textArea.appendText("ìš”ê¸ˆí•©ê³„ : " + String.valueOf(current_fee) + " ì›\n");
     }
 
     public void execute_total_cal_fee(){
-        // ?Œ¨?„´?´ ?•œ?‹¬ ?‚´?‚´ ?˜‘ê°™ë‹¤?Š” ê°?? •?•˜?— ?¬ë§ìš”ê¸ˆê¹Œì§? ì¶”ê?ë¡? ?‚¬?š© ê°??Š¥?•œ ? „? ¥?Ÿ‰ ê³„ì‚°
+        // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê°™ë‹¤?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë§ìš”ê¸ˆê¹Œï¿½? ì¶”ï¿½?ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê³„ì‚°
+    	textArea.appendText("----- ì´ë²ˆë‹¬ ì „ì²´ ì˜ˆìƒ ì‹œë®¬ë ˆì´ì…˜ -----\n");
         calculateThirdposition.setTotal_electric_usage(ex_total_usage);
         calculatefee.setNum_remain(calculateThirdposition.cal_position()[1]);
         calculatefee.setNumofthirdposition(calculateThirdposition.cal_position()[0],calculateThirdposition.cal_position()[2]);
 
-        // ?•œ?‹¬ ?™?•ˆ ?‚¬?š©?•  ê²ƒìœ¼ë¡? ?˜ˆ?ƒ?˜?Š” ? „? ¥?— ???•œ ?š”ê¸ˆì•¡ (ë¶?ê³¼ì„¸ ???“œ ë¯¸í¬?•¨
+        // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê²ƒìœ¼ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ???ï¿½ï¿½ ?ï¿½ï¿½ê¸ˆì•¡ (ï¿½?ê³¼ì„¸ ???ï¿½ï¿½ ë¯¸í¬?ï¿½ï¿½
         month_basic_fee = calculatefee.cal_Basic_Fee();
-        calculatefee.taxing();
-        calculatefee.cal_elec_industry_fund();
+        textArea.appendText("ì „ë ¥ì‚¬ìš©ìš”ê¸ˆ : " + String.valueOf(current_basic_fee) +" ì›\n");
+        
+        tax = calculatefee.taxing();
+        textArea.appendText("ë¶€ê°€ê°€ì¹˜ì„¸ : " + String.valueOf(tax) + " ì›\n");
+        
+        ele_industry_fund = calculatefee.cal_elec_industry_fund();
+        textArea.appendText("ì „ë ¥ì‚°ì—…ë°œì „ê¸°ê¸ˆ : " + String.valueOf(ele_industry_fund) + " ì›\n");
+        
         month_fee = calculatefee.cal_total();
-
-        // ?•œ?‹¬ ?Œ¨?„´?´ ?˜‘ê°™ë‹¤ê³? ê°?? •?• ?•Œ ì¶”ê?ë¡? ?‚¬?š©ê°??Š¥?•œ ? „? ¥?Ÿ‰
+        textArea.appendText("ìš”ê¸ˆí•©ê³„ : " + String.valueOf(current_fee) + " ì›\n");
+        
+        // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê°™ë‹¤ï¿½? ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ì¶”ï¿½?ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
         calculate_plan.setCurrent_basic_fee(month_basic_fee);
         calculate_plan.setCurrent_total_fee(month_fee);
         calculate_plan.setRemainder(hope_fee);
-
 
     }
 
