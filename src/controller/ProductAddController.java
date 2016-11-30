@@ -20,15 +20,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+// ProductAddController
 public class ProductAddController implements Initializable {
 	@FXML
 	private AnchorPane paneAdd;
 
 	@FXML
-	private ComboBox<String> cmbBoxProduct;
+	private ComboBox<String> cmbBoxProduct;		// List of appliance types
 
 	@FXML
-	private ComboBox<String> cmbBoxModel;
+	private ComboBox<String> cmbBoxModel;		// List of appliance models
 
 	@FXML
 	private Text textPower;
@@ -46,61 +47,88 @@ public class ProductAddController implements Initializable {
 	private TextField textFieldHour;
 
 	@FXML
-	private Button btnAdd;
+	private Button btnAdd;			// Add appliance button
 
 	@FXML
-	private Button btnCancel;
+	private Button btnCancel;		// Cancel inserting button
 
-	private ProductController productController;
-	private Product newProduct;
-	private String type;
-	private String model;
+	private ProductController productController;	// ProductController
+	private Product newProduct;		// New product
+	private String type;		// String of type
+	private String model;		// String of model
 
+	// Set controller method
 	public void setProductController(ProductController productController) {
 		this.productController = productController;
 	}
 
+	// Return built product
 	public Product getProduct() {
 		return newProduct;
 	}
 
+	// ProductAddController initialize
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		// Initialize list of types
 		ObservableList<String> listProduct = cmbBoxProduct.getItems();
+		
+		// Add types to list
 		listProduct.add("?Éâ?û•Í≥?");
 		listProduct.add("?óê?ñ¥Ïª?");
         listProduct.add("?ÇúÎ∞©Í∏∞");
         listProduct.add("?Ñ∏?ÉÅÍ∏?");
         listProduct.add("TV");
 
+        // Initialize list of models
 		ObservableList<String> listModel = cmbBoxModel.getItems();
+		
+		// Add models to list
 		listModel.add("c");
 		listModel.add("d");
 		
+		// Event of type combobox changed
 		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event -> {
+			
+			// Save changed type
 			type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();
 		});
 
+		// Event of model combobox changed
 		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event -> {
+			
+			// Save changed model
 			model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
 		});
 	}
 
+	// Event of add button
 	public void btnAddHandler() {
-		paneAdd.getChildren().clear();
+		
+		paneAdd.getChildren().clear();		// Clean the pane
 
+		// Create object of productTotalController
 		ProductTotalController productTotalController = new ProductTotalController();
+		
+		// Set productTotalController's controller
 		productTotalController.setProductController(productController);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
+		
+		// Connect loader with ProductTotal.fxml
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));		
 		loader.setController(productTotalController);
 
+		// Add loader to pane
 		try {
 			paneAdd.getChildren().add(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+		// Create object of ProductBuilder
 		ProductBuilder productBuilder = new ProductBuilder();
+		
+		// Parse textbox and Create product with productBuilder
 		newProduct = productBuilder
 				.setType(type)
 				.setModel(model)
@@ -110,17 +138,25 @@ public class ProductAddController implements Initializable {
 				.setNickName(textFieldNickName.getText())
 				.build();
 	
+		// Create button named product's nickname
 		Button newButton = new Button(newProduct.getNickName());
 		newButton.setPrefSize(210, 100);
+		
+		// Event of button click
 		newButton.setOnAction(event -> {
+			
+			// Create object of ProductEditController
 			ProductEditController productEditController = new ProductEditController();
 			productEditController.setProductController(productController);
 
+			// Initialize productEditController's product field
 			productEditController.setProduct(newProduct);
 			
+			// Connect loader with ProductEdit.fxml
 			FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
 			editLoader.setController(productEditController);
 
+			// Add loader to pane
 			try {
 				productController.getPaneTotal().getChildren().clear();
 				productController.getPaneTotal().getChildren().add(editLoader.load());
@@ -128,18 +164,30 @@ public class ProductAddController implements Initializable {
 				e.printStackTrace();
 			}
 		});
+		
+		// Add newButton to buttonList
 		productController.getButtonList().add(newButton);
+		
+		// Initialize buttons
 		productController.applyList();
+		
+		// Add newProduct to productList
 		productController.addProductList(newProduct);
 	}
 
+	// Event of cancel button
 	public void btnCancelHandler() {
-		paneAdd.getChildren().clear();
+		
+		paneAdd.getChildren().clear();		// Clean the pane
 
+		// Create object of productTotalController
 		ProductTotalController productTotalController = new ProductTotalController();
+		
+		// Connect loader with ProductTotal.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
 
+		// Add loader to pane
 		try {
 			paneAdd.getChildren().add(loader.load());
 		} catch (IOException e) {

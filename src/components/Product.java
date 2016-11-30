@@ -3,14 +3,15 @@ package components;
  * Created by jeonilbae on 2016. 11. 30..
  */
 public class Product {
-	private String type;
-	private String model;
-	private String nickName;
-	private int usingTime;
-	private double cool_heatpower;
-	private double power;
-	private int grade;
+	private String type;			// Type of appliance
+	private String model;			// Model name of appliance
+	private String nickName;		// Appliance's nickname
+	private int usingTime;			// Using time
+	private double cool_heatpower;	// Power of heating or cooling
+	private double power;			// Appliance's watt data
+	private int grade;				// Efficient grade
 
+	// Product constructor
 	public Product(String type, String model, String nickName, int usingTime, double power, double cool_heatpower,
 			int grade) {
 		this.type = type;
@@ -22,6 +23,7 @@ public class Product {
 		this.grade = grade;
 	}
 
+	// Get methods
 	public String getType() {
 		return this.type;
 	}
@@ -50,6 +52,7 @@ public class Product {
 		return this.grade;
 	}
 
+	// Print product information to console
 	public String getProductInfo() {
 		String productInfo = String.format(
 				"type:%s, model:%s, nickName:%s, usingTime:%d, availableTime:%d, power:%f, grade:%d",

@@ -19,21 +19,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+//ProductEditController
 public class ProductEditController implements Initializable {
 	@FXML
-	private ProductController productController;
-	private Product editProduct;
+	private ProductController productController;	// ProductController
+	private Product editProduct;			// Edit product
 	
-	private String type;
-	private String model;
+	private String type;		// String of type
+	private String model;		// String of model
 	@FXML
 	private AnchorPane paneEdit;
 
 	@FXML
-	private ComboBox<String> cmbBoxType;
+	private ComboBox<String> cmbBoxType;		// List of appliance types
 
 	@FXML
-	private ComboBox<String> cmbBoxModel;
+	private ComboBox<String> cmbBoxModel;		// List of appliance models
 
 	@FXML
 	private Text textPower;
@@ -48,41 +49,61 @@ public class ProductEditController implements Initializable {
 	private TextField hourField;
 
 	@FXML
-	private Button btnEdit;
+	private Button btnEdit;			// Edit appliance button
 
 	@FXML
-	private Button btnClose;
+	private Button btnClose;		// Close edit pane button
 
 	@FXML
-	private Button btnRemove;
+	private Button btnRemove;		// Remove appliance button
 
-	private boolean editFlag = false;
+	private boolean editFlag = false;	// Change flag of edit button
 
+	// Set product field of editController
 	public void setProduct(Product editProduct) {
 		this.editProduct = editProduct;
 	}
 	
+	// Set controller method
+	public void setProductController(ProductController productController) {
+		this.productController = productController;
+	}
+	
+	// ProductEditController initialize
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		type = "";
-		model = "";
+		type = "";		// Initialize type
+		model = "";		// Initialize model
 		
+		// Initialize list of types
 		ObservableList<String> listType = cmbBoxType.getItems();
+		
+		// Add types to list
 		listType.add("a");
 		listType.add("b");
 
+		// Initialize list of models
 		ObservableList<String> listModel = cmbBoxModel.getItems();
+		
+		// Add models to list
 		listModel.add("c");
 		listModel.add("d");
 
+		// Event of type combobox changed
 		cmbBoxType.getSelectionModel().selectedItemProperty().addListener(event -> {
+			
+			// Save changed type
 			type = cmbBoxType.getSelectionModel().getSelectedItem().toString();
 		});
 
+		// Event of model combobox changed
 		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event -> {
+			
+			// Save changed model
 			model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
 		});
 		
+		// Initialize textboxes by information of edit product
 		cmbBoxType.setPromptText(editProduct.getType());
 		cmbBoxModel.setPromptText(editProduct.getModel());
 		textPower.setText(String.valueOf(editProduct.getPower()) + " kW");
@@ -92,33 +113,52 @@ public class ProductEditController implements Initializable {
 	
 	}
 
+	// Event of edit button
 	public void btnEditHandler() {
+		
+		// If user see edit button
 		if (!editFlag) {
 		
+			// Change user could edit
 			cmbBoxType.setDisable(false);
 			cmbBoxModel.setDisable(false);
 			nickNameField.setDisable(false);
 			hourField.setDisable(false);
-			btnEdit.setText("�Ϸ�");
-			editFlag = true;
+			btnEdit.setText("Set");
 			
-		} else {
+			editFlag = true;		// Change flag
+		} 
+		
+		// If user see set button
+		else {
+			
+			// Create object of productBuilder
 			ProductBuilder productBuilder = new ProductBuilder();
 			
+			// Iterator of buttonList
 			ListIterator<Button> it = productController.getButtonList().listIterator();
+			
+			// Search button of editProduct in buttonList
 			while(it.hasNext()) {
-				Button button = it.next();
-				int buttonIndex = it.previousIndex();
+				
+				Button button = it.next();		// Temporary button
+				int buttonIndex = it.previousIndex();		// Save button index
+				
+				// Save editProduct index of productList
 				int productIndex = productController.getProductIndexInList(editProduct);
 				
+				// If product's nickname equals button's name
 				if(editProduct.getNickName().equals(button.getText()))
 				{
+					// If type is initialized
 					if(type == "")
-						type = editProduct.getType();
+						type = editProduct.getType();		// Save type of editProduct					
 					
+					// If model is initialized
 					if(model == "")
-						model = editProduct.getType();
+						model = editProduct.getType();		// Save model of editProduct
 					 
+					// Create product with productBuilder
 					editProduct = productBuilder
 							.setType(type)
 							.setModel(model)
@@ -128,16 +168,24 @@ public class ProductEditController implements Initializable {
 							.setNickName(nickNameField.getText())
 							.build();
 					
+					// Event of button click
 					button.setOnAction(event -> {
+						
+						// Create object of ProductEditController
 						ProductEditController productEditController = new ProductEditController();
 						productEditController.setProductController(productController);
 						
+						// Initialize productEditController's product field
 						productEditController.setProduct(editProduct);
+						
+						// Replace product to editProduct in productList
 						productController.setProductInList(productIndex, editProduct);
 						
+						// Connect loader with ProductEdit.fxml
 						FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
 						editLoader.setController(productEditController);
 
+						// Add loader to pane
 						try {
 							productController.getPaneTotal().getChildren().clear();
 							productController.getPaneTotal().getChildren().add(editLoader.load());
@@ -145,29 +193,41 @@ public class ProductEditController implements Initializable {
 							e.printStackTrace();
 						}
 					});
-					button.setText(editProduct.getNickName());
-					it.set(button);
 					
+					// Set button's name with nickname of product
+					button.setText(editProduct.getNickName());
+					
+					it.set(button);			// Replace button to new button
+					
+					// Replace button to new button in buttonList
 					productController.getButtonList().set(buttonIndex, button);
 					
 				}
 						
 			}
 	
+			// Change user couldn't edit
 			cmbBoxType.setDisable(true);
 			cmbBoxModel.setDisable(true);
 			nickNameField.setDisable(true);
 			hourField.setDisable(true);
-			btnEdit.setText("����");
-			editFlag = false;
+			btnEdit.setText("Edit");
+			
+			editFlag = false;		// Change flag
 		}
 	}
 
+	// Event of close button
 	public void btnCloseHandler() {
+		
+		// Create object of productTotalController
 		ProductTotalController productTotalController = new ProductTotalController();
+		
+		// Connect loader with ProductTotal.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
 
+		// Add loader to pane
 		try {
 			paneEdit.getChildren().clear();
 			paneEdit.getChildren().add(loader.load());
@@ -176,26 +236,30 @@ public class ProductEditController implements Initializable {
 		}
 	}
 
+	// Event of remove button
 	public void btnRemoveHandler() {
 	
+		// Remove product in productList
 		productController.removeProductInList(editProduct);
 		
+		// Iterator of buttonList
 		ListIterator<Button> it = productController.getButtonList().listIterator();
+		
+		// Search button of removeProduct in buttonList
 		while(it.hasNext()) {
+			
+			// If product's nickname equals button's name
 			if(editProduct.getNickName().equals(it.next().getText()))
 			{
-				it.remove();
+				it.remove();		// Remove button
 			}
-					
+
 		}
 		
-		productController.applyList();
-		paneEdit.setVisible(false);
+		productController.applyList();		// Initialize buttons
+		paneEdit.setVisible(false);			// Hide editPane
 	}
 
-	public void setProductController(ProductController productController) {
-		this.productController = productController;
-	}
 }
 /**
  * 

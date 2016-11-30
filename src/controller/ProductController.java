@@ -53,26 +53,33 @@ public class ProductController implements Initializable {
 	/**
 	 * Created by jeonilbae on 2016. 11. 30..
 	 */
+	
+	// Add newProduct to productList
 	public void addProductList(Product newProduct) {
 		productList.add(newProduct);
 	}
 	
+	// Remove product in productList
 	public void removeProductInList(Product removeProduct) {
 		productList.remove(removeProduct);
 	}
 	
+	// Index of searching product in productList
 	public int getProductIndexInList(Product searchProduct) {
 		return productList.indexOf(searchProduct);
 	}
 	
+	// Size of productList
 	public int getProductListSize() {
 		return productList.size();
 	}
 	
+	// Replace product in productList using index and editProduct
 	public void setProductInList(int productIndex, Product editProduct) {
 		productList.set(productIndex, editProduct);
 	}
 
+	// Get product in productList by index
 	public Product getProduct(int index) {
 		return productList.get(index);
 	}

@@ -3,20 +3,21 @@ package components;
  * Created by jeonilbae on 2016. 11. 30..
  */
 public class ProductBuilder {
-	private String type;
-	private String model;
-	private String nickName;
-	private int usingTime;
-	private double power;
-	// �ù�����, ��������
-	private double cool_heatpower;
-	private int grade;
+	private String type;			// Type of appliance
+	private String model;			// Model name of appliance
+	private String nickName;		// Appliance's nickname
+	private int usingTime;			// Using time
+	private double cool_heatpower;	// Power of heating or cooling
+	private double power;			// Appliance's watt data
+	private int grade;				// Efficient grade
 
+	// ProductBuilder constructor
 	public ProductBuilder setType(String type) {
 		this.type = type;
 		return this;
 	}
-
+	
+	// Set methods
 	public ProductBuilder setModel(String model) {
 		this.model = model;
 		return this;
@@ -47,6 +48,7 @@ public class ProductBuilder {
 		return this;
 	}
 
+	// Build product
 	public Product build() {
 		Product product = new Product(type, model, nickName, usingTime, power, cool_heatpower, grade);
 		return product;
