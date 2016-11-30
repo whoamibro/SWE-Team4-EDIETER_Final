@@ -336,12 +336,8 @@ public class LoginController implements Initializable {
                             }
                         }
                     }
-//                    for(int i=0;i<ProductController.productList.size();i++){
-//                    	System.out.printf("%s, %d", ProductController.productList.get(i).getNickName(), ProductController.productList.get(i).getPower());
-//                    }
                 }
 			}
-
             @Override
             public void onFailure(Call<List<Product_n>> call, Throwable throwable) {
                 System.out.printf("%s", throwable.getMessage());

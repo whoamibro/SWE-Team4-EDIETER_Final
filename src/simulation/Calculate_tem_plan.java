@@ -8,30 +8,30 @@ import controller.ProductController;
 public class Calculate_tem_plan {
     // cal
     private double kcal;
-    // ?˜¨?„?˜ ë³??™”?Ÿ‰
+    // temperature variation
     private int delta_t;
-    // ?‹¨?œ„ ë©´ì 
+    // square meter of house
     private double squaremeter;
-    // ê³µê°„(ë¶??”¼)
+    // volume of house
     private double V;
-    // ê³µê°„?— ì°¨ìˆ?Š” ê³µê¸°?— ???•œ ì§ˆëŸ‰
+    // mass of air in the house
     private double m;
-    // ê³µê¸°?˜ ë¹„ì—´
+    // specific heat of air
     private double C = 0.716;
-    // ì¼ˆë¹ˆ?˜¨?„
+    // kelvin temperature
     private double K;
-    // ?ƒ‰ë°©ì „? ¥ ë°? ?‚œë°©ì „? ¥
+    // kwh
     private double kwh;
-    // ?—?–´ì»¨ì˜ ?ƒ‰?‚œë°? ? „? ¥
+    // cool or heat power of airconditioner
     private double cool_heatpower;
-    // ?´ë²ˆë‹¬ ë§ì¼ ê¹Œì? ?‚¨?? ?¼?ˆ˜
+    // remainday of this month
     private int remainday;
-    // ?‹œë®¬ë ˆ?´?…˜ ê²°ê³¼ ?‚¨?? ? „? ¥?Ÿ‰ ë°›ì•„?˜´
+    // simulation result
     private double simul_result;
     public void setSimul_result(double simul_result){
         this.simul_result = simul_result;
     }
-
+    
     public int getDelta_t() {
         return delta_t;
     }
@@ -55,33 +55,35 @@ public class Calculate_tem_plan {
     public double getK() {
         return K;
     }
-    // ?…? ¥ë°›ì? ?˜¨?„ë¥? ì¼ˆë¹ˆ?˜¨?„ë¡? ë³??™˜
+    // change degrees celcius to kelvin temperature
     public void setK(double c) {
         K = c + 273.15;
     }
-    // ë¶??”¼?— ???•œ ê³µê¸°?˜ ì§ˆëŸ‰?„ êµ¬í•˜?Š” ê³¼ì •
-    public void calculate_volume(){
-        // 2 ?Š” ?•„?ŒŒ?Š¸?˜ ì¸µê°„ ?†’?´ - ë²½ì˜ ?‘ê»? | 1000 ?? m^3?„ literë¡? ë³??™˜
+    // calculate volume of house air
+    public double calculate_volume(){
+        // 2 is interlayer height - thickness of wall
         V = squaremeter * 2 * 1000;
-        // n = PV/RT ê°? ? ?š©?œ ê²? ??ê¸°ì•• = 1, ê¸°ì²´?ƒ?ˆ˜ = 0.082057, ëª°ì§ˆ?Ÿ‰?„ g?œ¼ë¡? ë³??™˜ 28.7
+        // get mass of house air
         m = 1 * V /( 0.082057 * K )* 28.7 ;
-        System.out.printf("?‚¬?š©? ê±°ì£¼ê³µê°„?˜ ë¶??”¼ \t\t\t\t: %.2f liter\n",V);
-        System.out.printf("?‚¬?š©? ê±°ì£¼ê³µê°„?˜ ì¼ˆë¹ˆ?˜¨?„\t\t\t\t: %.2f k\n",K);
-        System.out.printf("?‚¬?š©? ê±°ì£¼ê³µê°„?— ì¡´ì¬?•˜?Š” ê³µê¸°?˜ ì§ˆëŸ‰\t: %.2f g\n",m);
+        System.out.printf("Volume of User's space \t\t\t\t: %.2f liter\n",V);
+        System.out.printf("Kelvin temperature of User's space \t\t\t\t: %.2f k\n",K);
+        System.out.printf("Mass of User's space\t: %.2f g\n",m);
+        return m;
     }
-    // ì¹¼ë¡œë¦¬ë?? ê³„ì‚° ?•˜?Š” ê³¼ì •
-    public void calculate_cal(){
+    // calculate calorie
+    public double calculate_cal(){
         kcal = C * m * delta_t / 1000;
+        return kcal;
     }
-    // cal?‹¨?œ„?˜ ?ˆ˜ì¹˜ë?? Kwhë¡? ë³??™˜
+    // calculate calorie to wat
     public double calculate_w(){
         double result;
         kwh = kcal/861;
         // for confirmation
-        System.out.printf("?¬ë§í•˜?Š” ?˜¨?„ë¡? ?‚®ì¶”ê±°?‚˜ ?˜¬ë¦¬ê¸°ê¹Œì? ?•„?š”?•œ ?—?„ˆì§??˜ ?Ÿ‰(cal?„ kwhë¡? ë³??™˜?•¨) : %.2f kwh\n",kwh);
+        System.out.printf("?ï¿½ï¿½ë§í•˜?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ì¶”ê±°?ï¿½ï¿½ ?ï¿½ï¿½ë¦¬ê¸°ê¹Œï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½??ï¿½ï¿½ ?ï¿½ï¿½(cal?ï¿½ï¿½ kwhï¿½? ï¿½??ï¿½ï¿½?ï¿½ï¿½) : %.2f kwh\n",kwh);
         return result = kwh;
     }
-    // kwh?— ???•´?„œ ?ƒ‰?‚œë°©ê¸°?˜ ? „? ¥?„ ??ë¹„ì‹œì¼œì„œ ?‚¨?? ?¼?ˆ˜ ?™?•ˆ ëª‡ì‹œê°„ì„ ?” ì¶”ê?ë¡? ?‚¬?š©?•  ?ˆ˜ ?ˆ?Š”ì§? ?•Œ? ¤ì¤?
+    // kwh?ï¿½ï¿½ ???ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë°©ê¸°?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ??ë¹„ì‹œì¼œì„œ ?ï¿½ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ëª‡ì‹œê°„ì„ ?ï¿½ï¿½ ì¶”ï¿½?ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½?
     public void calculate_t(){
         int length = ProductController.productList.size();
         double time;
@@ -89,13 +91,13 @@ public class Calculate_tem_plan {
         for(int i=0; i<length; i++){
             if(ProductController.productList.get(i).getType() == "Airconditioner"){
                 cool_heatpower = ProductController.productList.get(i).getCool_heatpower();
-                System.out.printf("?‚¬?š©?ê°? ë³´ìœ ?•œ ?ƒ‰?‚œë°©ê¸°?˜ ?ƒ‰ë°?<?˜¹??>?‚œë°©ì „? ¥ : %.2f\n",cool_heatpower);
+                System.out.printf("?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë³´ìœ ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë°©ê¸°?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?<?ï¿½ï¿½??>?ï¿½ï¿½ë°©ì „?ï¿½ï¿½ : %.2f\n",cool_heatpower);
             }
         }
         time = simul_result/cool_heatpower;
         timeperday = time/remainday;
         // for confirmation
-        System.out.printf("?‹œë®¬ë ˆ?´?…˜ ê²°ê³¼ ?´ë²ˆë‹¬ ?‚´ë¡? ?ƒ‰?‚œë°©ê¸°ë¥? ?? ?ˆ˜ ?ˆ?Š” ì´? ?‹œê°? : %.2f\n", time);
-        System.out.printf("?¼ë³? ì¶”ê?ë¡? ?ƒ‰?‚œë°©ê¸°ë¥? ?? ?ˆ˜ ?ˆ?Š” ?‹œê°? : %.2f\n", timeperday);
+        System.out.printf("?ï¿½ï¿½ë®¬ë ˆ?ï¿½ï¿½?ï¿½ï¿½ ê²°ê³¼ ?ï¿½ï¿½ë²ˆë‹¬ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ë°©ê¸°ï¿½? ?? ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ï¿½? ?ï¿½ï¿½ï¿½? : %.2f\n", time);
+        System.out.printf("?ï¿½ï¿½ï¿½? ì¶”ï¿½?ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ë°©ê¸°ï¿½? ?? ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? : %.2f\n", timeperday);
     }
 }

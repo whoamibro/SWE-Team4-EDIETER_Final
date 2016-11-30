@@ -63,11 +63,16 @@ public class UserEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		/**
+		 * Create by jeonyongjin on 2016. 11. 30 ..
+		 */
 		userName.setText(thisUser.getName());
-//		ID.setText(thisUser.getID());
 		email.setText(thisUser.getEmail());
 		areaSize.setText(String.valueOf(thisUser.getAreaSize()));
 		usedElec.setText(String.valueOf(thisUser.getUsedElec()));
+		/**
+		 * 
+		 */
 	}
 
 	public void btnOKHandler() {

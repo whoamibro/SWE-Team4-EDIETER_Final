@@ -1,6 +1,7 @@
 package controller;
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * 
  */
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,11 +45,11 @@ public class PlanController implements Initializable {
 	private int current_day;
 	private int last_day;
 
-	CalculateThirdposition calculateThirdposition = new CalculateThirdposition();
-	Calculate_fee calculatefee = new Calculate_fee();
-	Calculate_electric_usage calculate_electric_usage= new Calculate_electric_usage();
-	Calculate_plan calculate_plan = new Calculate_plan();
-	Calculate_tem_plan calculate_tem_plan = new Calculate_tem_plan();
+	CalculateThirdposition calculateThirdposition = null;
+	Calculate_fee calculatefee = null;
+	Calculate_electric_usage calculate_electric_usage= null;
+	Calculate_plan calculate_plan = null;
+	Calculate_tem_plan calculate_tem_plan = null;
 
 	@FXML
 	private Button btnPlan;
@@ -85,6 +86,20 @@ public class PlanController implements Initializable {
 	}
 
 	public void btnPlanHandler() throws InterruptedException {
+		total_usage = 0;
+		current_basic_fee = 0;
+		tax = 0;
+		ele_industry_fund = 0;
+		current_fee = 0;
+		month_basic_fee = 0;
+		
+		calculateThirdposition = new CalculateThirdposition();
+		calculatefee = new Calculate_fee();
+		calculate_electric_usage= new Calculate_electric_usage();
+		calculate_plan = new Calculate_plan();
+		calculate_tem_plan = new Calculate_tem_plan();
+		
+		
 		textArea.setText("Your hope fee is : " + String.valueOf(hope_fee) + "won\n");
 		textArea.appendText("Start Simulation...\n");
 		execute_current_cal_fee();
@@ -95,9 +110,9 @@ public class PlanController implements Initializable {
 	public void execute_current_cal_fee(){
         calculate_electric_usage.setProductCount();
         total_usage = calculate_electric_usage.calc_ele_cur_usage();
-        textArea.appendText("1�씪遺��꽣 �쁽�옱源뚯��쓽 "+Assembleddata.getUser_f_n().getName()+"�떂 怨꾩젙�쓽 �쟾�젰�궗�슜�웾��\n " + String.valueOf(Math.round(total_usage)) + " kwh �엯�땲�떎.\n");
+        textArea.appendText("1 - TODAY "+Assembleddata.getUser_f_n().getName()+" 's Electric Usage is \n " + String.valueOf(Math.round(total_usage)) + " kwh.\n");
         ex_total_usage = calculate_electric_usage.cal_ele_expect_usage();
-        textArea.appendText("�씠踰덈떖�뿉 �삁�긽�릺�뒗 "+Assembleddata.getUser_f_n().getName()+"�떂 怨꾩젙�쓽 �쟾�젰�궗�슜�웾��\n " + String.valueOf(Math.round(ex_total_usage)) + " kwh �엯�땲�떎.\n");
+        textArea.appendText("WHOLE MONTH "+Assembleddata.getUser_f_n().getName()+" 's Electric Usage is \n " + String.valueOf(Math.round(ex_total_usage)) + " kwh.\n");
         
         textArea.appendText("/////////////////////////////////////////////////////////////////////////////\n");
         // ?占쏙옙?占쏙옙占�? ?占쏙옙?占쏙옙?占쏙옙?占쏙옙源뚳옙? ?占쏙옙?占쏙옙 占�??占쏙옙?占쏙옙占�? 怨꾩궛?占쏙옙 (?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙?占쏙옙?占쏙옙 - 1?占쏙옙占�??占쏙옙?占쏙옙?占쏙옙源뚳옙? ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙)
@@ -106,48 +121,74 @@ public class PlanController implements Initializable {
         calculatefee.setNumofthirdposition(calculateThirdposition.cal_position()[0],calculateThirdposition.cal_position()[2]);
 
         // ?占쏙옙?占쏙옙源뚳옙??占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙湲덉븸 (占�?怨쇱꽭, ???占쏙옙 誘명룷?占쏙옙)
-        textArea.appendText("-------- 1�씪 遺��꽣 �삤�뒛源뚯� --------\n");
+        textArea.appendText("-------- 1 - TODAY --------\n");
         current_basic_fee = calculatefee.cal_Basic_Fee();
-        textArea.appendText("�쟾�젰�궗�슜�슂湲� : " + String.valueOf(current_basic_fee) +" �썝\n");
+        textArea.appendText("Basic Fee : " + String.valueOf(current_basic_fee) +" won\n");
         
         // 占�?怨쇱꽭 怨꾩궛
         tax = calculatefee.taxing();
-        textArea.appendText("遺�媛�媛�移섏꽭 : " + String.valueOf(tax) + " �썝\n");
+        textArea.appendText("Tax : " + String.valueOf(tax) + " won\n");
         
         // ???占쏙옙 ?占쏙옙?占쏙옙
         ele_industry_fund = calculatefee.cal_elec_industry_fund();
-        textArea.appendText("�쟾�젰�궛�뾽諛쒖쟾湲곌툑 : " + String.valueOf(ele_industry_fund) + " �썝\n");
+        textArea.appendText("Electric industry fund Fee : " + String.valueOf(ele_industry_fund) + " won\n");
         // 珥앹븸 怨꾩궛
         current_fee = calculatefee.cal_total();
-        textArea.appendText("�슂湲덊빀怨� : " + String.valueOf(current_fee) + " �썝\n");
-    }
+        textArea.appendText("Total Fee : " + String.valueOf(current_fee) + " won\n");
+   
+        // preparing simulation
+        calculate_plan.setCurrent_basic_fee(current_basic_fee);
+        calculate_plan.setCurrent_total_fee(current_fee);
+        calculate_plan.setRemainder(hope_fee);
+        // simulation
+        simul_result = calculate_plan.simulator();
+        textArea.appendText("Additional available electric usage is " + String.valueOf(Math.round(simul_result)) + " kwh\n");
+	}
 
     public void execute_total_cal_fee(){
         // ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙 ?占쏙옙媛숇떎?占쏙옙 占�??占쏙옙?占쏙옙?占쏙옙 ?占쏙옙留앹슂湲덇퉴占�? 異뷂옙?占�? ?占쏙옙?占쏙옙 占�??占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 怨꾩궛
-    	textArea.appendText("----- �씠踰덈떖 �쟾泥� �삁�긽 �떆裕щ젅�씠�뀡 -----\n");
+    	textArea.appendText("----- WHOLE MONTH -----\n");
         calculateThirdposition.setTotal_electric_usage(ex_total_usage);
         calculatefee.setNum_remain(calculateThirdposition.cal_position()[1]);
         calculatefee.setNumofthirdposition(calculateThirdposition.cal_position()[0],calculateThirdposition.cal_position()[2]);
 
         // ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 寃껋쑝占�? ?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ???占쏙옙 ?占쏙옙湲덉븸 (占�?怨쇱꽭 ???占쏙옙 誘명룷?占쏙옙
         month_basic_fee = calculatefee.cal_Basic_Fee();
-        textArea.appendText("�쟾�젰�궗�슜�슂湲� : " + String.valueOf(current_basic_fee) +" �썝\n");
+        textArea.appendText("Basic Fee : " + String.valueOf(current_basic_fee) +" won\n");
         
         tax = calculatefee.taxing();
-        textArea.appendText("遺�媛�媛�移섏꽭 : " + String.valueOf(tax) + " �썝\n");
+        textArea.appendText("Tax : " + String.valueOf(tax) + " won\n");
         
         ele_industry_fund = calculatefee.cal_elec_industry_fund();
-        textArea.appendText("�쟾�젰�궛�뾽諛쒖쟾湲곌툑 : " + String.valueOf(ele_industry_fund) + " �썝\n");
+        textArea.appendText("Electric industry fund Fee : " + String.valueOf(ele_industry_fund) + " won\n");
         
         month_fee = calculatefee.cal_total();
-        textArea.appendText("�슂湲덊빀怨� : " + String.valueOf(current_fee) + " �썝\n");
+        textArea.appendText("Total : " + String.valueOf(current_fee) + " won\n");
         
-        // ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙媛숇떎占�? 占�??占쏙옙?占쏙옙?占쏙옙 異뷂옙?占�? ?占쏙옙?占쏙옙占�??占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙
+        // preparing simulation
         calculate_plan.setCurrent_basic_fee(month_basic_fee);
         calculate_plan.setCurrent_total_fee(month_fee);
         calculate_plan.setRemainder(hope_fee);
-
+        // simulation
+        simul_result = calculate_plan.simulator();
+        textArea.appendText("Additional available electric usage is " + String.valueOf(Math.round(simul_result)) + " kwh\n");
     }
-
-
+    
+    public void excute_plan_temperature(){
+        current_day = calculate_electric_usage.getDate_of_month();
+        last_day = calculate_electric_usage.getLastdate_of_month();
+        calculate_tem_plan.setRemainday(last_day-current_day);
+        calculate_tem_plan.setSimul_result(simul_result);
+        // set temperature
+        current_temp = Integer.parseInt(curtmp.getText());
+        hope_temp = Integer.parseInt(hopetmp.getText());
+        // simulation calculating
+        calculate_tem_plan.setDelta_t(Math.abs(current_temp-hope_temp));
+        calculate_tem_plan.setSquaremeter(20);
+        calculate_tem_plan.setK(current_temp);
+        calculate_tem_plan.calculate_volume();
+        calculate_tem_plan.calculate_cal();
+        calculate_tem_plan.calculate_w();
+        calculate_tem_plan.calculate_t();
+    }
 }
