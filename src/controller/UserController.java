@@ -12,17 +12,19 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class UserController implements Initializable {
+	//get this month
 	Calendar day = Calendar.getInstance();
-
+	private int thismonth = day.get(day.MONTH);
+	
 	private User thisUser;
 
-	public void setUser(User user) {
-		this.thisUser = user;
-	}
-
+	@FXML
+	private AnchorPane paneMain;
+	
 	@FXML
 	private Text userName;
 
@@ -30,18 +32,21 @@ public class UserController implements Initializable {
 	private Text areaSize;
 
 	@FXML
-	private Text usedElec;
+	private Text usedElec;//used electricity of this month
 
 	@FXML
 	private BarChart<String, Double> barChart;
+
+
+	public void setUser(User user) {
+		this.thisUser = user;
+	}
 
 	/**
 	 * Create by jeonyongjin on 2016. 11. 30..
 	 * LOC 12
 	 * get month of today and input data for drawing the chart 
 	 */
-	private int thismonth = day.get(day.MONTH);
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Series<String, Double> series = new Series<>();
@@ -49,12 +54,12 @@ public class UserController implements Initializable {
 
 		ObservableList<Data<String, Double>> list = series.getData();
 		// -는 임시방편으로 사용한거 나중에 수정해야함
-		list.add(new Data<>(String.valueOf(thismonth-4), thisUser.getChargeHistory()[0]));
-		list.add(new Data<>(String.valueOf(thismonth-3), thisUser.getChargeHistory()[1]));
-		list.add(new Data<>(String.valueOf(thismonth-2), thisUser.getChargeHistory()[2]));
-		list.add(new Data<>(String.valueOf(thismonth-1), thisUser.getChargeHistory()[3]));
-		list.add(new Data<>(String.valueOf(thismonth), thisUser.getChargeHistory()[4]));
-		list.add(new Data<>(String.valueOf(thismonth+1), thisUser.getChargeHistory()[5]));
+		list.add(new Data<>(String.valueOf(thismonth-4), thisUser.getChargeHist()[0]));
+		list.add(new Data<>(String.valueOf(thismonth-3), thisUser.getChargeHist()[1]));
+		list.add(new Data<>(String.valueOf(thismonth-2), thisUser.getChargeHist()[2]));
+		list.add(new Data<>(String.valueOf(thismonth-1), thisUser.getChargeHist()[3]));
+		list.add(new Data<>(String.valueOf(thismonth), thisUser.getChargeHist()[4]));
+		list.add(new Data<>(String.valueOf(thismonth+1), thisUser.getChargeHist()[5]));
 
 		barChart.getData().add(series);
 

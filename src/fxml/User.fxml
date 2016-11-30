@@ -7,9 +7,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+<AnchorPane fx:id="paneMain" maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-	prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	>
 	<children>
 		<Text layoutX="193.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사용자 :" />
 		<Text layoutX="193.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="실내 평수 :" />
