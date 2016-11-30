@@ -1,5 +1,7 @@
 package controller;
-
+/**
+ * Created by jeonilbae on 2016. 11. 30..
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.util.ListIterator;
@@ -195,3 +197,6 @@ public class ProductEditController implements Initializable {
 		this.productController = productController;
 	}
 }
+/**
+ * 
+ */

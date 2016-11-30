@@ -1,11 +1,12 @@
 package components;
-
+/**
+ * Created by jeonilbae on 2016. 11. 30..
+ */
 public class Product {
 	private String type;
 	private String model;
 	private String nickName;
 	private int usingTime;
-	// �߰� �����κ�
 	private double cool_heatpower;
 	private double power;
 	private int grade;
@@ -17,7 +18,6 @@ public class Product {
 		this.nickName = nickName;
 		this.usingTime = usingTime;
 		this.power = power;
-		// �߰� �����κ�
 		this.cool_heatpower = cool_heatpower;
 		this.grade = grade;
 	}
@@ -58,3 +58,6 @@ public class Product {
 		return productInfo;
 	}
 }
+/**
+ * 
+ */

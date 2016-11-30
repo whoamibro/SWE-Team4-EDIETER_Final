@@ -1,5 +1,7 @@
 package components;
-
+/**
+ * Created by jeonilbae on 2016. 11. 30..
+ */
 public class ProductBuilder {
 	private String type;
 	private String model;
@@ -50,3 +52,7 @@ public class ProductBuilder {
 		return product;
 	}
 }
+
+/**
+ * 
+ */

@@ -1,5 +1,7 @@
 package controller;
-
+/**
+ * Created by jeonilbae on 2016. 11. 30..
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -107,9 +109,7 @@ public class ProductAddController implements Initializable {
 				.setUsingTime(Integer.parseInt(textFieldHour.getText()))
 				.setNickName(textFieldNickName.getText())
 				.build();
-
-		//int productIndex = productController.getProductListSize();
-		
+	
 		Button newButton = new Button(newProduct.getNickName());
 		newButton.setPrefSize(210, 100);
 		newButton.setOnAction(event -> {
@@ -149,3 +149,6 @@ public class ProductAddController implements Initializable {
 	}
 
 }
+/**
+ * 
+ */

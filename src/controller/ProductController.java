@@ -1,5 +1,7 @@
 package controller;
-
+/**
+ * Created by jeonilbae on 2016. 11. 30..
+ */
 import components.Product;
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +50,9 @@ public class ProductController implements Initializable {
 		flowPane.getChildren().setAll(buttonList);
 		flowPane.getChildren().add(btnAdd);
 	}
-	
+	/**
+	 * Created by jeonilbae on 2016. 11. 30..
+	 */
 	public void addProductList(Product newProduct) {
 		productList.add(newProduct);
 	}
@@ -72,6 +76,9 @@ public class ProductController implements Initializable {
 	public Product getProduct(int index) {
 		return productList.get(index);
 	}
+	/**
+	 * 
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ProductTotalController productTotalController = new ProductTotalController();
@@ -101,3 +108,6 @@ public class ProductController implements Initializable {
 	}
 
 }
+/**
+ * 
+ */
