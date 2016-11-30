@@ -17,6 +17,6 @@
 		<Text layoutX="508.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ºC" />
 		<ComboBox fx:id="comboBox" layoutX="357.0" layoutY="146.0" prefWidth="150.0" />
 		<Button fx:id="btnPlan" layoutX="601.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnPlanHandler" text="플래닝!" />
-		<TextArea fx:id="textArea" editable="false" layoutX="230.0" layoutY="227.0" prefHeight="235.0" prefWidth="439.0" />
+		<TextArea fx:id="textArea" editable="false" layoutX="230.0" layoutY="227.0" prefHeight="300.0" prefWidth="500.0" />
 	</children>
 </AnchorPane>

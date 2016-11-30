@@ -69,20 +69,22 @@ public class Calculate_fee {
     }
 
     // calculate tax
-    public void taxing(){
+    public int taxing(){
         tax = (int) (basicfee * 0.1);
         // for confimation
         System.out.println("tax : " + tax);
+        return tax;
     }
 
     // calculate electric industry fund
-    public void cal_elec_industry_fund(){
+    public int cal_elec_industry_fund(){
         double fund = basicfee *0.037;
         // 10?��?��?�� ?��?�� ?��?��
         int rm_first_positon = (int)fund / 10 * 10;
         ele_ind_fund = rm_first_positon;
         // for confirmation
         System.out.println("electric industry fund : " +  ele_ind_fund);
+        return ele_ind_fund; 
     }
 
     // �?구요�? 계산
