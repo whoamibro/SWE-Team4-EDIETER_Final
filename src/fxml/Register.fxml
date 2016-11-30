@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="paneRegister" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Text layoutX="221.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이름" />
+		<Text layoutX="221.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+		<Text layoutX="221.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호" />
+		<Text layoutX="221.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호 확인" />
+		<Text layoutX="221.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이메일" />
+		<Text layoutX="221.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="실내 평수" />
+		<Text layoutX="220.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이번 달 전력 사용량" />
+		<TextField fx:id="userName" layoutX="332.0" layoutY="134.0" />
+		<TextField fx:id="ID" layoutX="332.0" layoutY="184.0" />
+		<PasswordField fx:id="password" layoutX="332.0" layoutY="234.0" />
+		<PasswordField fx:id="passwordAgain" layoutX="332.0" layoutY="284.0" />
+		<TextField fx:id="email" layoutX="332.0" layoutY="334.0" />
+		<TextField fx:id="areaSize" layoutX="332.0" layoutY="384.0" />
+		<TextField fx:id="usedElec" layoutX="376.0" layoutY="434.0" />
+		<Button fx:id="btnOK" layoutX="613.0" layoutY="537.0" mnemonicParsing="false" onAction="#btnOKHandler" text="가입" />
+		<Button fx:id="btnCancel" layoutX="686.0" layoutY="537.0" mnemonicParsing="false" onAction="#btnCancelHandler" text="취소" />
+      <Hyperlink layoutX="218.0" layoutY="463.0" onAction="#hyperlinkHandler" text="⤷ 궁금하면 클릭!" />
+	</children>
+</AnchorPane>

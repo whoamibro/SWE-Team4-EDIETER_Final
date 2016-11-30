@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+	prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	>
+	<children>
+		<Text layoutX="193.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사용자 :" />
+		<Text layoutX="193.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="실내 평수 :" />
+		<Text layoutX="193.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이번 달 전력사용량 :" />
+		<Text fx:id="userName" layoutX="267.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ㅁㅁㅁ" />
+		<Text fx:id="areaSize" layoutX="283.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10 평" />
+		<Text fx:id="usedElec" layoutX="350.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000kWh" />
+		<Text layoutX="193.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="월별 전력 요금 History" />
+		<Button layoutX="500.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnPastHandler" text="지난 달 전기요금 기록" />
+		
+		<BarChart fx:id="barChart" layoutX="169.0" layoutY="200.0" prefHeight="400.0" prefWidth="500.0">
+			<xAxis>
+				<CategoryAxis side="BOTTOM" />
+			</xAxis>
+			<yAxis>
+				<NumberAxis side="LEFT" />
+			</yAxis>
+		</BarChart>
+	</children>
+</AnchorPane>
