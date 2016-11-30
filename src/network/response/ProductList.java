@@ -2,9 +2,11 @@ package network.response;
 
 /**
  * Created by jeonyongjin on 2016. 11. 30..
+ * LOC 57
  */
+// object for crawledproduct on web
 public class ProductList {
-    private int pcode;
+	private int pcode;
     private String pname;
     private String model;
     private double power;
@@ -59,3 +61,6 @@ public class ProductList {
         this.grade = grade;
     }
 }
+/**
+ * 
+ */

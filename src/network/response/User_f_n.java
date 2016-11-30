@@ -2,14 +2,16 @@ package network.response;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 58
  */
+//object for user information right after login success
 public class User_f_n {
-    private String name;    // ?´ë¦?
-    private String email;   // ?´ë©”ì¼
-    private int areaSize;       // ê±°ì£¼ê³µê°„ ?‚¬?´ì¦?
-    private double usedElec;    // ? „? ¥?‚¬?š©?Ÿ‰
-    private boolean result;     // ë¡œê·¸?¸ ?„±ê³µì—¬ë¶?
-    private int token;       // ë¡œê·¸?¸?— ?„±ê³µí•˜???„?•Œ session?„ ?œ„?•œ token
+    private String name;    
+    private String email;   
+    private int areaSize;       
+    private double usedElec;    
+    private boolean result;     
+    private int token;       
 
     public String getName() {
         return name;
@@ -59,3 +61,6 @@ public class User_f_n {
         this.token = token;
     }
 }
+/**
+ * 
+ */

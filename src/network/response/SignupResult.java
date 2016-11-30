@@ -2,10 +2,11 @@ package network.response;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 21
  */
 public class SignupResult {
-    private String name;    // ?ù¥Î¶?
-    private String email;   // ?ù¥Î©îÏùº
+    private String name;    // name
+    private String email;   // mail
 
     public String getName() {
         return name;
@@ -23,3 +24,6 @@ public class SignupResult {
         this.email = email;
     }
 }
+/**
+ * 
+ */

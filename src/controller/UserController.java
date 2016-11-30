@@ -35,6 +35,11 @@ public class UserController implements Initializable {
 	@FXML
 	private BarChart<String, Double> barChart;
 
+	/**
+	 * Create by jeonyongjin on 2016. 11. 30..
+	 * LOC 12
+	 * get month of today and input data for drawing the chart 
+	 */
 	private int thismonth = day.get(day.MONTH);
 
 	@Override
@@ -43,7 +48,6 @@ public class UserController implements Initializable {
 		series.setName("전기 사용량");
 
 		ObservableList<Data<String, Double>> list = series.getData();
-
 		// -는 임시방편으로 사용한거 나중에 수정해야함
 		list.add(new Data<>(String.valueOf(thismonth-4), thisUser.getChargeHistory()[0]));
 		list.add(new Data<>(String.valueOf(thismonth-3), thisUser.getChargeHistory()[1]));
@@ -58,7 +62,9 @@ public class UserController implements Initializable {
 		areaSize.setText(String.valueOf(thisUser.getAreaSize()));
 		usedElec.setText(String.valueOf(thisUser.getUsedElec()));
 	}
-	
+	/**
+	 * 
+	 */
 	public void btnPastHandler() {
 
 	}

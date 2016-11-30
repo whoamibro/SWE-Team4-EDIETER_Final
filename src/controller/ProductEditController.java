@@ -16,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import network.Assembleddata;
 
 public class ProductEditController implements Initializable {
 	@FXML
@@ -66,12 +67,22 @@ public class ProductEditController implements Initializable {
 		model = "";
 		
 		ObservableList<String> listType = cmbBoxType.getItems();
-		listType.add("a");
-		listType.add("b");
-
 		ObservableList<String> listModel = cmbBoxModel.getItems();
-		listModel.add("c");
-		listModel.add("d");
+		
+		/** Created by jeonyongjin on 2016. 11. 30..
+		 *  LOC 8
+		 */ 
+		listType.add("washer");
+		listType.add("airconditioner");
+        listType.add("heater");
+        listType.add("refrigerator");
+        listType.add("TV");
+		for(int i=0;i< Assembleddata.getProductLists().size();i++){
+			listModel.add(i,Assembleddata.getProductLists().get(i).getName());
+		}
+		/**
+		 * 
+		 */
 
 		cmbBoxType.getSelectionModel().selectedItemProperty().addListener(event -> {
 			type = cmbBoxType.getSelectionModel().getSelectedItem().toString();

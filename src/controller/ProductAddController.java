@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-
 import components.Product;
 import components.ProductBuilder;
 import javafx.collections.ObservableList;
@@ -17,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import network.Assembleddata;
 
 public class ProductAddController implements Initializable {
 	@FXML
@@ -65,15 +64,22 @@ public class ProductAddController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<String> listProduct = cmbBoxProduct.getItems();
-		listProduct.add("?Éâ?û•Í≥?");
-		listProduct.add("?óê?ñ¥Ïª?");
-        listProduct.add("?ÇúÎ∞©Í∏∞");
-        listProduct.add("?Ñ∏?ÉÅÍ∏?");
-        listProduct.add("TV");
-
 		ObservableList<String> listModel = cmbBoxModel.getItems();
-		listModel.add("c");
-		listModel.add("d");
+		
+		/** Created by jeonyongjin on 2016. 11. 30..
+		 *  LOC 8
+		 */ 
+		listProduct.add("washer");
+		listProduct.add("airconditioner");
+        listProduct.add("heater");
+        listProduct.add("refrigerator");
+        listProduct.add("TV");
+		for(int i=0;i< Assembleddata.getProductLists().size();i++){
+			listModel.add(i,Assembleddata.getProductLists().get(i).getName());
+		}
+		/**
+		 * 
+		 */
 		
 		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event -> {
 			type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();

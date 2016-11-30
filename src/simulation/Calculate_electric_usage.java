@@ -10,19 +10,19 @@ import java.util.Calendar;
 public class Calculate_electric_usage {
     Calendar day = Calendar.getInstance();
 
-    // forë¬¸ì„ ?Œë¦¬ê¸° ?œ„?•œ arraylist?˜ sizeë¥? ?‹´ê³? ?ˆ?Š” ë³??ˆ˜
+    // forë¬¸ì„ ?ï¿½ï¿½ë¦¬ê¸° ?ï¿½ï¿½?ï¿½ï¿½ arraylist?ï¿½ï¿½ sizeï¿½? ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
     private int productCount;
 
-    // ? „? ¥?‚¬?š©?Ÿ‰?„ ?‹´ê¸? ?œ„?•œ ë³??ˆ˜
+    // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
     private double total_usage;
 
-    // ?´ë²ˆë‹¬ ?˜ˆ?ƒ ? „? ¥?‚¬?š©?Ÿ‰?„ ?‹´ê¸? ?œ„?•œ ë³??ˆ˜
+    // ?ï¿½ï¿½ë²ˆë‹¬ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
     private double expect_total_usage;
 
-    // ?˜„?¬ê¹Œì??˜ ? „? ¥?‚¬?š©?Ÿ‰?„ ê³„ì‚°?•˜ê¸? ?œ„?•œ ?š”?¼ ë³??ˆ˜
+    // ?ï¿½ï¿½?ï¿½ï¿½ê¹Œï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê³„ì‚°?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½
     private int date_of_month = day.get(day.DAY_OF_MONTH);
 
-    // ?˜„?¬ ?‹¬?˜ ë§ˆì?ë§? ?‚ ì§œë?? êµ¬í•¨
+    // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ë§ˆï¿½?ï¿½? ?ï¿½ï¿½ì§œï¿½?? êµ¬í•¨
     private int lastdate_of_month = day.getActualMaximum(Calendar.DATE);
 
     public int getDate_of_month() {
@@ -37,42 +37,28 @@ public class Calculate_electric_usage {
         return productCount;
     }
 
-    // static productlistë³??ˆ˜ë¥? ì°¸ì¡°?•´?„œ ê·? sizeë¥? productCountë³??ˆ˜?— ?‹´?Š”?‹¤.
+    // static productlistï¿½??ï¿½ï¿½ï¿½? ì°¸ì¡°?ï¿½ï¿½?ï¿½ï¿½ ï¿½? sizeï¿½? productCountï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.
     public void setProductCount() {
         this.productCount = ProductController.productList.size();
     }
 
-    // productcontrollerë¥? ?†µ?•´?„œ productlist?— ?ˆ?Š” product?“¤?„ ëª¨ë‘ ë°›ì•„???„œ 1?¼ë¶??„° ?•´?‹¹ ?¼ ê¹Œì? ?¼ë³? ?‚¬?š©?Ÿ‰ * ?†Œë¹„ì „? ¥?„ ?†µ?•´ ?–¼ë§ˆë‚˜ ? „? ¥?„ ?‚¬?š©?• ì§? ?˜ˆ?ƒ?•˜?Š” ë©”ì†Œ?“œ
+    // productcontrollerï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ productlist?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ product?ï¿½ï¿½?ï¿½ï¿½ ëª¨ë‘ ë°›ì•„???ï¿½ï¿½ 1?ï¿½ï¿½ï¿½??ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ ê¹Œï¿½? ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ * ?ï¿½ï¿½ë¹„ì „?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë§ˆë‚˜ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ë©”ì†Œ?ï¿½ï¿½
     public double calc_ele_cur_usage(){
-        // confirmation code
-//        System.out.println(lastdate_of_month);
         for(int i=0;i<productCount;i++){
             total_usage += ProductController.productList.get(i).getPower()*
                     ProductController.productList.get(i).getUsingTime()*
                     date_of_month;
-            // confirmation code
-//            System.out.println(ProductController.productList.get(i).getPower() + " " + ProductController.productList.get(i).getUsingTime());
-//            System.out.println(total_usage);
         }
-        //confirmation code
-//        System.out.println(total_usage);
         return total_usage;
     }
 
-    // productcontrollerë¥? ?†µ?•´?„œ productlist?— ?ˆ?Š” product?“¤?„ ëª¨ë‘ ë°›ì•„???„œ ?•´?‹¹ ?‹¬?™?•ˆ ?¼ë³? ?‚¬?š©?Ÿ‰ * ?†Œë¹„ì „? ¥?„ ?†µ?•´ ?–¼ë§ˆë‚˜ ? „? ¥?„ ?‚¬?š©?• ì§? ?˜ˆ?ƒ?•˜?Š” ë©”ì†Œ?“œ
+    // productcontrollerï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ productlist?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ product?ï¿½ï¿½?ï¿½ï¿½ ëª¨ë‘ ë°›ì•„???ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ * ?ï¿½ï¿½ë¹„ì „?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë§ˆë‚˜ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ë©”ì†Œ?ï¿½ï¿½
     public double cal_ele_expect_usage() {
-        // confirmation code
-//        System.out.println(lastdate_of_month);
         for (int i = 0; i < productCount; i++) {
             expect_total_usage += ProductController.productList.get(i).getPower() *
                     ProductController.productList.get(i).getUsingTime() *
                     lastdate_of_month;
-            // confirmation code
-//            System.out.println(ProductController.productList.get(i).getPower() + " " + ProductController.productList.get(i).getUsingTime());
-//            System.out.println(expect_total_usage);
         }
-        // confirmation code
-//        System.out.println(expect_total_usage);
         return expect_total_usage;
     }
 
