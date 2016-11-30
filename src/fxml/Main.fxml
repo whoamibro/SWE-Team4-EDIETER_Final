@@ -24,12 +24,14 @@
 				</Tab>
 				<Tab text="내 가전제품">
 					<content>
-						<fx:include fx:id="product" source="Product.fxml" />
+						<AnchorPane fx:id="productPane" prefHeight="200.0"
+							prefWidth="200.0" />
 					</content>
 				</Tab>
 				<Tab text="내 플랜">
 					<content>
-						<fx:include fx:id="plan" source="Plan.fxml" />
+						<AnchorPane fx:id="planPane" prefHeight="200.0"
+							prefWidth="200.0" />
 					</content>
 				</Tab>
 			</tabs>

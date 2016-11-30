@@ -94,7 +94,13 @@ public class LoginController implements Initializable {
 			return;
 		}
 
+		ProductController productController = new ProductController();
+		PlanController planController = new PlanController();
+		MainController mainController = new MainController();
+		
 		mainController.setUserController(userController);
+		mainController.setProductController(productController);
+		mainController.setPlanController(planController);
 		mainController.setUser(thisUser);
 		userController.setUser(thisUser);
 

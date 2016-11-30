@@ -53,6 +53,13 @@ public class MainController implements Initializable {
 
 	@FXML
 	private AnchorPane userPane;
+	
+	@FXML
+	private AnchorPane productPane;
+	
+	@FXML
+	private AnchorPane planPane;
+	
 
 	public MainController() {
 	}
@@ -62,24 +69,50 @@ public class MainController implements Initializable {
 	}
 
 	private UserController userController;
+	private ProductController productController;
+	private PlanController planController;
 
 	public void setUserController(UserController userController) {
 		this.userController = userController;
 	}
 
+	public void setProductController(ProductController productController) {
+		this.productController = productController;
+	}
+
+	public void setPlanController(PlanController planController) {
+		this.planController = planController;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/User.fxml"));
-		loader.setController(userController);
+		Getproductlist();
+		FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/fxml/User.fxml"));
+		userLoader.setController(userController);
 		try {
-			userPane.getChildren().add(loader.load());
+			userPane.getChildren().add(userLoader.load());
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 		}
-		greetText.setText("welcome " + thisUser.getName());
 
-		Getproductlist();
+		FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/fxml/Product.fxml"));
+		productLoader.setController(productController);
+		try {
+			productPane.getChildren().add(productLoader.load());
+
+		} catch (IOException e) {
+		}
+
+		FXMLLoader planLoader = new FXMLLoader(getClass().getResource("/fxml/Plan.fxml"));
+		planLoader.setController(planController);
+		try {
+			planPane.getChildren().add(planLoader.load());
+
+		} catch (IOException e) {
+		}
+
+		// greetText.setText("welcome " + thisUser.getName());
+
 
 	}
 
