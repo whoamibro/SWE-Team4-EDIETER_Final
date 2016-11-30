@@ -33,9 +33,6 @@ public class RegisterController implements Initializable {
 	private TextField userName;
 
 	@FXML
-	private TextField ID;
-
-	@FXML
 	private PasswordField password;
 
 	@FXML
