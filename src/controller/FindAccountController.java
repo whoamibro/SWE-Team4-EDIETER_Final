@@ -3,18 +3,8 @@ package controller;
 //<<<<<<< HEAD
 //=======
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
-
-//>>>>>>> abc
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 
 //<<<<<<< HEAD
 import javax.mail.Message;
@@ -23,9 +13,18 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.net.URL;
-import java.util.Properties;
-import java.util.ResourceBundle;
+
+//>>>>>>> abc
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 
 //=======
 //>>>>>>> abc
@@ -37,13 +36,18 @@ public class FindAccountController implements Initializable {
 	private FlowPane inputPane;
 
 	@FXML
-	private TextField emailField;
+	private TextField mailID;
+
+	@FXML
+	private PasswordField mailPW;
 
 	@FXML
 	private ComboBox<String> cmbBoxSite;
 
 	@FXML
 	private Button btnFindPW;
+
+	private TextField inputField;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -51,22 +55,12 @@ public class FindAccountController implements Initializable {
 		siteList.add("naver.com");
 		siteList.add("gmail.com");
 		siteList.add("daum.net");
-//<<<<<<< HEAD
-		siteList.add("���� �Է�");
-//=======
-		siteList.add("���� �Է�");
-//>>>>>>> abc
+		siteList.add("���� �Է�");
 
 		cmbBoxSite.getSelectionModel().selectedItemProperty().addListener(event -> cmbBoxSiteListener());
 	}
 
 	public void cmbBoxSiteListener() {
-		TextField inputField;
-//<<<<<<< HEAD
-		// ���� �Է� �ؽ�Ʈ �ʵ� ���� Ȯ��
-
-		// ���� �Է� �ؽ�Ʈ �ʵ� ���� Ȯ��
-
 		boolean existFlag = true;
 		try {
 			inputPane.getChildren().get(1);
@@ -74,82 +68,65 @@ public class FindAccountController implements Initializable {
 			existFlag = false;
 		}
 
-
-		if (cmbBoxSite.getSelectionModel().getSelectedItem() == "���� �Է�") {
-
-		if (cmbBoxSite.getSelectionModel().getSelectedItem() == "���� �Է�") {
-
+		if (cmbBoxSite.getSelectionModel().getSelectedIndex() == 3) {
 			inputField = new TextField();
 			inputField.setPrefWidth(130);
 			inputPane.getChildren().add(0, inputField);
 		} else {
-
-			// ���� �Է� �ؽ�Ʈ �ʵ尡 �����ϸ�
-
-			// ���� �Է� �ؽ�Ʈ �ʵ尡 �����ϸ�
-
-			if(existFlag) {
+			if (existFlag) {
 				inputPane.getChildren().remove(0);
 			}
 		}
-	}}
+	}
 
 	public void btnFindPWHandler() {
+		// Get password from db
+		String password = "123";
 
-		// DB���� �̸��� �ּҸ� ã�Ƽ� ���� ���? ���� Ȯ�� �˸�
+		String mailSite = cmbBoxSite.getSelectionModel().getSelectedItem().toString();
+
+		String recipient = mailID.getText() + "@" + mailSite;
+		String host = "smtp." + mailSite;
+		String mailPassword = mailPW.getText();
+
+		String subject = "E-Dieter Password!"; // ����
+		String body = "Your password is " + password; // ���� ����
+
+		// properties ����
+		Properties props = new Properties();
+		props.put("mail.smtps.auth", "true");
+
+		// ���� ����
+		Session session = Session.getDefaultInstance(props);
+		MimeMessage msg = new MimeMessage(session);
+
+		// ���� ����
+		try {
+			msg.setSubject(subject);
+			msg.setText(body);
+			msg.setFrom(new InternetAddress(recipient));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+
+			// �߼� ó��
+			Transport transport = session.getTransport("smtps");
+			transport.connect(host, recipient, mailPassword);
+			transport.sendMessage(msg, msg.getAllRecipients());
+			transport.close();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+
+			Alert failAlert = new Alert(Alert.AlertType.ERROR);
+			failAlert.setHeaderText(null);
+			failAlert.setContentText("��ϵ�? �̸��� �ּҰ� �����ϴ�.");
+			failAlert.showAndWait();
+			return;
+		}
+
 		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
 		successAlert.setHeaderText(null);
 		successAlert.setContentText("������ Ȯ�����ּ���!");
 		successAlert.showAndWait();
 
-		// ã�� ���� ���? ��ϵ�? �̸��� ���ٰ� �˸�
-		Alert failAlert = new Alert(Alert.AlertType.ERROR);
-		failAlert.setHeaderText(null);
-		failAlert.setContentText("��ϵ�? �̸��� �ּҰ� �����ϴ�.");
-		failAlert.showAndWait();
-	}
-	
-	public void sendMail() throws MessagingException {
-		 // ���� ���� ����
-        String host = "smtp.gmail.com";
-        String username = "�����Ͼ��̵�@gmail.com";
-        String password = "��й��?";
-         
-        // ���� ����
-        String recipient = "������ �����ּ�"; // ������ �����ּ�
-        String subject = "�������� �����? �߼� �׽�Ʈ�Դϴ�."; // ���� ����
-        String body = "���� ��"; // ���� ����
-         
-        //properties ����
-        Properties props = new Properties();
-        props.put("mail.smtps.auth", "true");
-        // ���� ����
-        Session session = Session.getDefaultInstance(props);
-        MimeMessage msg = new MimeMessage(session);
- 
-        // ���� ����
-        msg.setSubject(subject);
-        msg.setText(body);
-        msg.setFrom(new InternetAddress(username));
-        msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
- 
-        // �߼� ó��
-        Transport transport = session.getTransport("smtps");
-        transport.connect(host, username, password);
-        transport.sendMessage(msg, msg.getAllRecipients());
-        transport.close();  
 	}
 
-//		// DB���� �̸��� �ּҸ� ã�Ƽ� ���� ���? ���� Ȯ�� �˸�
-//		Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-//		successAlert.setHeaderText(null);
-//		successAlert.setContentText("������ Ȯ�����ּ���!");
-//		successAlert.showAndWait();
-//
-//		// ã�� ���� ���? ��ϵ�? �̸��� ���ٰ� �˸�
-//		Alert failAlert = new Alert(Alert.AlertType.ERROR);
-//		failAlert.setHeaderText(null);
-//		failAlert.setContentText("��ϵ�? �̸��� �ּҰ� �����ϴ�.");
-//		failAlert.showAndWait();
-	}
-
+}
