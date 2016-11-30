@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * LOC 62 
+ * LOC 65 
  * part for networking create static variables (for escape nullpointError)
  */
 public class Assembleddata {
@@ -41,9 +41,16 @@ public class Assembleddata {
         Assembleddata.user_f_n.setAreaSize(user_f_n.getAreaSize());
         Assembleddata.user_f_n.setUsedElec(user_f_n.getUsedElec());
         Assembleddata.user_f_n.setResult(user_f_n.isResult());
-
     }
-
+    
+    public static void setpw(String pw){
+    	Assembleddata.user_f_n.setPw(pw);
+    }
+    
+    public static String getpw(){
+    	return user_f_n.getPw();
+    }
+    
     public static List<Electricusage_permon> getElectricusage_permons() {
         return electricusage_permons;
     }

@@ -25,6 +25,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import network.Assembleddata;
 
 //=======
 //>>>>>>> abc
@@ -55,7 +56,7 @@ public class FindAccountController implements Initializable {
 		siteList.add("naver.com");
 		siteList.add("gmail.com");
 		siteList.add("daum.net");
-		siteList.add("Á÷Á¢ ÀÔ·Â");
+		siteList.add("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½");
 
 		cmbBoxSite.getSelectionModel().selectedItemProperty().addListener(event -> cmbBoxSiteListener());
 	}
@@ -80,8 +81,8 @@ public class FindAccountController implements Initializable {
 	}
 
 	public void btnFindPWHandler() {
-		// Get password from db
-		String password = "123";
+
+		String password = Assembleddata.getpw();
 
 		String mailSite = cmbBoxSite.getSelectionModel().getSelectedItem().toString();
 
@@ -117,7 +118,7 @@ public class FindAccountController implements Initializable {
 
 			Alert failAlert = new Alert(Alert.AlertType.ERROR);
 			failAlert.setHeaderText(null);
-			failAlert.setContentText("ï¿½ï¿½Ïµï¿? ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+			failAlert.setContentText("ï¿½ï¿½Ïµï¿½? ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 			failAlert.showAndWait();
 			return;
 		}

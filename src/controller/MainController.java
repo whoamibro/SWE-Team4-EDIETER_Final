@@ -178,7 +178,7 @@ public class MainController implements Initializable {
 
                     for(int i=0;i<products.size();i++){
                         for(int j=0;j<Assembleddata.getProductLists().size();j++) {
-                            if(products.get(i).getPcode() == Assembleddata.getProductLists().get(i).getPcode()) {
+                            if(products.get(i).getPcode() == Assembleddata.getProductLists().get(j).getPcode()) {
                                 ProductBuilder productBuilder = new ProductBuilder();
                                 Product product = productBuilder
                                         .setType(Assembleddata.getProductLists().get(i).getName())
@@ -193,10 +193,13 @@ public class MainController implements Initializable {
                                 System.out.printf("이부분 값은 ? %d", Assembleddata.getProductLists().size());
                                 System.out.printf("%s", product.getNickName());
                                 System.out.printf("%s", product.getModel());
-                                System.out.printf("%s", product.getType());
+                                System.out.printf("%s\n", product.getType());
                             }
                         }
                     }
+//                    for(int i=0;i<ProductController.productList.size();i++){
+//                    	System.out.printf("%s, %d", ProductController.productList.get(i).getNickName(), ProductController.productList.get(i).getPower());
+//                    }
                 }
 			}
 
