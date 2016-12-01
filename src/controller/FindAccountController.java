@@ -24,9 +24,9 @@ import javafx.scene.layout.FlowPane;
 import network.Assembleddata;
 
 public class FindAccountController implements Initializable {
-	/** 
+	/**
 	 * created by Jin Jung on 2016. 11. 30..
-	 * */
+	 */
 	@FXML
 	private AnchorPane paneFind;
 
@@ -45,18 +45,17 @@ public class FindAccountController implements Initializable {
 	@FXML
 	private Button btnFindPW;
 
-	private TextField inputField;
+	private TextField inputField = null;
 
 	/**
 	 * */
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		/** 
-		 * created by Jin Jung on 2016. 11. 30..
-		 * function : add items on site combobox 
-		 * loc : 8
-		 * */
+		/**
+		 * created by Jin Jung on 2016. 11. 30.. function : add items on site
+		 * combobox loc : 8
+		 */
 		// add items on cmbBoxSite
 		ObservableList<String> siteList = cmbBoxSite.getItems();
 		siteList.add("naver.com");
@@ -71,11 +70,9 @@ public class FindAccountController implements Initializable {
 	}
 
 	public void cmbBoxSiteListener() {
-		/** 
-		 * created by Jin Jung
-		 * function : handle cmbBoxSite
-		 * loc : 18 
-		 * */
+		/**
+		 * created by Jin Jung function : handle cmbBoxSite loc : 18
+		 */
 		boolean existFlag = true; // inputField existence flag
 		try {
 			inputPane.getChildren().get(1); // check if there is inputField
@@ -99,11 +96,11 @@ public class FindAccountController implements Initializable {
 	}
 
 	public void btnFindPWHandler() {
-		/** 
-		 * created by Jin Jung on 2016. 11. 30..
-		 * function : send password to user's email
-		 * loc : 54
-		 * */
+		/**
+		 * created by Jin Jung on 2016. 11. 30.. function : send password to
+		 * user's email loc : 54
+		 */
+
 		String password = Assembleddata.getpw(); // get user's password
 
 		String mailSite = null;
@@ -145,7 +142,7 @@ public class FindAccountController implements Initializable {
 		} catch (MessagingException e) {
 			// if there is send error!
 			e.printStackTrace();
-			
+
 			// fail alert
 			Alert failAlert = new Alert(Alert.AlertType.ERROR);
 			failAlert.setHeaderText(null);
@@ -163,5 +160,4 @@ public class FindAccountController implements Initializable {
 		 * */
 	}
 
-	
 }

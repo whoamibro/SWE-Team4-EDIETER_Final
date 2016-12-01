@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import network.Assembleddata;
@@ -46,10 +49,10 @@ public class LoginController implements Initializable {
 	Login login = new Login();
 	User thisUser = null;
 	Token token = new Token();
-	
-	/** 
+
+	/**
 	 * created by Jin Jung on 2016. 11. 30.
-	 * */
+	 */
 	@FXML
 	private AnchorPane paneLogin;
 
@@ -70,20 +73,32 @@ public class LoginController implements Initializable {
 
 	UserController userController = new UserController();
 	MainController mainController = new MainController();
+
 	/** 
 	 * */
-	
+
+	boolean chargeHistoryFlag = true;
+	boolean productListFlag = true;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
 	}
 
+	public void btnLoginKeyPressHandler(KeyEvent e) {
+		/**
+		 * created by Jin Jung on 2016. 11. 30. function : keyhandler for login
+		 * button loc : 2
+		 */
+		if(e.getCode().equals(KeyCode.ENTER)) // call btnLoginHandler when press enter key
+			btnLoginHandler();
+	}
+	
 	public void btnLoginHandler() {
-		/** 
-		 * created by Jin Jung on 2016. 11. 30.
-		 * function : handler for login button
-		 * loc : 57
-		 * */
+		/**
+		 * created by Jin Jung on 2016. 11. 30. function : handler for login
+		 * button loc : 54
+		 */
 		// create user instance who logged in by entered information
 		login.setEmail(idField.getText());
 		login.setPassword(pwField.getText());
@@ -93,23 +108,15 @@ public class LoginController implements Initializable {
 			Login();
 		});
 		thread.start();
-
-		// check current time
-		long startTime = System.currentTimeMillis();
-
-		// check login status
-		while (thisUser == null) {
-			try {
-				Thread.sleep(500);
-				if (System.currentTimeMillis() - startTime >= 1500)
-					break;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
 		// if login is failed
-		if (thisUser == null) {
+		if (thisUser == null || !chargeHistoryFlag || !productListFlag) {
 			// fail alert
 			Alert successAlert = new Alert(Alert.AlertType.ERROR);
 			successAlert.setHeaderText(null);
@@ -130,7 +137,7 @@ public class LoginController implements Initializable {
 		mainController.setUser(thisUser);
 		userController.setUser(thisUser);
 
-		// create main scene loader 
+		// create main scene loader
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		// set controller on loader
 		loader.setController(mainController);
@@ -142,17 +149,16 @@ public class LoginController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		/** 
 		 * */
 	}
 
 	public void btnRegisterHandler() {
-		/** 
-		 * created by Jin Jung on 2016. 11. 30.
-		 * function : handler for register button
-		 * loc : 13 
-		 * */
+		/**
+		 * created by Jin Jung on 2016. 11. 30. function : handler for register
+		 * button loc : 13
+		 */
 		// create Register Controller
 		RegisterController registerController = new RegisterController();
 		// create loader for registerController
@@ -172,18 +178,17 @@ public class LoginController implements Initializable {
 	}
 
 	public void btnFindHandler() {
-		/** 
-		 * created by Jin Jung on 2016. 11. 30.
-		 * function : handler for find button
-		 * loc : 13 
-		 * */
+		/**
+		 * created by Jin Jung on 2016. 11. 30. function : handler for find
+		 * button loc : 13
+		 */
 		// create findAccountController
 		FindAccountController findAccountController = new FindAccountController();
 		// create loader for indAccountController
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FindAccount.fxml"));
 		// set controller on loader
 		loader.setController(findAccountController);
-		
+
 		// load find scene
 		try {
 			Scene scene = new Scene(loader.load());
@@ -272,7 +277,13 @@ public class LoginController implements Initializable {
 			public void onResponse(Call<List<Electricusage_permon>> call,
 					Response<List<Electricusage_permon>> response) {
 				int status = response.code();
+
+				chargeHistoryFlag = true;
 				double[] chargehistory = new double[6];
+				for (int i = 0; i < chargehistory.length; i++)
+					chargehistory[i] = -1.0;
+				thisUser.setChargeHistory(chargehistory);
+
 				System.out.printf("여기 출력됨?\n");
 				List<Electricusage_permon> electricusage_permons = response.body();
 				Assembleddata.setElectricusage_permons(electricusage_permons);
@@ -281,8 +292,15 @@ public class LoginController implements Initializable {
 					chargehistory[i] = Assembleddata.getElectricusage_permons().get(i).getUsage();
 					System.out.printf("%f \n", chargehistory[i]);
 				}
+
 				thisUser.setChargeHistory(chargehistory);
 
+				for (double d : thisUser.getChargeHist()) {
+					System.out.println(d);
+					if (d == -1.0) {
+						chargeHistoryFlag = false;
+					}
+				}
 			}
 
 			@Override
@@ -292,23 +310,21 @@ public class LoginController implements Initializable {
 			}
 		});
 	}
+
 	/**
 	 *
 	 */
-	
+
 	/**
 	 * Created by jeonyongjin on 2016. 11. 30..
 	 */
-	private void Getproductlist(){
+	private void Getproductlist() {
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
 		OkHttpClient httpClient = builder.build();
 
-		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl(baseurl)
-				.addConverterFactory(GsonConverterFactory.create())
-				.client(httpClient)
-				.build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient).build();
 
 		NetworkService networkService = retrofit.create(NetworkService.class);
 		networkService.getProductList().enqueue(new Callback<List<ProductList>>() {
@@ -319,10 +335,10 @@ public class LoginController implements Initializable {
 				List<ProductList> productLists = response.body();
 				Assembleddata.setProductLists(productLists);
 
-				for(int i=0;i<productLists.size();i++){
+				for (int i = 0; i < productLists.size(); i++) {
 					System.out.printf("%s \n", Assembleddata.getProductLists().get(i).getName());
 				}
-                GetUserproductlist();
+				GetUserproductlist();
 			}
 
 			@Override
@@ -333,59 +349,63 @@ public class LoginController implements Initializable {
 		});
 	}
 
-	private void GetUserproductlist(){
+	private void GetUserproductlist() {
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
 		OkHttpClient httpClient = builder.build();
 
-		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl(baseurl)
-				.addConverterFactory(GsonConverterFactory.create())
-				.client(httpClient)
-				.build();
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient).build();
 
 		NetworkService networkService = retrofit.create(NetworkService.class);
 		token.setToken(Assembleddata.tokensetting());
-        System.out.println("언제 찍히니");
+		System.out.println("언제 찍히니");
 		System.out.printf("%d", token.getToken());
 
 		networkService.getUserPList(token.getToken()).enqueue(new Callback<List<Product_n>>() {
 			@Override
 			public void onResponse(Call<List<Product_n>> call, Response<List<Product_n>> response) {
 				Assembleddata.setProducts(null);
-                int status = response.code();
-                if(response.isSuccessful()) {
-                    List<Product_n> products = response.body();
-                    Assembleddata.setProducts(products);
+				int status = response.code();
+				if (response.isSuccessful()) {
+					List<Product_n> products = response.body();
+					Assembleddata.setProducts(products);
 
-                    for(int i=0;i<products.size();i++){
-                        for(int j=0;j<Assembleddata.getProductLists().size();j++) {
-                            if(products.get(i).getPcode() == Assembleddata.getProductLists().get(j).getPcode()) {
-                                ProductBuilder productBuilder = new ProductBuilder();
-                                Product product = productBuilder
-                                        .setType(Assembleddata.getProductLists().get(i).getName())
-                                        .setModel(Assembleddata.getProductLists().get(i).getModel())
-                                        .setPower(Assembleddata.getProductLists().get(i).getPower())
-                                        .setGrade(Assembleddata.getProductLists().get(i).getGrade())
-                                        .setUsingTime(Assembleddata.getProducts().get(i).getUsingtime())
-                                        .setNickName(Assembleddata.getProducts().get(i).getNickname())
-                                        .build();
-                                ProductController.productList.add(i,product);
-                                System.out.printf("이부분 값은 ? %d", products.size());
-                                System.out.printf("이부분 값은 ? %d", Assembleddata.getProductLists().size());
-                                System.out.printf("%s", product.getNickName());
-                                System.out.printf("%s", product.getModel());
-                                System.out.printf("%s\n", product.getType());
-                            }
-                        }
-                    }
-                }
+					productListFlag = true;
+					ProductController.productList = new ArrayList<Product>();
+					for (int i = 0; i < products.size(); i++) {
+						for (int j = 0; j < Assembleddata.getProductLists().size(); j++) {
+							if (products.get(i).getPcode() == Assembleddata.getProductLists().get(j).getPcode()) {
+								ProductBuilder productBuilder = new ProductBuilder();
+								Product product = productBuilder
+										.setType(Assembleddata.getProductLists().get(i).getName())
+										.setModel(Assembleddata.getProductLists().get(i).getModel())
+										.setPower(Assembleddata.getProductLists().get(i).getPower())
+										.setGrade(Assembleddata.getProductLists().get(i).getGrade())
+										.setUsingTime(Assembleddata.getProducts().get(i).getUsingtime())
+										.setNickName(Assembleddata.getProducts().get(i).getNickname()).build();
+								ProductController.productList.add(i, product);
+
+								System.out.printf("이부분 값은 ? %d", products.size());
+								System.out.printf("이부분 값은 ? %d", Assembleddata.getProductLists().size());
+								System.out.printf("%s", product.getNickName());
+								System.out.printf("%s", product.getModel());
+								System.out.printf("%s\n", product.getType());
+							}
+						}
+					}
+
+					if (ProductController.productList.size() != products.size())
+						productListFlag = false;
+
+				}
 			}
-            @Override
-            public void onFailure(Call<List<Product_n>> call, Throwable throwable) {
-                System.out.printf("%s", throwable.getMessage());
-                System.out.println("failure");
-            }
+
+			@Override
+			public void onFailure(Call<List<Product_n>> call, Throwable throwable) {
+				System.out.printf("%s", throwable.getMessage());
+				System.out.println("failure");
+			}
 		});
 	}
 	/**

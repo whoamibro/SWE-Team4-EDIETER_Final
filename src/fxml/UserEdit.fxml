@@ -10,7 +10,7 @@
 	<children>
 
 <Text layoutX="63.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이름" />
-		<Text layoutX="63.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이메일(ID)" />
+		<Text layoutX="63.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail" />
 		<Text layoutX="62.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="기존 비밀번호" />
 		<Text layoutX="62.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="새 비밀번호" />
 		<Text layoutX="62.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="실내 평수" />

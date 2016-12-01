@@ -11,7 +11,7 @@
 		<Text layoutX="221.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이름" />
 		<Text layoutX="221.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호" />
 		<Text layoutX="221.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호 확인" />
-		<Text layoutX="221.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이메일" />
+		<Text layoutX="221.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail" />
 		<Text layoutX="220.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="실내 평수" />
 		<Text layoutX="222.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이번 달 전력 사용량" />
 		<TextField fx:id="userName" layoutX="332.0" layoutY="134.0" />

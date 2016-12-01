@@ -6,20 +6,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="paneFind" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Text layoutX="109.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="입력한 메일 주소로 비밀번호를 보내드립니다!" />
-      <Text layoutX="91.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="※ 반드시 이메일 계정의 비밀번호를 입력해 주세요!" />
-      <Text layoutX="50.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail" />
-      <Text layoutX="49.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호" />
-      <TextField fx:id="mailID" layoutX="118.0" layoutY="108.0" prefHeight="29.0" prefWidth="114.0" />
-      <Text layoutX="236.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@" />
-      <FlowPane fx:id="inputPane" hgap="5.0" layoutX="259.0" layoutY="108.0" prefHeight="29.0" prefWidth="273.0">
-         <children>
-            <ComboBox fx:id="cmbBoxSite" prefHeight="29.0" prefWidth="130.0" promptText="선택" />
-         </children>
-      </FlowPane>
-      <PasswordField fx:id="mailPW" layoutX="116.0" layoutY="165.0" />
-      <Button fx:id="btnFindPW" layoutX="393.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnFindPWHandler" text="찾기" />
-   </children>
+<AnchorPane fx:id="paneFind" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0"
+	prefWidth="561.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Text layoutX="109.0" layoutY="60.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="입력한 메일 주소로 비밀번호를 보내드립니다!" />
+		<Text layoutX="91.0" layoutY="86.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="※ 반드시 이메일 계정의 비밀번호를 입력해 주세요!" />
+		<Text layoutX="50.0" layoutY="127.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="E-mail" />
+		<Text layoutX="49.0" layoutY="185.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="비밀번호" />
+		<TextField fx:id="mailID" layoutX="118.0" layoutY="108.0"
+			prefHeight="29.0" prefWidth="114.0" />
+		<Text layoutX="236.0" layoutY="126.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="\@" />
+		<FlowPane fx:id="inputPane" hgap="5.0" layoutX="259.0"
+			layoutY="108.0" prefHeight="29.0" prefWidth="273.0">
+			<children>
+				<ComboBox fx:id="cmbBoxSite" prefHeight="29.0" prefWidth="130.0"
+					promptText="선택" />
+			</children>
+		</FlowPane>
+		<PasswordField fx:id="mailPW" layoutX="116.0" layoutY="165.0" />
+		<Button fx:id="btnFindPW" layoutX="393.0" layoutY="165.0"
+			mnemonicParsing="false" onAction="#btnFindPWHandler" text="찾기" />
+	</children>
 </AnchorPane>

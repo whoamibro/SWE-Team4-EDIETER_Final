@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<Text layoutX="235.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="현재 온도" />
 		<Text layoutX="235.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="희망 온도" />
@@ -17,6 +17,6 @@
 		<Text layoutX="508.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ºC" />
 		<ComboBox fx:id="comboBox" layoutX="357.0" layoutY="146.0" prefWidth="150.0" />
 		<Button fx:id="btnPlan" layoutX="601.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnPlanHandler" text="플래닝!" />
-		<TextArea fx:id="textArea" editable="false" layoutX="230.0" layoutY="227.0" prefHeight="350.0" prefWidth="600.0" />
+		<TextArea fx:id="textArea" editable="false" layoutX="125.0" layoutY="209.0" prefHeight="350.0" prefWidth="650.0" />
 	</children>
 </AnchorPane>
