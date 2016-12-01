@@ -154,7 +154,7 @@ public class PlanController implements Initializable {
 
         // ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 寃껋쑝占�? ?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ???占쏙옙 ?占쏙옙湲덉븸 (占�?怨쇱꽭 ???占쏙옙 誘명룷?占쏙옙
         month_basic_fee = calculatefee.cal_Basic_Fee();
-        textArea.appendText("Basic Fee : " + String.valueOf(current_basic_fee) +" won\n");
+        textArea.appendText("Basic Fee : " + String.valueOf(month_basic_fee) +" won\n");
         
         tax = calculatefee.taxing();
         textArea.appendText("Tax : " + String.valueOf(tax) + " won\n");
@@ -163,7 +163,7 @@ public class PlanController implements Initializable {
         textArea.appendText("Electric industry fund Fee : " + String.valueOf(ele_industry_fund) + " won\n");
         
         month_fee = calculatefee.cal_total();
-        textArea.appendText("Total : " + String.valueOf(current_fee) + " won\n");
+        textArea.appendText("Total : " + String.valueOf(month_fee) + " won\n");
         
         // preparing simulation
         calculate_plan.setCurrent_basic_fee(month_basic_fee);

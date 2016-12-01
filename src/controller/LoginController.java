@@ -352,6 +352,7 @@ public class LoginController implements Initializable {
 		networkService.getUserPList(token.getToken()).enqueue(new Callback<List<Product_n>>() {
 			@Override
 			public void onResponse(Call<List<Product_n>> call, Response<List<Product_n>> response) {
+				Assembleddata.setProducts(null);
                 int status = response.code();
                 if(response.isSuccessful()) {
                     List<Product_n> products = response.body();
