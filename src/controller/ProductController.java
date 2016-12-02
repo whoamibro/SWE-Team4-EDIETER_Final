@@ -1,4 +1,5 @@
 package controller;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class ProductController implements Initializable {
 	@FXML
 	private Button btnAdd;
 
-	private ObservableList<Button> buttonList=FXCollections.observableArrayList();
+	private ObservableList<Button> buttonList = FXCollections.observableArrayList();
 
 	public ObservableList<Button> getButtonList() {
 		return buttonList;
@@ -50,30 +51,31 @@ public class ProductController implements Initializable {
 		flowPane.getChildren().setAll(buttonList);
 		flowPane.getChildren().add(btnAdd);
 	}
+
 	/**
 	 * Created by jeonilbae on 2016. 11. 30..
 	 */
-	
+
 	// Add newProduct to productList
 	public void addProductList(Product newProduct) {
 		productList.add(newProduct);
 	}
-	
+
 	// Remove product in productList
 	public void removeProductInList(Product removeProduct) {
 		productList.remove(removeProduct);
 	}
-	
+
 	// Index of searching product in productList
 	public int getProductIndexInList(Product searchProduct) {
 		return productList.indexOf(searchProduct);
 	}
-	
+
 	// Size of productList
 	public int getProductListSize() {
 		return productList.size();
 	}
-	
+
 	// Replace product in productList using index and editProduct
 	public void setProductInList(int productIndex, Product editProduct) {
 		productList.set(productIndex, editProduct);
@@ -83,45 +85,48 @@ public class ProductController implements Initializable {
 	public Product getProduct(int index) {
 		return productList.get(index);
 	}
+
 	/**
 	 * 
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Iterator<Product> iterator = productList.iterator();
-		
-		while(iterator.hasNext()) {
-			Product product = iterator.next();
-			
-			Button newButton = new Button();
-			newButton.setText(product.getNickName());
-			newButton.setPrefSize(210, 100);
-			// Event of button click
-			newButton.setOnAction(event -> {
-				
-				// Create object of ProductEditController
-				ProductEditController productEditController = new ProductEditController();
-				productEditController.setProductController(this);
 
-				// Initialize productEditController's product field
-				productEditController.setProduct(product);
-				
-				// Connect loader with ProductEdit.fxml
-				FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
-				editLoader.setController(productEditController);
+		if (productList.size() != buttonList.size()) {
+			while (iterator.hasNext()) {
+				Product product = iterator.next();
 
-				// Add loader to pane
-				try {
-					getPaneTotal().getChildren().clear();
-					getPaneTotal().getChildren().add(editLoader.load());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			});
-						
-			buttonList.add(newButton);
+				Button newButton = new Button();
+				newButton.setText(product.getNickName());
+				newButton.setPrefSize(210, 100);
+				// Event of button click
+				newButton.setOnAction(event -> {
+
+					// Create object of ProductEditController
+					ProductEditController productEditController = new ProductEditController();
+					productEditController.setProductController(this);
+
+					// Initialize productEditController's product field
+					productEditController.setProduct(product);
+
+					// Connect loader with ProductEdit.fxml
+					FXMLLoader editLoader = new FXMLLoader(getClass().getResource("/fxml/ProductEdit.fxml"));
+					editLoader.setController(productEditController);
+
+					// Add loader to pane
+					try {
+						getPaneTotal().getChildren().clear();
+						getPaneTotal().getChildren().add(editLoader.load());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
+
+				buttonList.add(newButton);
+			}
 		}
-		
+
 		ProductTotalController productTotalController = new ProductTotalController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
 		loader.setController(productTotalController);
