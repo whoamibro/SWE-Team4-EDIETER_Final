@@ -26,4 +26,6 @@ public class ProductTotalController implements Initializable {
 	public void setProductController(ProductController productController) {
 		this.productController = productController;
 	}
+	
+	
 }
