@@ -79,15 +79,15 @@ public class ProductAddController implements Initializable {
 		return newProduct;
 	}
 
-	ObservableList<String> listProduct = cmbBoxProduct.getItems();
-	
-	ObservableList<String> listModel = cmbBoxModel.getItems();
-	
 	// ProductAddController initialize
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		// Initialize list of types
+		ObservableList<String> listProduct = cmbBoxProduct.getItems();
+		
+		ObservableList<String> listModel = cmbBoxModel.getItems();
+		
 		/** Created by jeonyongjin on 2016. 11. 30..
 		 *  LOC 8
 		 */ 
