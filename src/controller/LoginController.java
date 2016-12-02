@@ -110,7 +110,7 @@ public class LoginController implements Initializable {
 		thread.start();
 		
 		try {
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
