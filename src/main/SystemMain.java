@@ -31,6 +31,7 @@ public class SystemMain extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		primaryStage.setResizable(false);
+		primaryStage.setOnCloseRequest(event -> System.exit(0));
 	}
 
 	/** 
