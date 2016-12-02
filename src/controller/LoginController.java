@@ -73,6 +73,8 @@ public class LoginController implements Initializable {
 
 	UserController userController = new UserController();
 	MainController mainController = new MainController();
+	ProductController productController = new ProductController();
+	PlanController planController = new PlanController();
 
 	/** 
 	 * */
@@ -125,21 +127,16 @@ public class LoginController implements Initializable {
 			return;
 		}
 
-		// create all controller
-		ProductController productController = new ProductController();
-		PlanController planController = new PlanController();
-		MainController mainController = new MainController();
-
+		// set controller on loader
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+		
 		// controller setting
 		mainController.setUserController(userController);
 		mainController.setProductController(productController);
 		mainController.setPlanController(planController);
 		mainController.setUser(thisUser);
 		userController.setUser(thisUser);
-
-		// create main scene loader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-		// set controller on loader
+		
 		loader.setController(mainController);
 
 		// load main scene
