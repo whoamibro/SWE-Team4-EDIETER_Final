@@ -12,12 +12,21 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import network.Assembleddata;
+import network.NetworkService;
+import network.response.SignupResult;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 // ProductAddController
 public class ProductAddController implements Initializable {
@@ -55,6 +64,10 @@ public class ProductAddController implements Initializable {
 	private Product newProduct;		// New product
 	private String type;		// String of type
 	private String model;		// String of model
+	
+	private String baseurl;
+	private final String IP = "52.78.211.206";
+	private final int PORT = 80;
 
 	// Set controller method
 	public void setProductController(ProductController productController) {
@@ -66,25 +79,26 @@ public class ProductAddController implements Initializable {
 		return newProduct;
 	}
 
+	ObservableList<String> listProduct = cmbBoxProduct.getItems();
+	
+	ObservableList<String> listModel = cmbBoxModel.getItems();
+	
 	// ProductAddController initialize
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		// Initialize list of types
-		ObservableList<String> listProduct = cmbBoxProduct.getItems();
-		
-		ObservableList<String> listModel = cmbBoxModel.getItems();
-		
 		/** Created by jeonyongjin on 2016. 11. 30..
 		 *  LOC 8
 		 */ 
-		listProduct.add("washer");
-		listProduct.add("airconditioner");
-        listProduct.add("heater");
-        listProduct.add("refrigerator");
+		listProduct.add("Washer");
+		listProduct.add("Airconditioner");
+        listProduct.add("Heater");
+        listProduct.add("Refrigerator");
         listProduct.add("TV");
+        System.out.println("getting in here?1");
 		for(int i=0;i< Assembleddata.getProductLists().size();i++){
-			listModel.add(i,Assembleddata.getProductLists().get(i).getName());
+			listModel.add(i,Assembleddata.getProductLists().get(i).getModel());
 		}
 		/**
 		 * 
@@ -92,16 +106,35 @@ public class ProductAddController implements Initializable {
 
 		// Event of type combobox changed
 		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event -> {
-			
 			// Save changed type
+			listModel.remove(0, listModel.size());
 			type = cmbBoxProduct.getSelectionModel().getSelectedItem().toString();
+			System.out.printf("type은 %s \n",type);
+			for(int i =0;i<Assembleddata.getProductLists().size();i++){
+				System.out.println("getting in here?2");
+				System.out.printf("%s \n", Assembleddata.getProductLists().get(i).getName());
+				if(Assembleddata.getProductLists().get(i).getName().equals(type)){
+					System.out.println("getting in here?3");
+					listModel.add(Assembleddata.getProductLists().get(i).getModel());
+				}
+			}
 		});
 
 		// Event of model combobox changed
-		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event -> {
-			
+		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event2 -> {
 			// Save changed model
+			System.out.println(cmbBoxModel.getSelectionModel().getSelectedItem().toString());
 			model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
+			System.out.println(Assembleddata.getProductLists().size());
+			for(int i=0;i<Assembleddata.getProductLists().size();i++){
+				if(Assembleddata.getProductLists().get(i).getModel().equals(model)){
+					textPower.setText(String.valueOf(Assembleddata.getProductLists().get(i).getPower()));
+					textGrade.setText(String.valueOf(Assembleddata.getProductLists().get(i).getGrade()));
+					if(Assembleddata.getProductLists().get(i).getName().equals("Airconditioner") || Assembleddata.getProductLists().get(i).getName().equals("Heater")){
+						Power.setText(String.valueOf(Assembleddata.getProductLists().get(i).getChpower()));
+					}
+				}
+			}
 		});
 	}
 
@@ -196,6 +229,35 @@ public class ProductAddController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void Addproduct(){
+		baseurl = String.format("http://%s:%d/", IP, PORT);
+		OkHttpClient.Builder builder = new OkHttpClient.Builder();
+		OkHttpClient httpClient = builder.build();
+
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient).build();
+
+		NetworkService networkService = retrofit.create(NetworkService.class);
+		networkService.addProduct(Assembleddata.getToken().getToken(), newProduct).enqueue(new Callback<Void>() {
+			@Override
+			public void onResponse(Call<Void> call, Response<Void> response) {
+				int status = response.code();
+				if (response.isSuccessful()) {
+				
+				} else {
+					System.out.printf("응답코드 %d", status);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Void> call, Throwable throwable) {
+
+				System.out.printf("%s", throwable.getMessage());
+				System.out.println("failure");
+			}
+		});		
 	}
 
 }

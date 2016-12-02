@@ -84,20 +84,33 @@ public class Calculate_tem_plan {
         return result = kwh;
     }
     // kwh?�� ???��?�� ?��?��방기?�� ?��?��?�� ??비시켜서 ?��?? ?��?�� ?��?�� 몇시간을 ?�� 추�?�? ?��?��?�� ?�� ?��?���? ?��?���?
-    public void calculate_t(){
+    public double calculate_t(){
         int length = ProductController.productList.size();
         double time;
-        double timeperday;
         for(int i=0; i<length; i++){
-            if(ProductController.productList.get(i).getType() == "Airconditioner"){
+        	System.out.printf("타입은 뭐지? %s \n", ProductController.productList.get(i).getType());
+        	System.out.printf("결과 값은 ? %s \n", ProductController.productList.get(i).getType().equals("Airconditioner"));
+            if(ProductController.productList.get(i).getType().equals("Airconditioner") || 
+            		ProductController.productList.get(i).getType().equals("Heater")){
                 cool_heatpower = ProductController.productList.get(i).getCool_heatpower();
-                System.out.printf("?��?��?���? 보유?�� ?��?��방기?�� ?���?<?��??>?��방전?�� : %.2f\n",cool_heatpower);
+                System.out.printf("coolheat power는 ? %.2f", cool_heatpower);
             }
         }
         time = simul_result/cool_heatpower;
-        timeperday = time/remainday;
         // for confirmation
         System.out.printf("?��뮬레?��?�� 결과 ?��번달 ?���? ?��?��방기�? ?? ?�� ?��?�� �? ?���? : %.2f\n", time);
-        System.out.printf("?���? 추�?�? ?��?��방기�? ?? ?�� ?��?�� ?���? : %.2f\n", timeperday);
+
+        return time;
+    }
+    public double calculate_td(double time){
+    	double timeperday;
+    	if(remainday == 0){
+    		timeperday = time;
+    	}
+    	else {
+    		timeperday = time/remainday;
+    	}
+    	System.out.printf("?���? 추�?�? ?��?��방기�? ?? ?�� ?��?�� ?���? : %.2f\n", timeperday);
+    	return timeperday;
     }
 }

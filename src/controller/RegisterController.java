@@ -1,11 +1,10 @@
 package controller;
 
-import components.User;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import components.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -21,12 +20,30 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import network.Assembleddata;
+import network.NetworkService;
+import network.request.Signup;
+import network.response.SignupResult;
+import network.response.User_f_n;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterController implements Initializable {
 	/** 
 	 * created by Jin Jung on 2016. 11. 30.
 	 * */
-	private User newUser;
+	
+	private String baseurl;
+	private final String IP = "52.78.211.206";
+	private final int PORT = 80;
+//	private User newUser;
+	private Signup signup = new Signup();
+	private SignupResult signupresult;
+	private int flag = 0;
 
 	@FXML
 	private AnchorPane paneRegister;
@@ -58,6 +75,9 @@ public class RegisterController implements Initializable {
 	/** 
 	 * */
 	
+	String pw;
+	String pwcheck;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
@@ -69,21 +89,55 @@ public class RegisterController implements Initializable {
 		 * function : handler for ok button 
 		 * loc : 8
 		 * */
+		pw = password.getText();
+		System.out.printf("%s \n", pw);
+		pwcheck = passwordAgain.getText();
+		System.out.printf("%s \n", pwcheck);
 		
 		// check if password and passwordAgain is same
-		if (password.getText() == passwordAgain.getText()) {
-			newUser.setName(userName.getText());
-			newUser.setEmail(email.getText());
-			newUser.setAreaSize(Integer.parseInt(areaSize.getText()));
-			newUser.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0]));
+		if (pw.equals(pwcheck)) {
+			System.out.println("여기 들어오나? ");
+			signup.setName(userName.getText());
+			signup.setEmail(email.getText());
+			signup.setAreaSize(Integer.parseInt(areaSize.getText()));
+			signup.setElecUsage(Double.parseDouble(usedElec.getText().split(" ")[0]));
+			signup.setPassword(pw);
+			System.out.printf("email : %s\n", signup.getEmail());
+			System.out.printf("pw : %s\n", signup.getPassword());
 		}
-
-		showLoginWindow();
+		
+		Thread th = new Thread(()->{
+			
+			Signup();
+		});
+		th.start();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		if(flag ==0){
+			Alert successAlert = new Alert(Alert.AlertType.ERROR);
+			successAlert.setHeaderText("signup alert");
+			successAlert.setContentText(" You Input Wrong type\n or Id is already exist\n or Connection to server fail");
+			successAlert.showAndWait();
+		}
+		else if(flag ==1){
+			Alert successAlert = new Alert(Alert.AlertType.ERROR);
+			successAlert.setHeaderText("signup alert");
+			successAlert.setContentText("Register Successful");
+			successAlert.showAndWait();
+			showLoginWindow();
+		}
+		
+		
+		
 	}
 	
-	public User getuser() {
-		return newUser;
-	}
+//	public User getuser() {
+//		return newUser;
+//	}
 
 	public void btnCancelHandler() {		
 		showLoginWindow();
@@ -146,5 +200,48 @@ public class RegisterController implements Initializable {
 				}
 			}
 		});
+	}
+	
+	
+	private void Signup(){
+		baseurl = String.format("http://%s:%d/", IP, PORT);
+		OkHttpClient.Builder builder = new OkHttpClient.Builder();
+		OkHttpClient httpClient = builder.build();
+
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient).build();
+
+		NetworkService networkService = retrofit.create(NetworkService.class);
+		networkService.getSignupResult(signup).enqueue(new Callback<SignupResult>() {
+			@Override
+			public void onResponse(Call<SignupResult> call, Response<SignupResult> response) {
+				int status = response.code();
+				if (response.isSuccessful()) {
+					SignupResult signupresult = response.body();
+					if (signupresult.isResult() == true) {
+						Assembleddata.setSignupresult(signupresult);
+						System.out.printf("되돌아온 이름 %s\n", Assembleddata.getSignupresult().getName());
+						flag = 1;
+					}
+					else{
+						flag = 0;
+					}
+					
+				} else {
+					flag=0;
+					System.out.printf("응답코드 %d", status);
+//					System.out.printf("%s ", Assembleddata.getSignupresult().isResult());
+				}
+			}
+
+			@Override
+			public void onFailure(Call<SignupResult> call, Throwable throwable) {
+				signupresult = null;
+				flag=0;
+				System.out.printf("%s", throwable.getMessage());
+				System.out.println("failure");
+			}
+		});
+		
 	}
 }

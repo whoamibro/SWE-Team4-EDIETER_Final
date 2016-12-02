@@ -4,6 +4,7 @@ package controller;
  * 
  */
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
@@ -50,7 +51,7 @@ public class PlanController implements Initializable {
 	Calculate_electric_usage calculate_electric_usage= null;
 	Calculate_plan calculate_plan = null;
 	Calculate_tem_plan calculate_tem_plan = null;
-
+	DecimalFormat form = new DecimalFormat("#.##");
 	@FXML
 	private Button btnPlan;
 
@@ -104,7 +105,7 @@ public class PlanController implements Initializable {
 		textArea.appendText("Start Simulation...\n");
 		execute_current_cal_fee();
 		execute_total_cal_fee();
-
+		excute_plan_temperature();
 	}
 
 	public void execute_current_cal_fee(){
@@ -123,7 +124,7 @@ public class PlanController implements Initializable {
         // ?占쏙옙?占쏙옙源뚳옙??占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙湲덉븸 (占�?怨쇱꽭, ???占쏙옙 誘명룷?占쏙옙)
         textArea.appendText("-------- 1 - TODAY --------\n");
         current_basic_fee = calculatefee.cal_Basic_Fee();
-        textArea.appendText("Basic Fee : " + String.valueOf(current_basic_fee) +" won\n");
+        textArea.appendText("Basic Fee : " + String.valueOf(form.format(current_basic_fee)) +" won\n");
         
         // 占�?怨쇱꽭 怨꾩궛
         tax = calculatefee.taxing();
@@ -154,7 +155,7 @@ public class PlanController implements Initializable {
 
         // ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 寃껋쑝占�? ?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ???占쏙옙 ?占쏙옙湲덉븸 (占�?怨쇱꽭 ???占쏙옙 誘명룷?占쏙옙
         month_basic_fee = calculatefee.cal_Basic_Fee();
-        textArea.appendText("Basic Fee : " + String.valueOf(month_basic_fee) +" won\n");
+        textArea.appendText("Basic Fee : " + String.valueOf(form.format(month_basic_fee)) +" won\n");
         
         tax = calculatefee.taxing();
         textArea.appendText("Tax : " + String.valueOf(tax) + " won\n");
@@ -171,24 +172,40 @@ public class PlanController implements Initializable {
         calculate_plan.setRemainder(hope_fee);
         // simulation
         simul_result = calculate_plan.simulator();
-        textArea.appendText("Additional available electric usage is " + String.valueOf(Math.round(simul_result)) + " kwh\n");
+        textArea.appendText("Additional available electric usage is " + String.valueOf(form.format(simul_result)) + " kwh\n");
     }
     
     public void excute_plan_temperature(){
+    	double m; // mass
+    	double kcal; // kcal
+    	double kwh; // kwh
+    	double time; // time for whole month
+    	double timeperday; // time for day
+    	// set temperature
+        current_temp = Integer.parseInt(curtmp.getText());
+        hope_temp = Integer.parseInt(hopetmp.getText());
+        
+    	textArea.appendText("----- Simulation for temperature -----\n");
+    	textArea.appendText("Current temperature is " + String.valueOf(current_temp) + " degrees celcius\n");
+    	textArea.appendText("Your hope temperature is " + String.valueOf(hope_temp) + " degrees celcius\n");
         current_day = calculate_electric_usage.getDate_of_month();
         last_day = calculate_electric_usage.getLastdate_of_month();
         calculate_tem_plan.setRemainday(last_day-current_day);
         calculate_tem_plan.setSimul_result(simul_result);
-        // set temperature
-        current_temp = Integer.parseInt(curtmp.getText());
-        hope_temp = Integer.parseInt(hopetmp.getText());
+        
         // simulation calculating
         calculate_tem_plan.setDelta_t(Math.abs(current_temp-hope_temp));
         calculate_tem_plan.setSquaremeter(20);
         calculate_tem_plan.setK(current_temp);
-        calculate_tem_plan.calculate_volume();
-        calculate_tem_plan.calculate_cal();
-        calculate_tem_plan.calculate_w();
-        calculate_tem_plan.calculate_t();
+        m = calculate_tem_plan.calculate_volume();
+        textArea.appendText("Mass of User's space : "+ String.valueOf(form.format(m)) + " g\n");
+        kcal = calculate_tem_plan.calculate_cal();
+        textArea.appendText("The amount of heat to change the temperature : " + String.valueOf(form.format(kcal)) + " cal\n");
+        kwh = calculate_tem_plan.calculate_w();
+        textArea.appendText("Convert heat to electric usage : " + String.valueOf(form.format(kwh)) + " kwh\n");
+        time = calculate_tem_plan.calculate_t();
+        textArea.appendText("Additional available time to use airconditioner or heater among whole month : " + String.valueOf(form.format(time)) + " hour\n");
+        timeperday = calculate_tem_plan.calculate_td(time);
+        textArea.appendText("Additional available time to use airconditioner or heater among day : " + String.valueOf(form.format(timeperday)) + " hour\n");
     }
 }

@@ -7,8 +7,17 @@ package network.response;
 public class SignupResult {
     private String name;    // name
     private String email;   // mail
+    private boolean result;
+    
+    public boolean isResult() {
+		return result;
+	}
 
-    public String getName() {
+	public void setResult(boolean result) {
+		this.result = result;
+	}
+
+	public String getName() {
         return name;
     }
 

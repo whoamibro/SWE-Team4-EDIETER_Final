@@ -1,13 +1,13 @@
 package network;
 
-import javafx.collections.ObservableList;
+import java.util.List;
+
 import network.request.Token;
 import network.response.Electricusage_permon;
-import network.response.Product_n;
 import network.response.ProductList;
+import network.response.Product_n;
+import network.response.SignupResult;
 import network.response.User_f_n;
-
-import java.util.List;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
@@ -20,8 +20,18 @@ public class Assembleddata {
     private static List<Electricusage_permon> electricusage_permons;
     private static List<ProductList> productLists;
     private static List<Product_n> products;
+    private static SignupResult signupresult = new SignupResult();
 
-    public static Token getToken() {
+    
+    public static SignupResult getSignupresult() {
+		return signupresult;
+	}
+
+	public static void setSignupresult(SignupResult signupresult) {
+		Assembleddata.signupresult = signupresult;
+	}
+
+	public static Token getToken() {
         return token;
     }
 

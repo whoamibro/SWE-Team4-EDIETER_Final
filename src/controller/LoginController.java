@@ -205,7 +205,6 @@ public class LoginController implements Initializable {
 	 */
 	// method for login
 	private void Login() {
-
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
 		OkHttpClient httpClient = builder.build();
@@ -378,15 +377,16 @@ public class LoginController implements Initializable {
 										.setType(Assembleddata.getProductLists().get(i).getName())
 										.setModel(Assembleddata.getProductLists().get(i).getModel())
 										.setPower(Assembleddata.getProductLists().get(i).getPower())
+										.setCool_heatpower(Assembleddata.getProductLists().get(i).getChpower())
 										.setGrade(Assembleddata.getProductLists().get(i).getGrade())
 										.setUsingTime(Assembleddata.getProducts().get(i).getUsingtime())
 										.setNickName(Assembleddata.getProducts().get(i).getNickname()).build();
 								ProductController.productList.add(i, product);
-
+								System.out.printf("타입이 뭔지좀 알려줘 \n", product.getType());
 								System.out.printf("이부분 값은 ? %d", products.size());
 								System.out.printf("이부분 값은 ? %d", Assembleddata.getProductLists().size());
-								System.out.printf("%s", product.getNickName());
-								System.out.printf("%s", product.getModel());
+								System.out.printf("%s\n", product.getNickName());
+								System.out.printf("%s\n", product.getModel());
 								System.out.printf("%s\n", product.getType());
 							}
 						}

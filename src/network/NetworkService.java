@@ -1,14 +1,20 @@
 package network;
 
+import java.util.List;
+
+import components.Product;
 import network.request.Login;
 import network.request.Signup;
-import network.request.Token;
-import network.response.*;
+import network.response.Electricusage_permon;
+import network.response.ProductList;
+import network.response.Product_n;
+import network.response.SignupResult;
+import network.response.User_f_n;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.http.*;
-
-import java.util.List;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
@@ -37,9 +43,9 @@ public interface NetworkService {
     
     // callback method for add product to user's account on server
     @GET("user/product/addproducttolist")
-    Call<Void> addProduct(@Header("token") String token, @Body Product_n product);
+    Call<Void> addProduct(@Query("token") int token, @Body Product product);
 
     // callback method for edit product to user's account on server
     @GET("user/product/editproducttolist")
-    Call<Void> editProduct(@Header("token") String token,@Body Product_n product);
+    Call<Void> editProduct(@Query("token") int token,@Body Product product);
 }

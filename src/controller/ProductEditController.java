@@ -19,6 +19,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import network.Assembleddata;
+import network.NetworkService;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 //ProductEditController
 public class ProductEditController implements Initializable {
@@ -28,6 +35,11 @@ public class ProductEditController implements Initializable {
 	
 	private String type;		// String of type
 	private String model;		// String of model
+	
+	private String baseurl;
+	private final String IP = "52.78.211.206";
+	private final int PORT = 80;
+	
 	@FXML
 	private AnchorPane paneEdit;
 
@@ -75,6 +87,7 @@ public class ProductEditController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		type = "";		// Initialize type
 		model = "";		// Initialize model
+		int index;
 		
 		// Initialize list of types
 		ObservableList<String> listType = cmbBoxType.getItems();
@@ -90,7 +103,7 @@ public class ProductEditController implements Initializable {
         listType.add("refrigerator");
         listType.add("TV");
 		for(int i=0;i< Assembleddata.getProductLists().size();i++){
-			listModel.add(i,Assembleddata.getProductLists().get(i).getName());
+			listModel.add(i,Assembleddata.getProductLists().get(i).getModel());
 		}
 		/**
 		 * 
@@ -100,7 +113,17 @@ public class ProductEditController implements Initializable {
 		cmbBoxType.getSelectionModel().selectedItemProperty().addListener(event -> {
 			
 			// Save changed type
-			type = cmbBoxType.getSelectionModel().getSelectedItem().toString();
+		listModel.remove(0, listModel.size());
+		type = cmbBoxType.getSelectionModel().getSelectedItem().toString();
+		System.out.printf("type은 %s \n",type);
+		for(int i =0;i<Assembleddata.getProductLists().size();i++){
+			System.out.println("getting in here?2");
+			System.out.printf("%s \n", Assembleddata.getProductLists().get(i).getName());
+			if(Assembleddata.getProductLists().get(i).getName().equals(type)){
+				System.out.println("getting in here?3");
+				listModel.add(Assembleddata.getProductLists().get(i).getModel());
+				}
+			}
 		});
 
 		// Event of model combobox changed
@@ -132,7 +155,6 @@ public class ProductEditController implements Initializable {
 			nickNameField.setDisable(false);
 			hourField.setDisable(false);
 			btnEdit.setText("Set");
-			
 			editFlag = true;		// Change flag
 		} 
 		
@@ -164,7 +186,7 @@ public class ProductEditController implements Initializable {
 					// If model is initialized
 					if(model == "")
 						model = editProduct.getType();		// Save model of editProduct
-					 
+					
 					// Create product with productBuilder
 					editProduct = productBuilder
 							.setType(type)
@@ -267,7 +289,38 @@ public class ProductEditController implements Initializable {
 		paneEdit.setVisible(false);			// Hide editPane
 	}
 
+	private void Editproduct(){
+		baseurl = String.format("http://%s:%d/", IP, PORT);
+		OkHttpClient.Builder builder = new OkHttpClient.Builder();
+		OkHttpClient httpClient = builder.build();
+
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient).build();
+
+		NetworkService networkService = retrofit.create(NetworkService.class);
+		networkService.editProduct(Assembleddata.getToken().getToken(), editProduct).enqueue(new Callback<Void>() {
+			@Override
+			public void onResponse(Call<Void> call, Response<Void> response) {
+				int status = response.code();
+				if (response.isSuccessful()) {
+				
+				} else {
+					System.out.printf("응답코드 %d", status);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Void> call, Throwable throwable) {
+
+				System.out.printf("%s", throwable.getMessage());
+				System.out.println("failure");
+			}
+		});		
+	}
 }
+
+
+
 /**
  * 
  */
