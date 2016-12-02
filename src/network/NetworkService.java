@@ -4,6 +4,7 @@ import java.util.List;
 
 import components.Product;
 import network.request.Login;
+import network.request.Productforserver;
 import network.request.Signup;
 import network.response.Electricusage_permon;
 import network.response.ProductList;
@@ -42,10 +43,13 @@ public interface NetworkService {
     Call<List<Product_n>> getUserPList(@Query("token") int token);
     
     // callback method for add product to user's account on server
-    @GET("user/product/addproducttolist")
-    Call<Void> addProduct(@Query("token") int token, @Body Product product);
+    @POST("user/product/addproducttolist")
+    Call<Void> addProduct(@Query("token") int token, @Body Productforserver productforserver);
 
     // callback method for edit product to user's account on server
-    @GET("user/product/editproducttolist")
-    Call<Void> editProduct(@Query("token") int token,@Body Product product);
+    @POST("user/product/editproducttolist")
+    Call<Void> editProduct(@Query("token") int token,@Body Productforserver productforserver);
+    
+    @POST("user/product/deleteproductfromlist")
+    Call<Void> deleteProduct(@Query("token") int token, @Body Productforserver productforserver);
 }

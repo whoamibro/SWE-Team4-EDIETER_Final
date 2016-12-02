@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import network.Assembleddata;
 import network.NetworkService;
+import network.request.Productforserver;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +33,7 @@ public class ProductEditController implements Initializable {
 	@FXML
 	private ProductController productController;	// ProductController
 	private Product editProduct;			// Edit product
-	
+	private Productforserver productforserver;
 	private String type;		// String of type
 	private String model;		// String of model
 	
@@ -145,7 +146,7 @@ public class ProductEditController implements Initializable {
 
 	// Event of edit button
 	public void btnEditHandler() {
-		
+		productforserver = new Productforserver();
 		// If user see edit button
 		if (!editFlag) {
 		
@@ -196,6 +197,10 @@ public class ProductEditController implements Initializable {
 							.setUsingTime(Integer.parseInt(hourField.getText()))
 							.setNickName(nickNameField.getText())
 							.build();
+					
+					productforserver.setNickName(nickNameField.getText());
+					productforserver.setUsingTime(Integer.parseInt(hourField.getText()));
+					
 					
 					// Event of button click
 					button.setOnAction(event -> {
@@ -298,7 +303,35 @@ public class ProductEditController implements Initializable {
 				.client(httpClient).build();
 
 		NetworkService networkService = retrofit.create(NetworkService.class);
-		networkService.editProduct(Assembleddata.getToken().getToken(), editProduct).enqueue(new Callback<Void>() {
+		networkService.editProduct(Assembleddata.getToken().getToken(), productforserver).enqueue(new Callback<Void>() {
+			@Override
+			public void onResponse(Call<Void> call, Response<Void> response) {
+				int status = response.code();
+				if (response.isSuccessful()) {
+				
+				} else {
+					System.out.printf("응답코드 %d", status);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Void> call, Throwable throwable) {
+
+				System.out.printf("%s", throwable.getMessage());
+				System.out.println("failure");
+			}
+		});		
+	}
+	private void Deleteproduct(){
+		baseurl = String.format("http://%s:%d/", IP, PORT);
+		OkHttpClient.Builder builder = new OkHttpClient.Builder();
+		OkHttpClient httpClient = builder.build();
+
+		Retrofit retrofit = new Retrofit.Builder().baseUrl(baseurl).addConverterFactory(GsonConverterFactory.create())
+				.client(httpClient).build();
+
+		NetworkService networkService = retrofit.create(NetworkService.class);
+		networkService.editProduct(Assembleddata.getToken().getToken(), productforserver).enqueue(new Callback<Void>() {
 			@Override
 			public void onResponse(Call<Void> call, Response<Void> response) {
 				int status = response.code();

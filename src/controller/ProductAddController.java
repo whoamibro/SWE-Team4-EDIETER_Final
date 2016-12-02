@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -20,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import network.Assembleddata;
 import network.NetworkService;
-import network.response.SignupResult;
+import network.request.Productforserver;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,11 +63,13 @@ public class ProductAddController implements Initializable {
 	private Product newProduct;		// New product
 	private String type;		// String of type
 	private String model;		// String of model
+	private Productforserver productforserver;
 	
 	private String baseurl;
 	private final String IP = "52.78.211.206";
 	private final int PORT = 80;
 
+	private int num;
 	// Set controller method
 	public void setProductController(ProductController productController) {
 		this.productController = productController;
@@ -78,7 +79,8 @@ public class ProductAddController implements Initializable {
 	public Product getProduct() {
 		return newProduct;
 	}
-
+	
+	
 	// ProductAddController initialize
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -126,11 +128,14 @@ public class ProductAddController implements Initializable {
 			System.out.println(cmbBoxModel.getSelectionModel().getSelectedItem().toString());
 			model = cmbBoxModel.getSelectionModel().getSelectedItem().toString();
 			System.out.println(Assembleddata.getProductLists().size());
-			for(int i=0;i<Assembleddata.getProductLists().size();i++){
+			for(int i=0; i<Assembleddata.getProductLists().size(); i++){
+				System.out.println(model);
 				if(Assembleddata.getProductLists().get(i).getModel().equals(model)){
+					num = i;
 					textPower.setText(String.valueOf(Assembleddata.getProductLists().get(i).getPower()));
 					textGrade.setText(String.valueOf(Assembleddata.getProductLists().get(i).getGrade()));
 					if(Assembleddata.getProductLists().get(i).getName().equals("Airconditioner") || Assembleddata.getProductLists().get(i).getName().equals("Heater")){
+						System.out.printf("여기 들어오니???100\n");
 						Power.setText(String.valueOf(Assembleddata.getProductLists().get(i).getChpower()));
 					}
 				}
@@ -162,7 +167,7 @@ public class ProductAddController implements Initializable {
 
 		// Create object of ProductBuilder
 		ProductBuilder productBuilder = new ProductBuilder();
-		
+		productforserver = new Productforserver();
 		// Parse textbox and Create product with productBuilder
 		newProduct = productBuilder
 				.setType(type)
@@ -173,6 +178,9 @@ public class ProductAddController implements Initializable {
 				.setNickName(textFieldNickName.getText())
 				.build();
 	
+		productforserver.setNickName(textFieldNickName.getText());
+		productforserver.setUsingTime(Integer.parseInt(textFieldHour.getText()));;
+		productforserver.setPcode(Assembleddata.getProductLists().get(num).getPcode());
 		// Create button named product's nickname
 		Button newButton = new Button(newProduct.getNickName());
 		newButton.setPrefSize(210, 100);
@@ -198,8 +206,9 @@ public class ProductAddController implements Initializable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 		});
-		
+		Addproduct();
 		// Add newButton to buttonList
 		productController.getButtonList().add(newButton);
 		
@@ -240,7 +249,7 @@ public class ProductAddController implements Initializable {
 				.client(httpClient).build();
 
 		NetworkService networkService = retrofit.create(NetworkService.class);
-		networkService.addProduct(Assembleddata.getToken().getToken(), newProduct).enqueue(new Callback<Void>() {
+		networkService.addProduct(Assembleddata.getToken().getToken(), productforserver).enqueue(new Callback<Void>() {
 			@Override
 			public void onResponse(Call<Void> call, Response<Void> response) {
 				int status = response.code();

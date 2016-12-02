@@ -333,6 +333,7 @@ public class LoginController implements Initializable {
 
 				for (int i = 0; i < productLists.size(); i++) {
 					System.out.printf("%s \n", Assembleddata.getProductLists().get(i).getName());
+
 				}
 				GetUserproductlist();
 			}
@@ -374,11 +375,11 @@ public class LoginController implements Initializable {
 							if (products.get(i).getPcode() == Assembleddata.getProductLists().get(j).getPcode()) {
 								ProductBuilder productBuilder = new ProductBuilder();
 								Product product = productBuilder
-										.setType(Assembleddata.getProductLists().get(i).getName())
-										.setModel(Assembleddata.getProductLists().get(i).getModel())
-										.setPower(Assembleddata.getProductLists().get(i).getPower())
-										.setCool_heatpower(Assembleddata.getProductLists().get(i).getChpower())
-										.setGrade(Assembleddata.getProductLists().get(i).getGrade())
+										.setType(Assembleddata.getProductLists().get(j).getName())
+										.setModel(Assembleddata.getProductLists().get(j).getModel())
+										.setPower(Assembleddata.getProductLists().get(j).getPower())
+										.setCool_heatpower(Assembleddata.getProductLists().get(j).getChpower())
+										.setGrade(Assembleddata.getProductLists().get(j).getGrade())
 										.setUsingTime(Assembleddata.getProducts().get(i).getUsingtime())
 										.setNickName(Assembleddata.getProducts().get(i).getNickname()).build();
 								ProductController.productList.add(i, product);
@@ -389,6 +390,9 @@ public class LoginController implements Initializable {
 								System.out.printf("%s\n", product.getModel());
 								System.out.printf("%s\n", product.getType());
 							}
+//							if(Assembleddata.getProductLists().get(i).getName().equals("Airconditioner")){
+//								System.out.printf("%.2f", Assembleddata.getProductLists().get(i).getChpower());
+//							}
 						}
 					}
 
