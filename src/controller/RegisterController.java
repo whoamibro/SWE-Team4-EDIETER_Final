@@ -124,7 +124,7 @@ public class RegisterController implements Initializable {
 			successAlert.showAndWait();
 		}
 		else if(flag ==1){
-			Alert successAlert = new Alert(Alert.AlertType.ERROR);
+			Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION);
 			successAlert.setHeaderText("signup alert");
 			successAlert.setContentText("Register Successful");
 			successAlert.showAndWait();

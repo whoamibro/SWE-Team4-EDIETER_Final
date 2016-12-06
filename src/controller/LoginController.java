@@ -118,7 +118,8 @@ public class LoginController implements Initializable {
 		}
 
 		// if login is failed
-		if (thisUser == null || !chargeHistoryFlag || !productListFlag) {
+//		&& !chargeHistoryFlag && !productListFlag
+		if (thisUser == null ) {
 			// fail alert
 			Alert successAlert = new Alert(Alert.AlertType.ERROR);
 			successAlert.setHeaderText(null);
@@ -390,9 +391,6 @@ public class LoginController implements Initializable {
 								System.out.printf("%s\n", product.getModel());
 								System.out.printf("%s\n", product.getType());
 							}
-//							if(Assembleddata.getProductLists().get(i).getName().equals("Airconditioner")){
-//								System.out.printf("%.2f", Assembleddata.getProductLists().get(i).getChpower());
-//							}
 						}
 					}
 

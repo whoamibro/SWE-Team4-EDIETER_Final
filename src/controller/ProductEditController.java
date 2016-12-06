@@ -41,6 +41,8 @@ public class ProductEditController implements Initializable {
 	private final String IP = "52.78.211.206";
 	private final int PORT = 80;
 	
+	private String basename;
+	
 	@FXML
 	private AnchorPane paneEdit;
 
@@ -141,12 +143,14 @@ public class ProductEditController implements Initializable {
 		textGrade.setText(String.valueOf(editProduct.getGrade()));
 		nickNameField.setText(editProduct.getNickName());
 		hourField.setText(String.valueOf(editProduct.getUsingTime()));
-	
+		
+		basename=editProduct.getNickName();
 	}
 
 	// Event of edit button
 	public void btnEditHandler() {
 		productforserver = new Productforserver();
+		productforserver.setNickName(basename);
 		// If user see edit button
 		if (!editFlag) {
 		
@@ -177,6 +181,7 @@ public class ProductEditController implements Initializable {
 				// Save editProduct index of productList
 				int productIndex = productController.getProductIndexInList(editProduct);
 				
+				
 				// If product's nickname equals button's name
 				if(editProduct.getNickName().equals(button.getText()))
 				{
@@ -186,7 +191,7 @@ public class ProductEditController implements Initializable {
 					
 					// If model is initialized
 					if(model == "")
-						model = editProduct.getType();		// Save model of editProduct
+						model = editProduct.getModel();		// Save model of editProduct
 					
 					// Create product with productBuilder
 					editProduct = productBuilder
@@ -197,10 +202,25 @@ public class ProductEditController implements Initializable {
 							.setUsingTime(Integer.parseInt(hourField.getText()))
 							.setNickName(nickNameField.getText())
 							.build();
-					
-					productforserver.setNickName(nickNameField.getText());
+					productforserver.setAfternickName(nickNameField.getText());
 					productforserver.setUsingTime(Integer.parseInt(hourField.getText()));
 					
+					for(int i=0;i<Assembleddata.getProductLists().size();i++){
+						System.out.printf("model %s\n", model);
+						System.out.printf("productlist model %s\n", Assembleddata.getProductLists().get(i).getModel());
+						if(Assembleddata.getProductLists().get(i).getModel().equals(model))
+						{
+							System.out.printf("pcode? %d", Assembleddata.getProductLists().get(i).getPcode());
+							productforserver.setPcode(Assembleddata.getProductLists().get(i).getPcode());
+						}
+					}
+					for(int i=0;i<Assembleddata.getProducts().size();i++){
+						System.out.printf("code? %d" ,Assembleddata.getProducts().get(i).getCode());
+						if(productforserver.getNickName().equals(Assembleddata.getProducts().get(i).getNickname())){
+							System.out.printf("\ncode? %d" ,Assembleddata.getProducts().get(i).getCode());
+							productforserver.setCode(Assembleddata.getProducts().get(i).getCode());
+						}
+					}
 					
 					// Event of button click
 					button.setOnAction(event -> {
@@ -230,7 +250,7 @@ public class ProductEditController implements Initializable {
 					
 					// Set button's name with nickname of product
 					button.setText(editProduct.getNickName());
-					
+					Editproduct();
 					it.set(button);			// Replace button to new button
 					
 					// Replace button to new button in buttonList
@@ -275,6 +295,7 @@ public class ProductEditController implements Initializable {
 	
 		// Remove product in productList
 		productController.removeProductInList(editProduct);
+		productforserver = new Productforserver();
 		
 		// Iterator of buttonList
 		ListIterator<Button> it = productController.getButtonList().listIterator();
@@ -289,7 +310,11 @@ public class ProductEditController implements Initializable {
 			}
 
 		}
+		productforserver.setNickName(nickNameField.getText());
+		productforserver.setUsingTime(Integer.parseInt(hourField.getText()));
+		System.out.printf(" 닉네임 : %s\n",productforserver.getNickName());
 		
+		Deleteproduct();
 		productController.applyList();		// Initialize buttons
 		paneEdit.setVisible(false);			// Hide editPane
 	}
@@ -331,7 +356,7 @@ public class ProductEditController implements Initializable {
 				.client(httpClient).build();
 
 		NetworkService networkService = retrofit.create(NetworkService.class);
-		networkService.editProduct(Assembleddata.getToken().getToken(), productforserver).enqueue(new Callback<Void>() {
+		networkService.deleteProduct(Assembleddata.getToken().getToken(), productforserver).enqueue(new Callback<Void>() {
 			@Override
 			public void onResponse(Call<Void> call, Response<Void> response) {
 				int status = response.code();

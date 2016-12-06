@@ -2,9 +2,18 @@ package network.request;
 
 public class Productforserver {
 
-	private String nickName;		// Appliance's nickname
+	private String formernickName;		// Appliance's nickname
+	private String afternickName;
+	
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
 	private int usingTime;			// Using time
 	private int pcode;
+	private int code;
 	
 	public int getPcode() {
 		return pcode;
@@ -13,10 +22,16 @@ public class Productforserver {
 		this.pcode = pcode;
 	}
 	public String getNickName() {
-		return nickName;
+		return formernickName;
 	}
 	public void setNickName(String nickName) {
-		this.nickName = nickName;
+		this.formernickName = nickName;
+	}
+	public String getAfternickName() {
+		return afternickName;
+	}
+	public void setAfternickName(String afternickName) {
+		this.afternickName = afternickName;
 	}
 	public int getUsingTime() {
 		return usingTime;

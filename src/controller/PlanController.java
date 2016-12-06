@@ -111,9 +111,9 @@ public class PlanController implements Initializable {
 	public void execute_current_cal_fee(){
         calculate_electric_usage.setProductCount();
         total_usage = calculate_electric_usage.calc_ele_cur_usage();
-        textArea.appendText("1 - TODAY "+Assembleddata.getUser_f_n().getName()+" 's Electric Usage is \n " + String.valueOf(Math.round(total_usage)) + " kwh.\n");
+        textArea.appendText("1 - TODAY "+Assembleddata.getUser_f_n().getName()+" 's Electric Usage is \n " + String.valueOf(form.format(total_usage)) + " kwh.\n");
         ex_total_usage = calculate_electric_usage.cal_ele_expect_usage();
-        textArea.appendText("WHOLE MONTH "+Assembleddata.getUser_f_n().getName()+" 's Electric Usage is \n " + String.valueOf(Math.round(ex_total_usage)) + " kwh.\n");
+        textArea.appendText("WHOLE MONTH "+Assembleddata.getUser_f_n().getName()+" 's Electric Usage is \n " + String.valueOf(form.format(ex_total_usage)) + " kwh.\n");
         
         textArea.appendText("/////////////////////////////////////////////////////////////////////////////\n");
         // ?占쏙옙?占쏙옙占�? ?占쏙옙?占쏙옙?占쏙옙?占쏙옙源뚳옙? ?占쏙옙?占쏙옙 占�??占쏙옙?占쏙옙占�? 怨꾩궛?占쏙옙 (?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙?占쏙옙?占쏙옙 - 1?占쏙옙占�??占쏙옙?占쏙옙?占쏙옙源뚳옙? ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙)
@@ -195,12 +195,12 @@ public class PlanController implements Initializable {
         
         // simulation calculating
         calculate_tem_plan.setDelta_t(Math.abs(current_temp-hope_temp));
-        calculate_tem_plan.setSquaremeter(20);
+        calculate_tem_plan.setSquaremeter(Assembleddata.getUser_f_n().getAreaSize());
         calculate_tem_plan.setK(current_temp);
         m = calculate_tem_plan.calculate_volume();
         textArea.appendText("Mass of User's space : "+ String.valueOf(form.format(m)) + " g\n");
         kcal = calculate_tem_plan.calculate_cal();
-        textArea.appendText("The amount of heat to change the temperature : " + String.valueOf(form.format(kcal)) + " cal\n");
+        textArea.appendText("The amount of heat to change the temperature : " + String.valueOf(form.format(kcal)) + " kcal\n");
         kwh = calculate_tem_plan.calculate_w();
         textArea.appendText("Convert heat to electric usage : " + String.valueOf(form.format(kwh)) + " kwh\n");
         time = calculate_tem_plan.calculate_t();

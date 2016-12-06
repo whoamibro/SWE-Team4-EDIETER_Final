@@ -6,7 +6,16 @@ package network.response;
  */
 // object for productlist belongs to user
 public class Product_n {
-    private int pcode;
+	private int code;
+    public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	private int pcode;
     private int usingtime;
     private String nickname;
 

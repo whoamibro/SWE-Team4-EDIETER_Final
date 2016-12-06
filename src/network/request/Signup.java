@@ -9,7 +9,16 @@ public class Signup {
     private String name;  
     private String email; 
     private String password;
-    private int areaSize;   
+    private String newpassword;
+    public String getNewpassword() {
+		return newpassword;
+	}
+
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
+	}
+
+	private int areaSize;   
     private double ElecUsage;  
 
     public String getName() {

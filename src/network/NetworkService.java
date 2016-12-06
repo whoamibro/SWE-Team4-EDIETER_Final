@@ -29,6 +29,10 @@ public interface NetworkService {
     // callback method for signin
     @POST("user/signin")
     Call<User_f_n> getUserIdentity(@Body Login login);
+    
+    // callback method for edit user
+    @POST("user/edituser")
+    Call<SignupResult> editUserIdentity(@Query("token") int token, @Body Signup signup);
 
     // callback method for request get electric usage history
     @GET("user/getelechistory")

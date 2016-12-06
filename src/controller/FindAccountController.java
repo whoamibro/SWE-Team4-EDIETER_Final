@@ -101,8 +101,8 @@ public class FindAccountController implements Initializable {
 		 * user's email loc : 54
 		 */
 
-		String password = Assembleddata.getpw(); // get user's password
-
+		String password = "12345"; // get user's password
+		System.out.printf("%s", password);
 		String mailSite = null;
 
 		if (inputField == null) // check if there is inputField
