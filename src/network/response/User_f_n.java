@@ -2,7 +2,7 @@ package network.response;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * LOC 58
+ * LOC 65
  */
 //object for user information right after login success
 public class User_f_n {

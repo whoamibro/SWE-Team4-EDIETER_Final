@@ -106,6 +106,10 @@ public class ProductAddController implements Initializable {
 		 * 
 		 */
 
+		/**
+		 * Created by jeonyongjin on 2016. 12. 2..
+		 * LOC 33
+		 */
 		// Event of type combobox changed
 		cmbBoxProduct.getSelectionModel().selectedItemProperty().addListener(event -> {
 			// Save changed type
@@ -121,7 +125,6 @@ public class ProductAddController implements Initializable {
 				}
 			}
 		});
-
 		// Event of model combobox changed
 		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event2 -> {
 			// Save changed model
@@ -142,7 +145,9 @@ public class ProductAddController implements Initializable {
 			}
 		});
 	}
-
+	/**
+	 * 
+	 */
 	// Event of add button
 	public void btnAddHandler() {
 		
@@ -178,9 +183,16 @@ public class ProductAddController implements Initializable {
 				.setNickName(textFieldNickName.getText())
 				.build();
 	
+		/**
+		 * Created by jeonyongjin on 2016. 12. 2..
+		 * LOC 3
+		 */
 		productforserver.setNickName(textFieldNickName.getText());
 		productforserver.setUsingTime(Integer.parseInt(textFieldHour.getText()));;
 		productforserver.setPcode(Assembleddata.getProductLists().get(num).getPcode());
+		/**
+		 * 
+		 */
 		// Create button named product's nickname
 		Button newButton = new Button(newProduct.getNickName());
 		newButton.setPrefSize(210, 100);
@@ -239,7 +251,10 @@ public class ProductAddController implements Initializable {
 		}
 
 	}
-	
+	/**
+	 * Created by jeonyongjin on 2016. 12. 2..
+	 * LOC 28
+	 */
 	private void Addproduct(){
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -268,7 +283,9 @@ public class ProductAddController implements Initializable {
 			}
 		});		
 	}
-
+	/**
+	 * 
+	 */
 }
 /**
  * 

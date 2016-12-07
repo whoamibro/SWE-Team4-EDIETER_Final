@@ -1,7 +1,8 @@
 package controller;
+
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * 
+ * LOC 206
  */
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -209,3 +210,5 @@ public class PlanController implements Initializable {
         textArea.appendText("Additional available time to use airconditioner or heater among day : " + String.valueOf(form.format(timeperday)) + " hour\n");
     }
 }
+/**
+*/

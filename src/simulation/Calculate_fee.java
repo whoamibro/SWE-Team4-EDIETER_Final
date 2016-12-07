@@ -2,6 +2,7 @@ package simulation;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 93
  */
 public class Calculate_fee {
     // 3rd position

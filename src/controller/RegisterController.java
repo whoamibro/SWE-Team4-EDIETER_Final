@@ -37,9 +37,16 @@ public class RegisterController implements Initializable {
 	 * created by Jin Jung on 2016. 11. 30.
 	 * */
 	
+	/**
+	 * Created by jeonyongjin on 2016. 12. 2..
+	 * lOC 3
+	 */
 	private String baseurl;
 	private final String IP = "52.78.211.206";
 	private final int PORT = 80;
+	/**
+	 * 
+	 */
 //	private User newUser;
 	private Signup signup = new Signup();
 	private SignupResult signupresult;
@@ -82,18 +89,21 @@ public class RegisterController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 	
 	}
-
+	/** 
+	 * created by Jin Jung on 2016. 11. 30.
+	 * function : handler for ok button 
+	 * loc : 8
+	 * */
 	public void btnOKHandler() {
-		/** 
-		 * created by Jin Jung on 2016. 11. 30.
-		 * function : handler for ok button 
-		 * loc : 8
-		 * */
+		
+		/**
+		 * Created by jeonyongjin on 2016. 12. 1..
+		 * LOC 15
+		 */
 		pw = password.getText();
 		System.out.printf("%s \n", pw);
 		pwcheck = passwordAgain.getText();
-		System.out.printf("%s \n", pwcheck);
-		
+		System.out.printf("%s \n", pwcheck);	
 		// check if password and passwordAgain is same
 		if (pw.equals(pwcheck)) {
 			System.out.println("여기 들어오나? ");
@@ -105,7 +115,9 @@ public class RegisterController implements Initializable {
 			System.out.printf("email : %s\n", signup.getEmail());
 			System.out.printf("pw : %s\n", signup.getPassword());
 		}
-		
+		/**
+		 * 
+		 */
 		Thread th = new Thread(()->{
 			
 			Signup();
@@ -202,7 +214,10 @@ public class RegisterController implements Initializable {
 		});
 	}
 	
-	
+	/**
+	 * Created by jeonyongjin on 2016. 12. 2..
+	 * LOC 39
+	 */
 	private void Signup(){
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -230,8 +245,7 @@ public class RegisterController implements Initializable {
 				} else {
 					flag=0;
 					System.out.printf("응답코드 %d", status);
-//					System.out.printf("%s ", Assembleddata.getSignupresult().isResult());
-				}
+					}
 			}
 
 			@Override
@@ -241,7 +255,9 @@ public class RegisterController implements Initializable {
 				System.out.printf("%s", throwable.getMessage());
 				System.out.println("failure");
 			}
-		});
-		
+		});	
 	}
+	/**
+	 * 
+	 */
 }

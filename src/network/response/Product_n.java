@@ -2,7 +2,7 @@ package network.response;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * LOC 30
+ * LOC 39
  */
 // object for productlist belongs to user
 public class Product_n {

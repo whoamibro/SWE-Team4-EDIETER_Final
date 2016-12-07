@@ -28,13 +28,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserEditController implements Initializable {
 
+	/**
+	 * Created by jeonyongjin on 2016. 12. 2..
+	 * LOC 6
+	 */
 	private String baseurl;
 	private final String IP = "52.78.211.206";
 	private final int PORT = 80;
 	private Signup edituser;
 	private SignupResult signupresult;
 	private int flag = 0;
-	
+	/**
+	 * 
+	 */
 	User thisUser;
 	@FXML
 	private AnchorPane paneUserEdit;
@@ -101,10 +107,17 @@ public class UserEditController implements Initializable {
 		thisUser.setUsedElec(Double.parseDouble(usedElec.getText().split(" ")[0]));
 		
 		
+		/**
+		 * Created by jeonyongjin on 2016. 12. 2..
+		 * LOC 4
+		 */
 		edituser.setPassword(oldPassword.getText());
 		edituser.setNewpassword(password.getText());
 		edituser.setAreaSize(Integer.parseInt(areaSize.getText()));
 		edituser.setElecUsage(Double.parseDouble(usedElec.getText()));
+		/**
+		 * 
+		 */
 		//set loader of Main.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		loader.setController(mainController);
@@ -130,7 +143,10 @@ public class UserEditController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Created by jeonyongjin on 2016. 12. 2..
+	 * LOC 41
+	 */
 	private void EditUser(){
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -169,12 +185,9 @@ public class UserEditController implements Initializable {
 				flag = 0;
 				System.out.printf("%s",throwable.getMessage());
 				System.out.println("failure");
-			}
-
-			
+			}		
 		});
 	}
-
 }
 /**
  */

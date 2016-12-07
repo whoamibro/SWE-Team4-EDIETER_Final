@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 63
  */
 public class Calculate_electric_usage {
     Calendar day = Calendar.getInstance();

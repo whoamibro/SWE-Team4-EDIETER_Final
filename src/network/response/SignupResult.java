@@ -2,7 +2,7 @@ package network.response;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * LOC 21
+ * LOC 29
  */
 public class SignupResult {
     private String name;    // name

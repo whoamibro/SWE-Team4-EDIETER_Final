@@ -4,6 +4,7 @@ import controller.ProductController;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 107
  */
 public class Calculate_tem_plan {
     // cal

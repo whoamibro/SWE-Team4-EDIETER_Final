@@ -2,7 +2,7 @@ package network.request;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * LOC 48
+ * LOC 58
  */
 public class Signup {
     // object for signup

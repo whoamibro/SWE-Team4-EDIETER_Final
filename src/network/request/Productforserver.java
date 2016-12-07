@@ -1,3 +1,7 @@
+/**
+ * Created by jeonyongjin on 2016. 12. 2..
+ * LOC 41
+ */
 package network.request;
 
 public class Productforserver {
@@ -41,3 +45,5 @@ public class Productforserver {
 	}
 
 }
+/**
+*/

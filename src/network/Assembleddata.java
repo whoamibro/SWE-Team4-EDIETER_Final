@@ -11,7 +11,7 @@ import network.response.User_f_n;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * LOC 65 
+ * LOC 71
  * part for networking create static variables (for escape nullpointError)
  */
 public class Assembleddata {
@@ -22,7 +22,6 @@ public class Assembleddata {
     private static List<Product_n> products;
     private static SignupResult signupresult = new SignupResult();
 
-    
     public static SignupResult getSignupresult() {
 		return signupresult;
 	}

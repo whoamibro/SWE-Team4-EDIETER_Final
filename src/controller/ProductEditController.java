@@ -112,9 +112,12 @@ public class ProductEditController implements Initializable {
 		 * 
 		 */
 
+		/**
+		 * Created by jeonyongjin on 2016. 12. 2..
+		 * LOC 14
+		 */
 		// Event of type combobox changed
-		cmbBoxType.getSelectionModel().selectedItemProperty().addListener(event -> {
-			
+		cmbBoxType.getSelectionModel().selectedItemProperty().addListener(event -> {	
 			// Save changed type
 		listModel.remove(0, listModel.size());
 		type = cmbBoxType.getSelectionModel().getSelectedItem().toString();
@@ -128,7 +131,9 @@ public class ProductEditController implements Initializable {
 				}
 			}
 		});
-
+		/*
+		 *	 
+		 */
 		// Event of model combobox changed
 		cmbBoxModel.getSelectionModel().selectedItemProperty().addListener(event -> {
 			
@@ -149,8 +154,15 @@ public class ProductEditController implements Initializable {
 
 	// Event of edit button
 	public void btnEditHandler() {
+		/**
+		 * Created by jeonyongjin on 2016. 12. 2..
+		 * LOC 2
+		 */
 		productforserver = new Productforserver();
 		productforserver.setNickName(basename);
+		/**
+		 * 
+		 */
 		// If user see edit button
 		if (!editFlag) {
 		
@@ -202,6 +214,10 @@ public class ProductEditController implements Initializable {
 							.setUsingTime(Integer.parseInt(hourField.getText()))
 							.setNickName(nickNameField.getText())
 							.build();
+					/**
+					 * Created by jeonyongjin on 2016. 12. 2..
+					 * LOC 19
+					 */
 					productforserver.setAfternickName(nickNameField.getText());
 					productforserver.setUsingTime(Integer.parseInt(hourField.getText()));
 					
@@ -221,6 +237,9 @@ public class ProductEditController implements Initializable {
 							productforserver.setCode(Assembleddata.getProducts().get(i).getCode());
 						}
 					}
+					/**
+					 * 
+					 */
 					
 					// Event of button click
 					button.setOnAction(event -> {
@@ -310,15 +329,26 @@ public class ProductEditController implements Initializable {
 			}
 
 		}
+		/**
+		 * Created by jeonyongjin on 2016. 12. 2..
+		 * LOC 4
+		 */
 		productforserver.setNickName(nickNameField.getText());
 		productforserver.setUsingTime(Integer.parseInt(hourField.getText()));
 		System.out.printf(" 닉네임 : %s\n",productforserver.getNickName());
 		
 		Deleteproduct();
+		/**
+		 * 
+		 */
 		productController.applyList();		// Initialize buttons
 		paneEdit.setVisible(false);			// Hide editPane
 	}
 
+	/**
+	 * Created by jeonyongjin on 2016. 12. 1..
+	 * LOC 57
+	 */
 	private void Editproduct(){
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -376,9 +406,6 @@ public class ProductEditController implements Initializable {
 		});		
 	}
 }
-
-
-
 /**
  * 
  */

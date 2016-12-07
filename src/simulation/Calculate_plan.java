@@ -4,12 +4,10 @@ import javafx.scene.control.Alert;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
+ * LOC 217
  */
 public class Calculate_plan {
-    // calculate_electric_usage?��?�� cal_ele_expect_usage 메소?��?�� ?��?�� 결과�? 반환?��?�� 값이 ???��?��?�� �??��
-    // private double basic_usage;
 
-    // ?���? ?���? �??��
     private int hope_fee;
     //
     private double current_total_fee;

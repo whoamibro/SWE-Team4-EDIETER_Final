@@ -19,7 +19,7 @@ import retrofit2.http.Query;
 
 /**
  * Created by jeonyongjin on 2016. 11. 29..
- * LOC 36
+ * LOC 52
  */
 public interface NetworkService {
     // callback method for signup

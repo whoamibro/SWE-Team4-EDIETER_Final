@@ -14,15 +14,6 @@ import javafx.scene.text.Text;
 import network.request.Token;
 
 public class MainController implements Initializable {
-	/**
-	 * Created by jeonyongjin on 2016. 11. 29.. LOC : 3
-	 */
-	private String baseurl;
-	private final String IP = "52.78.211.206";
-	private final int PORT = 80;
-	Token token = new Token();
-	/**
-	 */
 	
 	/** 
 	 * created by Jin Jung on 2016. 11. 30.

@@ -39,17 +39,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginController implements Initializable {
 	/**
 	 * Created by jeonyongjin on 2016. 11. 29..
+	 * LOC 6
 	 */
 	private String baseurl;
 	private final String IP = "52.78.211.206";
 	private final int PORT = 80;
-	/**
-	 */
+	
 
 	Login login = new Login();
 	User thisUser = null;
 	Token token = new Token();
-
+	/**
+	 */
 	/**
 	 * created by Jin Jung on 2016. 11. 30.
 	 */
@@ -203,6 +204,7 @@ public class LoginController implements Initializable {
 
 	/**
 	 * Created by jeonyongjin on 2016. 11. 29.. LOC 89
+	 * LOC 194
 	 */
 	// method for login
 	private void Login() {
@@ -308,13 +310,6 @@ public class LoginController implements Initializable {
 		});
 	}
 
-	/**
-	 *
-	 */
-
-	/**
-	 * Created by jeonyongjin on 2016. 11. 30..
-	 */
 	private void Getproductlist() {
 		baseurl = String.format("http://%s:%d/", IP, PORT);
 		OkHttpClient.Builder builder = new OkHttpClient.Builder();
