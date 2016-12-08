@@ -18,7 +18,6 @@ public class CalculateThirdposition {
         int num, num_remain;
         num = (int)total_electric_usage / 100;
         num_remain = (int)total_electric_usage % 100;
-
         //2번째 index?��?�� 백의 ?��리�?? ?��?��?�� ?��머�? ?���? 집어?��?��
         arr[1] = num_remain;
         // ?��머�? ?���? 0?�� ?��?��?���?

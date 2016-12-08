@@ -65,31 +65,33 @@ public class ProductAddController implements Initializable {
 	private String model;		// String of model
 	private Productforserver productforserver;
 	
+	/**
+	 * Created by jeonyongjin on 2016. 12. 2..
+	 * LOC 4
+	 */
 	private String baseurl;
 	private final String IP = "52.78.211.206";
 	private final int PORT = 80;
 
 	private int num;
+	/**
+	 */
+	
 	// Set controller method
 	public void setProductController(ProductController productController) {
 		this.productController = productController;
 	}
-
 	// Return built product
 	public Product getProduct() {
 		return newProduct;
-	}
-	
-	
+	}	
 	// ProductAddController initialize
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
+	public void initialize(URL location, ResourceBundle resources) {	
 		// Initialize list of types
 		ObservableList<String> listProduct = cmbBoxProduct.getItems();
 		
-		ObservableList<String> listModel = cmbBoxModel.getItems();
-		
+		ObservableList<String> listModel = cmbBoxModel.getItems();		
 		/** Created by jeonyongjin on 2016. 11. 30..
 		 *  LOC 8
 		 */ 
@@ -150,18 +152,18 @@ public class ProductAddController implements Initializable {
 	 */
 	// Event of add button
 	public void btnAddHandler() {
-		
+	
 		paneAdd.getChildren().clear();		// Clean the pane
 
-		// Create object of productTotalController
-		ProductTotalController productTotalController = new ProductTotalController();
-		
-		// Set productTotalController's controller
-		productTotalController.setProductController(productController);
+//		// Create object of productTotalController
+//		ProductTotalController productTotalController = new ProductTotalController();
+//		
+//		// Set productTotalController's controller
+//		productTotalController.setProductController(productController);
 		
 		// Connect loader with ProductTotal.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));		
-		loader.setController(productTotalController);
+//		loader.setController(productTotalController);
 
 		// Add loader to pane
 		try {
@@ -182,7 +184,6 @@ public class ProductAddController implements Initializable {
 				.setUsingTime(Integer.parseInt(textFieldHour.getText()))
 				.setNickName(textFieldNickName.getText())
 				.build();
-	
 		/**
 		 * Created by jeonyongjin on 2016. 12. 2..
 		 * LOC 3
@@ -220,7 +221,14 @@ public class ProductAddController implements Initializable {
 			}
 			
 		});
+		/**
+		 * Created by jeonyongjin on 2016. 12. 2..
+		 * LOC 1
+		 */
 		Addproduct();
+		/**
+		 * 
+		 */
 		// Add newButton to buttonList
 		productController.getButtonList().add(newButton);
 		
@@ -236,12 +244,9 @@ public class ProductAddController implements Initializable {
 		
 		paneAdd.getChildren().clear();		// Clean the pane
 
-		// Create object of productTotalController
-		ProductTotalController productTotalController = new ProductTotalController();
-		
 		// Connect loader with ProductTotal.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
-		loader.setController(productTotalController);
+
 
 		// Add loader to pane
 		try {

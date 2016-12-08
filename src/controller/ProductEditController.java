@@ -95,8 +95,7 @@ public class ProductEditController implements Initializable {
 		// Initialize list of types
 		ObservableList<String> listType = cmbBoxType.getItems();
 
-		ObservableList<String> listModel = cmbBoxModel.getItems();
-		
+		ObservableList<String> listModel = cmbBoxModel.getItems();	
 		/** Created by jeonyongjin on 2016. 11. 30..
 		 *  LOC 8
 		 */ 
@@ -151,7 +150,6 @@ public class ProductEditController implements Initializable {
 		
 		basename=editProduct.getNickName();
 	}
-
 	// Event of edit button
 	public void btnEditHandler() {
 		/**
@@ -239,8 +237,7 @@ public class ProductEditController implements Initializable {
 					}
 					/**
 					 * 
-					 */
-					
+					 */		
 					// Event of button click
 					button.setOnAction(event -> {
 						
@@ -289,16 +286,11 @@ public class ProductEditController implements Initializable {
 			editFlag = false;		// Change flag
 		}
 	}
-
 	// Event of close button
 	public void btnCloseHandler() {
 		
-		// Create object of productTotalController
-		ProductTotalController productTotalController = new ProductTotalController();
-		
 		// Connect loader with ProductTotal.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
-		loader.setController(productTotalController);
 
 		// Add loader to pane
 		try {
@@ -308,7 +300,6 @@ public class ProductEditController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
 	// Event of remove button
 	public void btnRemoveHandler() {
 	
@@ -335,8 +326,7 @@ public class ProductEditController implements Initializable {
 		 */
 		productforserver.setNickName(nickNameField.getText());
 		productforserver.setUsingTime(Integer.parseInt(hourField.getText()));
-		System.out.printf(" 닉네임 : %s\n",productforserver.getNickName());
-		
+		System.out.printf(" 닉네임 : %s\n",productforserver.getNickName());		
 		Deleteproduct();
 		/**
 		 * 

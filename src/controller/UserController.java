@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-
 import components.User;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,11 +40,9 @@ public class UserController implements Initializable {
 	@FXML
 	private BarChart<String, Double> barChart;
 
-
 	public void setUser(User user) {
 		this.thisUser = user;
 	}
-
 	/**
 	 * Create by jeonyongjin on 2016. 11. 30..
 	 * LOC 12
@@ -75,8 +72,7 @@ public class UserController implements Initializable {
 	 * 
 	 */
 	//button handler for past charge button
-	public void btnPastHandler() {
-			
+	public void btnPastHandler() {	
 		//create PastUsageController and connect it to this UserController
 		PastUsageController pastUsageController = new PastUsageController(thisUser);
 		pastUsageController.setUserController(this);
@@ -96,7 +92,6 @@ public class UserController implements Initializable {
 	public void setVisible(boolean bool) {
 		paneUser.setVisible(bool);
 	}
-
 }
 /**
  */

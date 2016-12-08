@@ -85,7 +85,6 @@ public class ProductController implements Initializable {
 	public Product getProduct(int index) {
 		return productList.get(index);
 	}
-
 	/**
 	 * 
 	 */
@@ -127,9 +126,9 @@ public class ProductController implements Initializable {
 			}
 		}
 
-		ProductTotalController productTotalController = new ProductTotalController();
+//		ProductTotalController productTotalController = new ProductTotalController();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProductTotal.fxml"));
-		loader.setController(productTotalController);
+//		loader.setController(productTotalController);
 		try {
 			paneTotal.getChildren().add(loader.load());
 		} catch (IOException e) {

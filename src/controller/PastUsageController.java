@@ -5,12 +5,10 @@ package controller;
  */
 
 import components.User;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -51,7 +49,6 @@ public class PastUsageController implements Initializable {
 	
 	@FXML
 	private AnchorPane panePastUsage;
-
 	
 	//past charge of each month
 	@FXML
@@ -113,11 +110,9 @@ public class PastUsageController implements Initializable {
 		lastMonth4.setText(String.valueOf(history[2]));
 		lastMonth5.setText(String.valueOf(history[1]));
 		lastMonth6.setText(String.valueOf(history[0]));
-
 	}
 
-	public void btnOKHandler() {
-		
+	public void btnOKHandler() {		
 		//get lastMonth field that user entered and save it to history[5]
 		history[5] = Double.parseDouble(lastMonth.getText().split(" ")[0]);
 		//set the entered last month's usage to this user's history
@@ -148,8 +143,6 @@ public class PastUsageController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
 }
-
 /**
  */

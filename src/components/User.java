@@ -28,13 +28,11 @@ public class User {
 	public double getUsedElec() {
 		return usedElec;
 	}
-	
+
 	//get charge history
 	public double[] getChargeHist() {
 		return chargeHistory;
 	}
-	
-	
 	//set Area
 	
 	public void setName(String name) {
@@ -56,8 +54,6 @@ public class User {
 	public void setChargeHistory(double[] chargeHistory) {
 		this.chargeHistory = chargeHistory;
 	}
-
 }
-
 /**
  */
