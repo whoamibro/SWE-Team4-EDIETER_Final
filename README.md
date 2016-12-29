@@ -11,3 +11,6 @@ userinfo, useredit class -> created by pkhtoto
 product add, product edit class -> created by geronimo124
 
 All GUI, DB design -> created by tobeGitMater
+
+We are not running the server for this application reason for the cost issue. so if you need server code of this application, send mail to yongjin117@naver.com
+
